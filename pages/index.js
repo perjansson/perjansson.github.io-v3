@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import RichText from '@madebyconnor/rich-text-to-jsx'
+import Fade from 'react-reveal/Fade'
 
 import styles from '../styles/Index.module.css'
+import { backgroundChanger, imageOfSize } from './utils'
 
 export async function getServerSideProps() {
   const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
@@ -62,6 +64,11 @@ export async function getServerSideProps() {
 }
 
 export default function Index({ me, projects }) {
+  useEffect(() => {
+    window.addEventListener('scroll', backgroundChanger)
+    return () => window.removeEventListener('scroll', backgroundChanger)
+  }, [])
+
   return (
     <>
       <Head>
@@ -114,17 +121,19 @@ function Projects({ projects }) {
 }
 
 function Project({ title, role, description, me, assetCollection, odd }) {
-  const assetUrl = assetCollection.items[0]?.url
+  const assetUrl = imageOfSize(assetCollection, 'small')?.url
 
   return (
-    <article className={odd ? styles.projectOdd : styles.project}>
-      <img src={assetUrl} className={styles.image} />
-      <div className={styles.details}>
-        <header>{title}</header>
-        <main>
-          <RichText richText={me.json} />
-        </main>
-      </div>
-    </article>
+    <Fade bottom>
+      <article className={odd ? styles.projectOdd : styles.project}>
+        <img src={assetUrl} className={styles.image} />
+        <div className={styles.details}>
+          <header>{title}</header>
+          <main>
+            <RichText richText={me.json} />
+          </main>
+        </div>
+      </article>
+    </Fade>
   )
 }
