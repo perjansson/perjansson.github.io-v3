@@ -130,6 +130,7 @@ function Project({ title, role, description, me, assetCollection, odd }) {
         <div className={styles.details}>
           <header>{title}</header>
           <main>
+            <RichText richText={description.json} />
             <RichText richText={me.json} />
           </main>
         </div>
