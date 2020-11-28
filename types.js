@@ -18,14 +18,14 @@ export const ProjectsType = shape({
   items: arrayOf(ProjectType),
 })
 
+export const ContactsCollectionType = shape({
+  items: arrayOf(ContactType),
+})
+
 export const MeType = shape({
   name: string,
   title: string,
   contacts: ContactsCollectionType,
   short: string,
   long: string,
-})
-
-export const ContactsCollectionType = shape({
-  items: arrayOf(ContactType),
 })
