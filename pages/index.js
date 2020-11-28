@@ -5,6 +5,7 @@ import Fade from 'react-reveal/Fade'
 
 import styles from '../styles/Index.module.css'
 import { backgroundChanger, imageOfSize } from '../utils'
+import { ContactType, MeType, ProjectsType, ProjectType } from '../types'
 
 export async function getServerSideProps() {
   const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
@@ -82,6 +83,10 @@ export default function Index({ me, projects }) {
     </>
   )
 }
+Index.propTypes = {
+  me: MeType,
+  projects: ProjectsType,
+}
 
 function Header({ contacts }) {
   return (
@@ -94,6 +99,7 @@ function Header({ contacts }) {
     </header>
   )
 }
+Header.propTypes = ContactType
 
 function Me({ me }) {
   return (
@@ -109,18 +115,26 @@ function Me({ me }) {
     </section>
   )
 }
+Me.propTypes = {
+  me: MeType,
+}
 
 function Projects({ projects }) {
   return (
     <section className={styles.projects}>
       {projects?.map((project, i) => (
-        <Project key={i} {...project} odd={i % 2 === 1} />
+        <Project key={i} project={project} odd={i % 2 === 1} />
       ))}
     </section>
   )
 }
+Projects.propTypes = {
+  projects: ProjectsType,
+}
 
-function Project({ title, role, description, me, assetCollection, odd }) {
+function Project({
+  project: { title, description, me, assetCollection, odd },
+}) {
   const assetUrl = imageOfSize(assetCollection, 'small')?.url
 
   return (
@@ -137,4 +151,7 @@ function Project({ title, role, description, me, assetCollection, odd }) {
       </article>
     </Fade>
   )
+}
+Project.propTypes = {
+  project: ProjectType,
 }
