@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
-    "start:noport": "next start",
+    "start:ci": "next start -p 5000",
     "heroku-postbuild": "yarn build"
   },
   "dependencies": {
