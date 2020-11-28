@@ -1,65 +1,130 @@
+import React from 'react'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import RichText from '@madebyconnor/rich-text-to-jsx'
 
-export default function Home() {
+import styles from '../styles/Index.module.css'
+
+export async function getServerSideProps() {
+  const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+  const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
+
+  const res = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${space}`,
+    {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({
+        query: `
+            {
+                me(id: "6DJvlbWzPKLgZvCzVDRzos") {
+                  name
+                  title
+                      contactsCollection {
+                      items {
+                        ... on Contact {
+                          medium
+                          url
+                        }
+                      }
+                    }
+                }
+                projectCollection(order: startdate_DESC) {
+                    items {
+                        title
+                        description { json }
+                        me { json }
+                        role
+                        startdate
+                        assetCollection {
+                            items {
+                                fileName
+                                url
+                            }
+                        }
+                    }
+                }
+            }`,
+      }),
+    }
+  )
+
+  const { data } = await res.json()
+
+  return {
+    props: {
+      me: data.me,
+      projects: data.projectCollection.items,
+    },
+  }
+}
+
+export default function Index({ me, projects }) {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Per Jansson - Fullstack Web Developer</title>
       </Head>
-
+      <Header contacts={me.contactsCollection.items} />
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <Me me={me} />
+        <Projects projects={projects} />
       </main>
+    </>
+  )
+}
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+function Header({ contacts }) {
+  return (
+    <header className={styles.header}>
+      {contacts.map(({ url, medium }) => (
+        <a href={url} target="_blank" rel="noopener noreferrer" key={medium}>
+          {medium}
         </a>
-      </footer>
-    </div>
+      ))}
+    </header>
+  )
+}
+
+function Me({ me }) {
+  return (
+    <section className={styles.me}>
+      <div className={styles.meName}>
+        {me.name.split('').map((char, i) => (
+          <span key={i} style={{ animationDelay: `${i / 10}s` }}>
+            {char}
+          </span>
+        ))}
+      </div>
+      <div>{me.title}</div>
+    </section>
+  )
+}
+
+function Projects({ projects }) {
+  return (
+    <section className={styles.projects}>
+      {projects?.map((project, i) => (
+        <Project key={i} {...project} odd={i % 2 === 1} />
+      ))}
+    </section>
+  )
+}
+
+function Project({ title, role, description, me, assetCollection, odd }) {
+  const assetUrl = assetCollection.items[0]?.url
+
+  return (
+    <article className={odd ? styles.projectOdd : styles.project}>
+      <img src={assetUrl} className={styles.image} />
+      <div className={styles.details}>
+        <header>{title}</header>
+        <main>
+          <RichText richText={me.json} />
+        </main>
+      </div>
+    </article>
   )
 }
