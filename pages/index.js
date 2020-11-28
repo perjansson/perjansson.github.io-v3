@@ -4,7 +4,7 @@ import RichText from '@madebyconnor/rich-text-to-jsx'
 import Fade from 'react-reveal/Fade'
 
 import styles from '../styles/Index.module.css'
-import { backgroundChanger, imageOfSize } from './utils'
+import { backgroundChanger, imageOfSize } from '../utils'
 
 export async function getServerSideProps() {
   const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
