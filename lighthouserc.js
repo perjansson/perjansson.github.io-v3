@@ -4,7 +4,6 @@ module.exports = {
       numberOfRuns: 3,
       startServerCommand: 'yarn start:ci',
       url: ['http://localhost:5000'],
-      isSinglePageApplication: true,
     },
     assert: {
       assertions: {
