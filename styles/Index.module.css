@@ -23,12 +23,13 @@
 }
 
 .header {
-  height: 60px;
+  height: 80px;
   width: 90%;
   margin: auto;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-end;
+  flex-wrap: wrap;
   font-size: 0.9em;
   color: rgba(255, 255, 255, 0.8);
 }
@@ -45,6 +46,8 @@
 .main {
   margin-left: auto;
   margin-right: auto;
+  width: 90%;
+  min-width: 320px;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
@@ -101,25 +104,110 @@
   max-height: 200px;
   margin-bottom: 12px;
   width: 300px;
-  max-width: 50%;
   object-fit: cover;
-  border-radius: 40px;
+  border-radius: 20px;
   filter: brightness(0.7);
 }
 
 .details {
   width: 100%;
   max-width: 700px;
-  font-size: 1.2em;
   text-align: left;
 }
 
 .details p {
+  font-size: 1.2em;
   margin-top: 10px;
 }
 
 .details header {
   opacity: 0.5;
-  font-size: 0.7em;
+  font-size: 0.9em;
+  font-weight: 700;
   text-transform: uppercase;
+}
+
+/* Most of the Smartphones Mobiles (Portrait) */
+@media (min-width: 320px) and (max-width: 480px) {
+  .header {
+    height: 60px;
+    justify-content: center;
+  }
+
+  .meName {
+    font-size: 3em;
+  }
+
+  .project {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 7em 0;
+  }
+
+  .projectOdd {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 7em 0;
+  }
+
+  .image {
+    width: 100%;
+  }
+
+  .details p {
+    font-size: 1.4em;
+    text-align: justify;
+  }
+
+  .details header {
+    opacity: 0.5;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
+
+/* Low Resolution Tablets, Mobiles (Landscape) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .header {
+    height: 60px;
+    justify-content: flex-end;
+  }
+
+  .image {
+    max-width: 50%;
+    width: 300px;
+  }
+}
+
+/* Tablets, Ipads (portrait) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .header {
+    height: 60px;
+    justify-content: flex-end;
+  }
+}
+
+/* Tablets, Ipads (landscape) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .header {
+    height: 60px;
+    justify-content: flex-end;
+  }
+}
+
+/* Laptops, Desktops */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .header {
+    height: 60px;
+    justify-content: flex-end;
+  }
+}
+
+/* Desktops */
+@media (min-width: 1281px) {
+  .header {
+    height: 60px;
+    justify-content: flex-end;
+  }
 }

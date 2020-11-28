@@ -27,11 +27,20 @@ body {
   padding: 0;
   margin: 0;
   min-height: 100vh;
-  font-family: HKGrotesk, Helvetica Neue, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  font-size: 16px;
   color: rgb(255, 255, 255);
   background-color: rgb(0, 0, 0);
+}
+
+body {
+  font-family: HKGrotesk, Helvetica Neue, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  font-size: 10px;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 a {
@@ -51,4 +60,46 @@ h1 {
   font-size: 64px;
   color: rgb(255, 255, 255);
   font-weight: normal;
+}
+
+/* Most of the Smartphones Mobiles (Portrait) */
+@media (min-width: 320px) and (max-width: 480px) {
+  body {
+    font-size: 10px;
+  }
+}
+
+/* Low Resolution Tablets, Mobiles (Landscape) */
+@media (min-width: 481px) and (max-width: 767px) {
+  body {
+    font-size: 12px;
+  }
+}
+
+/* Tablets, Ipads (portrait) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Tablets, Ipads (landscape) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Laptops, Desktops */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Desktops */
+@media (min-width: 1281px) {
+  body {
+    font-size: 16px;
+  }
 }
