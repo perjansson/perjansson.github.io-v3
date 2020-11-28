@@ -1,9 +1,5 @@
 module.exports = {
   ci: {
-    collect: {
-      url: ['http://localhost:3000/'],
-      startServerCommand: 'yarn start:noport',
-    },
     assert: {
       assertions: {
         'categories:performance': ['error', { minScore: 1 }],
