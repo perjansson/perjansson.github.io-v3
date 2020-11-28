@@ -5,10 +5,6 @@ export const ContactType = shape({
   url: string,
 })
 
-export const ProjectsType = shape({
-  items: arrayOf(ProjectType),
-})
-
 export const ProjectType = shape({
   title: string,
   description: string,
@@ -16,6 +12,10 @@ export const ProjectType = shape({
   role: string,
   date: string,
   tags: arrayOf(string),
+})
+
+export const ProjectsType = shape({
+  items: arrayOf(ProjectType),
 })
 
 export const MeType = shape({
