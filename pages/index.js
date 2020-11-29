@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Head from 'next/head'
 import RichText from '@madebyconnor/rich-text-to-jsx'
-import Fade from 'react-reveal/Fade'
+import { Fade } from 'react-awesome-reveal'
 
 import styles from '../styles/Index.module.css'
 import { backgroundChanger, imageOfSize } from '../utils'
@@ -138,7 +138,7 @@ function Project({
   const assetUrl = imageOfSize(assetCollection, 'small')?.url
 
   return (
-    <Fade bottom>
+    <Fade direction="up" triggerOnce>
       <article className={odd ? styles.projectOdd : styles.project}>
         <img src={assetUrl} className={styles.image} />
         <div className={styles.details}>
