@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import Head from 'next/head'
-import RichText from '@madebyconnor/rich-text-to-jsx'
-import { Fade } from 'react-awesome-reveal'
 
-import styles from '../styles/Index.module.css'
-import { backgroundChanger, imageOfSize } from '../utils'
-import { ContactType, MeType, ProjectsType, ProjectType } from '../types'
+import { backgroundChanger } from '../utils'
+import { MeType, ProjectsType } from '../types'
 import { getIndexPageData } from '../queries'
-import { arrayOf } from 'prop-types'
+
+import { Header } from '../components/header'
+import { Me } from '../components/me'
+import { Projects } from '../components/projects'
 
 export async function getServerSideProps() {
   const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
@@ -49,84 +49,175 @@ export default function Index({ me, projects }) {
         <title>Per Jansson - Fullstack Web Developer</title>
       </Head>
       <Header contacts={me.contactsCollection.items} />
-      <main className={styles.main}>
+      <main className="main">
         <Me me={me} />
         <Projects projects={projects} />
       </main>
+
+      <style jsx>{`
+        .main {
+          margin-left: auto;
+          margin-right: auto;
+          width: 85%;
+          min-width: 320px;
+          max-width: 1600px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        /* Most of the Smartphones Mobiles (Portrait) */
+        @media (min-width: 320px) and (max-width: 480px) {
+        }
+
+        /* Low Resolution Tablets, Mobiles (Landscape) */
+        @media (min-width: 481px) and (max-width: 767px) {
+        }
+
+        /* Tablets, Ipads (portrait) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+        }
+
+        /* Tablets, Ipads (landscape) */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+        }
+
+        /* Laptops, Desktops */
+        @media (min-width: 1025px) and (max-width: 1280px) {
+        }
+
+        /* Desktops */
+        @media (min-width: 1281px) {
+        }
+      `}</style>
+
+      <style global jsx>{`
+        @font-face {
+          font-family: 'NerkoOne';
+          src: url('/fonts/NerkoOne/NerkoOne-Regular.ttf');
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'HKGrotesk';
+          src: url('/fonts/HKGrotesk/HKGrotesk-Regular.otf');
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'HKGrotesk';
+          src: url('/fonts/HKGrotesk/HKGrotesk-Bold.otf');
+          font-style: normal;
+          font-weight: 700;
+          font-display: swap;
+        }
+
+        html,
+        html[data-theme='dark'] {
+          --primary-bg-color: rgb(0, 0, 0);
+          --primary-text-color: rgb(255, 255, 255);
+          --secondary-text-color: rgb(56, 48, 46);
+        }
+
+        html[data-theme='light'] {
+          --primary-bg-color: rgb(255, 255, 255);
+          --primary-text-color: rgb(0, 0, 0);
+          --secondary-text-color: rgb(56, 48, 46, 0.5);
+        }
+
+        html,
+        body {
+          padding: 0;
+          margin: 0;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          min-height: 100vh;
+          background-color: var(--primary-bg-color);
+          transition: background-color 500ms linear;
+        }
+
+        body {
+          font-family: HKGrotesk, Helvetica Neue, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          font-size: 10px;
+        }
+
+        body::-webkit-scrollbar {
+          width: 0px;
+          background: transparent;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        a:hover {
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        h1 {
+          font-size: 64px;
+          font-weight: normal;
+        }
+
+        /* Most of the Smartphones Mobiles (Portrait) */
+        @media (min-width: 320px) and (max-width: 480px) {
+          body {
+            font-size: 10px;
+          }
+        }
+
+        /* Low Resolution Tablets, Mobiles (Landscape) */
+        @media (min-width: 481px) and (max-width: 767px) {
+          body {
+            font-size: 12px;
+          }
+        }
+
+        /* Tablets, Ipads (portrait) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+          body {
+            font-size: 16px;
+          }
+        }
+
+        /* Tablets, Ipads (landscape) */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+          body {
+            font-size: 16px;
+          }
+        }
+
+        /* Laptops, Desktops */
+        @media (min-width: 1025px) and (max-width: 1280px) {
+          body {
+            font-size: 16px;
+          }
+        }
+
+        /* Desktops */
+        @media (min-width: 1281px) {
+          body {
+            font-size: 16px;
+          }
+        }
+      `}</style>
     </>
   )
 }
 Index.propTypes = {
   me: MeType,
   projects: ProjectsType,
-}
-
-function Header({ contacts }) {
-  return (
-    <header className={styles.header}>
-      {contacts.map(({ url, medium }) => (
-        <a href={url} target="_blank" rel="noopener noreferrer" key={medium}>
-          {medium}
-        </a>
-      ))}
-    </header>
-  )
-}
-Header.propTypes = {
-  contacts: arrayOf(ContactType),
-}
-
-function Me({ me }) {
-  return (
-    <section className={styles.me}>
-      <div className={styles.meName}>
-        {me.name.split('').map((char, i) => (
-          <span key={i} style={{ animationDelay: `${i / 10}s` }}>
-            {char}
-          </span>
-        ))}
-      </div>
-      <div>{me.title}</div>
-    </section>
-  )
-}
-Me.propTypes = {
-  me: MeType,
-}
-
-function Projects({ projects }) {
-  return (
-    <section className={styles.projects}>
-      {projects?.map((project, i) => (
-        <Project key={i} project={project} odd={i % 2 === 1} />
-      ))}
-    </section>
-  )
-}
-Projects.propTypes = {
-  projects: ProjectsType,
-}
-
-function Project({
-  project: { title, description, me, assetCollection, odd },
-}) {
-  const assetUrl = imageOfSize(assetCollection, 'small')?.url
-
-  return (
-    <Fade direction="up" triggerOnce>
-      <article className={odd ? styles.projectOdd : styles.project}>
-        <img src={assetUrl} className={styles.image} />
-        <div className={styles.details}>
-          <header>{title}</header>
-          <main>
-            <RichText richText={description.json} />
-            <RichText richText={me.json} />
-          </main>
-        </div>
-      </article>
-    </Fade>
-  )
-}
-Project.propTypes = {
-  project: ProjectType,
 }
