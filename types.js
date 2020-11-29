@@ -1,4 +1,4 @@
-import { shape, string, arrayOf } from 'prop-types'
+import { shape, string, arrayOf, object } from 'prop-types'
 
 export const ContactType = shape({
   medium: string,
@@ -7,16 +7,14 @@ export const ContactType = shape({
 
 export const ProjectType = shape({
   title: string,
-  description: string,
-  me: string,
+  description: object,
+  me: object,
   role: string,
   date: string,
   tags: arrayOf(string),
 })
 
-export const ProjectsType = shape({
-  items: arrayOf(ProjectType),
-})
+export const ProjectsType = arrayOf(ProjectType)
 
 export const ContactsCollectionType = shape({
   items: arrayOf(ContactType),

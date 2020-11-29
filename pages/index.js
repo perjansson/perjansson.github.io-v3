@@ -6,6 +6,8 @@ import { Fade } from 'react-awesome-reveal'
 import styles from '../styles/Index.module.css'
 import { backgroundChanger, imageOfSize } from '../utils'
 import { ContactType, MeType, ProjectsType, ProjectType } from '../types'
+import { getIndexPageData } from '../queries'
+import { arrayOf } from 'prop-types'
 
 export async function getServerSideProps() {
   const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
@@ -20,36 +22,7 @@ export async function getServerSideProps() {
         authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
-        query: `
-            {
-                me(id: "6DJvlbWzPKLgZvCzVDRzos") {
-                  name
-                  title
-                      contactsCollection {
-                      items {
-                        ... on Contact {
-                          medium
-                          url
-                        }
-                      }
-                    }
-                }
-                projectCollection(order: startdate_DESC) {
-                    items {
-                        title
-                        description { json }
-                        me { json }
-                        role
-                        startdate
-                        assetCollection {
-                            items {
-                                fileName
-                                url
-                            }
-                        }
-                    }
-                }
-            }`,
+        query: getIndexPageData,
       }),
     }
   )
@@ -99,7 +72,9 @@ function Header({ contacts }) {
     </header>
   )
 }
-Header.propTypes = ContactType
+Header.propTypes = {
+  contacts: arrayOf(ContactType),
+}
 
 function Me({ me }) {
   return (
