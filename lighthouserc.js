@@ -2,7 +2,7 @@ module.exports = {
   ci: {
     collect: {
       numberOfRuns: 3,
-      startServerCommand: 'make run-ci',
+      // startServerCommand: 'make run-ci',
       url: ['http://localhost:3000'],
     },
     assert: {
