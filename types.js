@@ -5,6 +5,11 @@ export const ContactType = shape({
   url: string,
 })
 
+const ImageType = shape({
+  fileName: string,
+  url: string,
+})
+
 export const ProjectType = shape({
   title: string,
   description: object,
@@ -12,6 +17,7 @@ export const ProjectType = shape({
   role: string,
   date: string,
   tags: arrayOf(string),
+  asset: ImageType,
 })
 
 export const ProjectsType = arrayOf(ProjectType)

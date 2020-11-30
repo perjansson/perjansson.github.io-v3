@@ -1,7 +1,3 @@
-export function imageOfSize(assetCollection, size = 'large') {
-  return assetCollection?.items.find(({ fileName }) => fileName.includes(size))
-}
-
 export function backgroundChanger() {
   const scrollFromTop = window.pageYOffset
   const htmlElement = document.documentElement

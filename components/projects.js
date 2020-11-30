@@ -29,10 +29,8 @@ Projects.propTypes = {
   projects: ProjectsType,
 }
 
-function Project({
-  project: { title, description, me, assetCollection, odd },
-}) {
-  const assetUrl = imageOfSize(assetCollection, 'small')?.url
+function Project({ project: { title, description, me, asset, odd } }) {
+  const assetUrl = asset ? `${asset.url}?fl=progressive&w=534&h=800` : undefined
 
   return (
     <Fade direction="up" triggerOnce>
@@ -67,6 +65,7 @@ function Project({
           }
 
           .image {
+            background-color: rgba(0, 0, 0, 0.2);
             height: 267px;
             margin-bottom: 12px;
             width: 400px;

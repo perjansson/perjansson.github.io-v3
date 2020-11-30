@@ -18,11 +18,9 @@ export const getIndexPageData = `{
             me { json }
             role
             startdate
-            assetCollection {
-                items {
-                    fileName
-                    url
-                }
+            asset {
+                fileName
+                url
             }
         }
     }
