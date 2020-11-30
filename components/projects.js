@@ -34,7 +34,7 @@ function Project({ project: { title, description, me, asset, odd } }) {
   return (
     <Fade direction="up" triggerOnce>
       <article className={odd ? 'projectOdd' : 'project'}>
-        <img src={assetUrl} className="image" />
+        <img src={assetUrl} className="image" width="400" height="267" />
         <div className="details">
           <header>{title}</header>
           <main>
@@ -64,6 +64,7 @@ function Project({ project: { title, description, me, asset, odd } }) {
           }
 
           .image {
+            aspect-ratio: attr(width) / attr(height);
             background-color: rgba(0, 0, 0, 0.2);
             height: 267px;
             margin-bottom: 12px;
@@ -86,8 +87,8 @@ function Project({ project: { title, description, me, asset, odd } }) {
             margin-right: 2em;
           }
 
-          .details p {
-            font-size: 1.2em;
+          .details main {
+            font-size: 1em;
             margin-top: 10px;
           }
 
@@ -122,24 +123,29 @@ function Project({ project: { title, description, me, asset, odd } }) {
               margin: 0;
             }
 
-            .details p {
+            .details main {
               font-size: 1.4em;
               text-align: justify;
             }
 
             .details header {
               opacity: 0.5;
-              font-size: 2.5em;
+              font-size: 2.3em;
               text-transform: uppercase;
               text-align: center;
             }
           }
 
           /* Low Resolution Tablets, Mobiles (Landscape) */
-          @media (min-width: 481px) and (max-width: 767px) {
+          @media (min-width: 481px) and (max-width: 812px) {
             .image {
-              max-width: 50%;
+              max-width: 30%;
               width: 300px;
+            }
+
+            .details main {
+              font-size: 0.9em;
+              text-align: justify;
             }
           }
         `}</style>
