@@ -34,7 +34,13 @@ function Project({ project: { title, description, me, asset, odd } }) {
   return (
     <Fade direction="up" triggerOnce>
       <article className={odd ? 'projectOdd' : 'project'}>
-        <img src={assetUrl} className="image" width="400" height="267" />
+        <img
+          src={assetUrl}
+          alt={`Image for project ${title}`}
+          className="image"
+          width="400"
+          height="267"
+        />
         <div className="details">
           <header>{title}</header>
           <main>

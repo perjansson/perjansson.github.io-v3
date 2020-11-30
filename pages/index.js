@@ -121,7 +121,7 @@ export default function Index({ me, projects }) {
         html[data-theme='dark'] {
           --primary-bg-color: rgb(0, 0, 0);
           --primary-text-color: rgb(255, 255, 255);
-          --secondary-text-color: rgb(56, 48, 46);
+          --secondary-text-color: rgb(56, 48, 46, 0.9);
         }
 
         html[data-theme='light'] {
