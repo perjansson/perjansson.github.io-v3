@@ -4,7 +4,7 @@ import { MeType } from '../types'
 
 export function Me({ me }) {
   return (
-    <section className="me">
+    <section className="me" data-cy="me">
       <div className="meName">
         {me.name.split('').map((char, i) => (
           <span key={i} style={{ animationDelay: `${i / 10}s` }}>

@@ -8,6 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:cypress/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -18,4 +19,9 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {},
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 }

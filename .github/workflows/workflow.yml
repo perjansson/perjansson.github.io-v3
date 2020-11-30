@@ -3,6 +3,23 @@ name: Continuous Delivery
 on: [push]
 
 jobs:
+  smoke-test:
+    name: Smoke Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install packages
+        run: yarn
+      - name: Test app
+        run: yarn test:ci
+
   lhci:
     name: Lighthouse CI
     runs-on: ubuntu-latest
@@ -29,7 +46,7 @@ jobs:
 
   build:
     name: Build & Deploy
-    needs: [lhci]
+    needs: [smoke-test, lhci]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1

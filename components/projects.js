@@ -3,11 +3,10 @@ import RichText from '@madebyconnor/rich-text-to-jsx'
 import { Fade } from 'react-awesome-reveal'
 
 import { ProjectsType, ProjectType } from '../types'
-import { imageOfSize } from '../utils'
 
 export function Projects({ projects }) {
   return (
-    <section className="projects">
+    <section className="projects" data-cy="projects">
       {projects?.map((project, i) => (
         <Project key={i} project={project} odd={i % 2 === 1} />
       ))}

@@ -5,7 +5,7 @@ import { ContactType } from '../types'
 
 export function Header({ contacts }) {
   return (
-    <header className="header">
+    <header className="header" data-cy="header">
       {contacts.map(({ url, medium }) => (
         <a href={url} target="_blank" rel="noopener noreferrer" key={medium}>
           {medium}
