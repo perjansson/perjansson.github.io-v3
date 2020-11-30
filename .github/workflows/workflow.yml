@@ -20,6 +20,9 @@ jobs:
       - name: Build app
         run: yarn build
       - name: Test app
+        env: 
+          NEXT_PUBLIC_CONTENTFUL_SPACE_ID: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_SPACE_ID }}
+          NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN }}
         run: yarn test:ci
 
   lhci:
