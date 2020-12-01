@@ -17,13 +17,13 @@ export function Me({ me }) {
       <style jsx>{`
         @keyframes colorChange {
           0% {
-            color: var(--secondary-text-color);
-          }
-          50% {
             color: var(--primary-text-color);
           }
-          100% {
+          50% {
             color: var(--secondary-text-color);
+          }
+          100% {
+            color: var(--primary-text-color);
           }
         }
 
@@ -45,8 +45,9 @@ export function Me({ me }) {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          animation: colorChange 4s infinite;
+          animation: colorChange 4s ease-in 3s infinite;
           font-size: 1.8em;
+          color: var(--primary-text-color);
         }
 
         .meName {
