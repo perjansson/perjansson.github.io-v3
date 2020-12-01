@@ -23,7 +23,7 @@ describe('Smoke test', () => {
   it('works', () => {
     cy.visit('http://localhost:5000')
 
-    cy.get('body').contains('Per Jan##sson')
+    cy.get('body').contains('Per Jansson')
     cy.get('body').contains('Fullstack Web Developer')
 
     // cy.get('[data-cy=me').scrollIntoView()
