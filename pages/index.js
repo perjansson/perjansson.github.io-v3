@@ -157,6 +157,7 @@ export default function Index({ me, projects }) {
         a {
           color: inherit;
           text-decoration: none;
+          transition: color 0.8s ease;
         }
 
         a:hover {
