@@ -8,6 +8,14 @@ import { ProjectsType, ProjectType } from '../types'
 export function Projects({ projects }) {
   const [selectedProject, setSelectedProject] = useState(undefined)
 
+  const handleOnSelect = (project) => {
+    setSelectedProject((previouslySelectedProject) => {
+      setSelectedProject(
+        project !== previouslySelectedProject ? project : undefined
+      )
+    })
+  }
+
   return (
     <section className="projects" data-cy="projects">
       {projects?.map((project, i) => (
@@ -16,7 +24,7 @@ export function Projects({ projects }) {
           project={project}
           odd={i % 2 === 1}
           selected={project === selectedProject}
-          onSelect={setSelectedProject}
+          onSelect={handleOnSelect}
         />
       ))}
 
