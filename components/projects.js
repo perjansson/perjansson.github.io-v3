@@ -100,9 +100,6 @@ function Project({ project, odd, selected, onSelect }) {
             display: flex;
             flex-direction: column;
             justify-content: center;
-          }
-
-          article .details {
             margin-left: ${odd ? undefined : '2em'};
             margin-right: ${odd ? '2em' : undefined};
           }
@@ -146,6 +143,7 @@ function Project({ project, odd, selected, onSelect }) {
           /* Most of the Smartphones Mobiles (Portrait) */
           @media (min-width: 320px) and (max-width: 480px) {
             article {
+              padding: 20px;
               flex-direction: column;
               align-items: center;
             }
