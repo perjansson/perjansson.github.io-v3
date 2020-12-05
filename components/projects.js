@@ -1,4 +1,5 @@
 import React from 'react'
+import { bool } from 'prop-types'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import { Fade } from 'react-awesome-reveal'
 
@@ -28,7 +29,7 @@ Projects.propTypes = {
   projects: ProjectsType,
 }
 
-function Project({ project: { title, description, me, role, asset, odd } }) {
+function Project({ project: { title, description, me, role, asset }, odd }) {
   const assetUrl = asset ? `${asset.url}?fl=progressive&w=534&h=800` : undefined
 
   return (
@@ -48,6 +49,7 @@ function Project({ project: { title, description, me, role, asset, odd } }) {
             <RichText richText={description.json} />
           </main>
         </div>
+        {/* <div className="toggle">X</div> */}
 
         <style jsx>{`
           .project {
@@ -81,7 +83,7 @@ function Project({ project: { title, description, me, role, asset, odd } }) {
 
           .details {
             width: 100%;
-            max-width: 700px;
+            max-width: 600px;
             text-align: left;
           }
 
@@ -110,6 +112,12 @@ function Project({ project: { title, description, me, role, asset, odd } }) {
             opacity: 0.5;
             font-size: 1.2em;
             font-weight: 700;
+          }
+
+          .toggle {
+            width: 50px;
+            display: flex;
+            justify-content: flex-start;
           }
 
           /* Most of the Smartphones Mobiles (Portrait) */
@@ -161,6 +169,20 @@ function Project({ project: { title, description, me, role, asset, odd } }) {
               text-align: justify;
             }
           }
+
+          /* Laptops, Desktops */
+          @media (min-width: 1025px) and (max-width: 1280px) {
+            .details {
+              min-width: 600px;
+            }
+          }
+
+          /* Desktops */
+          @media (min-width: 1281px) {
+            .details {
+              min-width: 600px;
+            }
+          }
         `}</style>
       </article>
     </Fade>
@@ -168,4 +190,5 @@ function Project({ project: { title, description, me, role, asset, odd } }) {
 }
 Project.propTypes = {
   project: ProjectType,
+  odd: bool,
 }
