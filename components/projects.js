@@ -1,15 +1,23 @@
-import React from 'react'
-import { bool } from 'prop-types'
+import React, { useState } from 'react'
+import { bool, func } from 'prop-types'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import { Fade } from 'react-awesome-reveal'
 
 import { ProjectsType, ProjectType } from '../types'
 
 export function Projects({ projects }) {
+  const [selectedProject, setSelectedProject] = useState(undefined)
+
   return (
     <section className="projects" data-cy="projects">
       {projects?.map((project, i) => (
-        <Project key={i} project={project} odd={i % 2 === 1} />
+        <Project
+          key={i}
+          project={project}
+          odd={i % 2 === 1}
+          selected={project === selectedProject}
+          onSelect={setSelectedProject}
+        />
       ))}
 
       <style jsx>{`
@@ -29,12 +37,13 @@ Projects.propTypes = {
   projects: ProjectsType,
 }
 
-function Project({ project: { title, description, me, role, asset }, odd }) {
+function Project({ project, odd, selected, onSelect }) {
+  const { title, description, role, asset } = project
   const assetUrl = asset ? `${asset.url}?fl=progressive&w=534&h=800` : undefined
 
   return (
     <Fade direction="up" triggerOnce>
-      <article className={odd ? 'projectOdd' : 'project'}>
+      <article onClick={() => onSelect(project)}>
         <img
           src={assetUrl}
           alt={`Image for project ${title}`}
@@ -49,26 +58,29 @@ function Project({ project: { title, description, me, role, asset }, odd }) {
             <RichText richText={description.json} />
           </main>
         </div>
-        {/* <div className="toggle">X</div> */}
+        <div className="toggle">
+          <div className="toggle-icon">{selected ? '-' : '+'}</div>
+        </div>
 
         <style jsx>{`
-          .project {
+          article {
+            cursor: pointer;
+            padding: 50px 0;
             width: 100%;
             margin-bottom: 8em;
+            padding-left: ${odd ? undefined : '50px'};
+            padding-right: ${odd ? '50px' : undefined};
             display: flex;
-            flex-direction: row;
+            flex-direction: ${odd ? 'row-reverse' : 'row'};
             justify-content: space-between;
-            align-items: center;
+            align-items: stretch;
+            transition: background-color 0.5s linear;
+            border-radius: 20px;
+            background: ${selected ? 'rgba(0, 0, 0, 0.07)' : 'transparent'};
           }
 
-          .projectOdd {
-            width: 100%;
-            margin-bottom: 8em;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            flex-flow: row-reverse;
+          article:hover {
+            background: rgba(0, 0, 0, 0.07);
           }
 
           .image {
@@ -85,14 +97,14 @@ function Project({ project: { title, description, me, role, asset }, odd }) {
             width: 100%;
             max-width: 600px;
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
           }
 
-          .project .details {
-            margin-left: 2em;
-          }
-
-          .projectOdd .details {
-            margin-right: 2em;
+          article .details {
+            margin-left: ${odd ? undefined : '2em'};
+            margin-right: ${odd ? '2em' : undefined};
           }
 
           header {
@@ -115,19 +127,25 @@ function Project({ project: { title, description, me, role, asset }, odd }) {
           }
 
           .toggle {
-            width: 50px;
-            display: flex;
-            justify-content: flex-start;
+            margin-top: -50px;
+            min-width: 50px;
+            text-align: center;
+          }
+
+          .toggle-icon {
+            font-size: 2em;
+            opacity: 0.4;
+            transform: scale(0) rotate(-540deg);
+            transition: all 0.4s ease;
+          }
+
+          article:hover .toggle-icon {
+            transform: scale(1) rotate(0);
           }
 
           /* Most of the Smartphones Mobiles (Portrait) */
           @media (min-width: 320px) and (max-width: 480px) {
-            .project {
-              flex-direction: column;
-              align-items: center;
-            }
-
-            .projectOdd {
+            article {
               flex-direction: column;
               align-items: center;
             }
@@ -136,11 +154,7 @@ function Project({ project: { title, description, me, role, asset }, odd }) {
               width: 100%;
             }
 
-            .project .details {
-              margin: 0;
-            }
-
-            .projectOdd .details {
+            .details {
               margin: 0;
             }
 
@@ -191,4 +205,6 @@ function Project({ project: { title, description, me, role, asset }, odd }) {
 Project.propTypes = {
   project: ProjectType,
   odd: bool,
+  selected: bool,
+  onSelect: func,
 }

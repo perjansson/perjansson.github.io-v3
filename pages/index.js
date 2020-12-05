@@ -138,7 +138,7 @@ export default function Index({ me, projects }) {
           overflow-x: hidden;
           min-height: 100vh;
           background-color: var(--primary-bg-color);
-          transition: background-color 500ms linear;
+          transition: background-color 0.5s ease;
         }
 
         body {
@@ -157,7 +157,7 @@ export default function Index({ me, projects }) {
         a {
           color: inherit;
           text-decoration: none;
-          transition: color 0.8s ease;
+          transition: color 0.5s ease;
         }
 
         a:hover {
