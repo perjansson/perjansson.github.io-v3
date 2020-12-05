@@ -28,7 +28,7 @@ Projects.propTypes = {
   projects: ProjectsType,
 }
 
-function Project({ project: { title, description, me, asset, odd } }) {
+function Project({ project: { title, description, me, role, asset, odd } }) {
   const assetUrl = asset ? `${asset.url}?fl=progressive&w=534&h=800` : undefined
 
   return (
@@ -44,8 +44,8 @@ function Project({ project: { title, description, me, asset, odd } }) {
         <div className="details">
           <header>{title}</header>
           <main>
+            <div className="role">{role}</div>
             <RichText richText={description.json} />
-            <RichText richText={me.json} />
           </main>
         </div>
 
@@ -93,16 +93,23 @@ function Project({ project: { title, description, me, asset, odd } }) {
             margin-right: 2em;
           }
 
-          .details main {
-            font-size: 1em;
-            margin-top: 10px;
-          }
-
-          .details header {
+          header {
             opacity: 0.5;
             font-size: 0.9em;
             font-weight: 700;
             text-transform: uppercase;
+          }
+
+          main {
+            font-size: 1em;
+            margin-top: 10px;
+          }
+
+          .role {
+            margin-top: 20px;
+            opacity: 0.5;
+            font-size: 1.2em;
+            font-weight: 700;
           }
 
           /* Most of the Smartphones Mobiles (Portrait) */
@@ -129,16 +136,16 @@ function Project({ project: { title, description, me, asset, odd } }) {
               margin: 0;
             }
 
-            .details main {
-              font-size: 1.4em;
-              text-align: justify;
-            }
-
-            .details header {
+            header {
               opacity: 0.5;
               font-size: 2.3em;
               text-transform: uppercase;
               text-align: center;
+            }
+
+            main {
+              font-size: 1.4em;
+              text-align: justify;
             }
           }
 
@@ -149,7 +156,7 @@ function Project({ project: { title, description, me, asset, odd } }) {
               width: 300px;
             }
 
-            .details main {
+            main {
               font-size: 0.9em;
               text-align: justify;
             }
