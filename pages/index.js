@@ -57,7 +57,7 @@ export default function Index({ me, projects }) {
       <Header contacts={me.contactsCollection.items} />
       <main className="main">
         <Me me={me} />
-        <TagCloud allTags={projects} />
+        <TagCloud projects={projects} />
         <Projects projects={projects} />
       </main>
 

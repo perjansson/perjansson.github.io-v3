@@ -13,6 +13,14 @@ export function backgroundChanger() {
   }
 }
 
+export function sortProjectsOnStartDate(projects) {
+  const sortedProjects = [...projects]
+  sortedProjects.sort(
+    (p1, p2) => new Date(p1.startdate) - new Date(p2.startdate)
+  )
+  return sortedProjects
+}
+
 export function formatProjectDates(startdate, enddate) {
   if (!startdate && !enddate) {
     return
@@ -36,27 +44,38 @@ export function formatProjectDates(startdate, enddate) {
   return `between ${startYear} and ${endYear}`
 }
 
-function yearFromIsoDate(isoDateString) {
-  if (!isoDateString) {
+export function yearFromIsoDate(isoDate) {
+  if (!isoDate) {
     return
   }
 
-  return new Date(isoDateString).getFullYear()
+  return new Date(
+    typeof isoDate === 'number' ? '' + isoDate : isoDate
+  ).getFullYear()
 }
 
-export function projectTagsToTagCloudData(projects) {
-  const tagsObject = projects?.reduce((state, { tags }) => {
-    tags.forEach((tag) => {
-      const trimmedTag = tag.trim()
-      const tagCount = state[trimmedTag]
-      if (tagCount >= 1) {
-        state[trimmedTag] = tagCount + 1
-      } else {
-        state[trimmedTag] = 1
-      }
+export function projectTagsToTagCloudData(projects, minYear, maxYear) {
+  const tagsObject = projects
+    ?.filter((project) => {
+      const startYear = yearFromIsoDate(project.startdate)
+      const endYear = yearFromIsoDate(project.enddate)
+      const projectDatesInBetweenMinMaxYear =
+        (minYear <= startYear && startYear <= maxYear) ||
+        (minYear <= endYear && endYear <= maxYear)
+      return projectDatesInBetweenMinMaxYear
     })
-    return state
-  }, {})
+    .reduce((state, project) => {
+      project.tags.forEach((tag) => {
+        const trimmedTag = tag.trim()
+        const tagCount = state[trimmedTag]
+        if (tagCount >= 1) {
+          state[trimmedTag] = tagCount + 1
+        } else {
+          state[trimmedTag] = 1
+        }
+      })
+      return state
+    }, {})
 
   const tagsList = Object.entries(tagsObject).map(([key, value]) => ({
     value: key,

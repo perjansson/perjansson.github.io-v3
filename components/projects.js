@@ -172,6 +172,7 @@ function Project({ project, odd, selected, onSelect }) {
           justify-content: center;
           margin-left: ${odd ? undefined : '2em'};
           margin-right: ${odd ? '2em' : undefined};
+          color: var(--primary-text-color);
         }
 
         header {
@@ -179,6 +180,7 @@ function Project({ project, odd, selected, onSelect }) {
           font-size: 0.9em;
           font-weight: 700;
           text-transform: uppercase;
+          color: var(--primary-text-color);
         }
 
         main {
