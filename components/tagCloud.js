@@ -12,6 +12,12 @@ import {
 } from '../utils'
 import { ProjectsType } from '../types'
 
+const TAG_CLOUD_INITIAL_YEARS_OF_HISTORY = 5
+const MIN_FONT_SIZE = {
+  mobile: 12,
+  nonMobile: 18,
+}
+
 export const TagCloud = memo(({ projects }) => {
   const [firstProjectYear, lastProjectYear] = useMemo(() => {
     const [firstProject, ...restOfProjects] = sortProjectsOnStartDate(projects)
@@ -23,7 +29,7 @@ export const TagCloud = memo(({ projects }) => {
 
   const [minYear] = useState(firstProjectYear)
   const [selectedMinYear, setSelectedMinYear] = useState(
-    Math.max(minYear, lastProjectYear - 5)
+    Math.max(minYear, lastProjectYear - TAG_CLOUD_INITIAL_YEARS_OF_HISTORY)
   )
   const [maxYear] = useState(lastProjectYear)
 
@@ -32,9 +38,9 @@ export const TagCloud = memo(({ projects }) => {
     [projects, selectedMinYear, maxYear]
   )
 
-  const [minTagFontSize, setMinTagFontSize] = useState(undefined)
+  const [minFontSize, setMinFontSize] = useState(undefined)
   useEffect(() => {
-    setMinTagFontSize(isMobile() ? 12 : 18)
+    setMinFontSize(isMobile() ? MIN_FONT_SIZE.mobile : MIN_FONT_SIZE.nonMobile)
   }, [])
 
   const handleSliderChange = (newMinYear) => {
@@ -42,14 +48,19 @@ export const TagCloud = memo(({ projects }) => {
       setSelectedMinYear(newMinYear)
     }
   }
-
+  const options = {
+    luminosity: 'light',
+    hue: 'blue',
+  }
   return (
     <section className="tags" data-cy="tags">
-      {minTagFontSize && (
+      {minFontSize && (
         <>
           <article className="slider">
             <header>
-              Buzz word cloud {formatProjectDates(selectedMinYear, maxYear)}
+              Buzz word cloud
+              <br />
+              {formatProjectDates(selectedMinYear, maxYear)}
             </header>
             <Slider
               min={minYear}
@@ -65,11 +76,10 @@ export const TagCloud = memo(({ projects }) => {
           </article>
           <article>
             <ReactTagCloud
-              minSize={minTagFontSize}
-              maxSize={minTagFontSize * 3}
+              minSize={minFontSize}
+              maxSize={minFontSize * 3}
               tags={data}
               shuffle
-              className="tag-cloud"
             />
           </article>
         </>
@@ -115,6 +125,24 @@ export const TagCloud = memo(({ projects }) => {
             max-width: 1100px;
             margin-bottom: 150px;
           }
+        }
+      `}</style>
+
+      <style global jsx>{`
+        [data-reach-slider-handle],
+        [data-reach-slider-track] {
+          background: var(--slider-active-color);
+        }
+
+        [data-reach-slider-handle] {
+          border: 2px solid var(--slider-inactive-color);
+          width: 24px;
+          height: 24px;
+          border-radius: 20px;
+        }
+
+        [data-reach-slider-range] {
+          background: var(--slider-inactive-color);
         }
       `}</style>
     </section>

@@ -145,12 +145,16 @@ export default function Index({ me, projects }) {
           --primary-bg-color: rgb(0, 0, 0);
           --primary-text-color: rgb(255, 255, 255);
           --secondary-text-color: rgb(56, 48, 46, 0.9);
+          --slider-active-color: rgba(255, 255, 255, 0.9);
+          --slider-inactive-color: rgba(0, 0, 0, 0.85);
         }
 
         html[data-theme='light'] {
           --primary-bg-color: rgb(255, 255, 255);
           --primary-text-color: rgb(0, 0, 0);
           --secondary-text-color: rgb(56, 48, 46, 0.5);
+          --slider-active-color: rgba(0, 0, 0, 0.85);
+          --slider-inactive-color: rgba(255, 255, 255, 0.9);
         }
 
         html,
