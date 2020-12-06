@@ -115,7 +115,7 @@ function Project({ project, odd, selected, onSelect }) {
             )}
             {tags && (
               <>
-                <div className="sub-header">Tech</div>
+                <div className="sub-header">Buzz words</div>
                 <p className="tags">{tags?.join(', ')}</p>
               </>
             )}
