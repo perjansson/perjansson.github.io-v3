@@ -40,7 +40,7 @@ export function Me({ me }) {
         }
 
         .me {
-          height: 90vh;
+          height: 85vh;
           display: flex;
           flex-direction: column;
           justify-content: center;

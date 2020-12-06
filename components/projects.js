@@ -75,7 +75,8 @@ function Project({ project, odd, selected, onSelect }) {
 
   return (
     <Fade direction="up" triggerOnce>
-      <article ref={element} onClick={handleOnClick}>
+      <article onClick={handleOnClick}>
+        <div ref={element} className="scroll-section"></div>
         <div className="content">
           <img
             src={assetUrl}
@@ -124,6 +125,7 @@ function Project({ project, odd, selected, onSelect }) {
 
       <style jsx>{`
         article {
+          position: relative;
           cursor: pointer;
           padding: 50px 0;
           width: 100%;
@@ -135,6 +137,11 @@ function Project({ project, odd, selected, onSelect }) {
 
         article:hover {
           background: rgba(0, 0, 0, 0.05);
+        }
+
+        .scroll-section {
+          position: absolute;
+          top: -50px;
         }
 
         .content {
