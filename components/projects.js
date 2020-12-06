@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { bool, func } from 'prop-types'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import { Fade } from 'react-awesome-reveal'
@@ -63,9 +63,18 @@ function Project({ project, odd, selected, onSelect }) {
   } = project
   const assetUrl = asset ? `${asset.url}?fl=progressive&w=534&h=800` : undefined
 
+  const element = useRef(null)
+  const handleOnClick = () => {
+    onSelect(project)
+    setTimeout(
+      () => element.current?.scrollIntoView({ behavior: 'smooth' }),
+      600
+    )
+  }
+
   return (
     <Fade direction="up" triggerOnce>
-      <article onClick={() => onSelect(project)}>
+      <article ref={element} onClick={handleOnClick}>
         <div className="content">
           <img
             src={assetUrl}
@@ -85,7 +94,7 @@ function Project({ project, odd, selected, onSelect }) {
             <div className="toggle-icon">{selected ? '-' : '+'}</div>
           </div>
         </div>
-        <SmoothCollapse expanded={selected} heightTransition="0.8s">
+        <SmoothCollapse expanded={selected} heightTransition="0.4s">
           <div className="me">
             {me && (
               <>
