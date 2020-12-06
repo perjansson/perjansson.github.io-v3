@@ -117,6 +117,22 @@ export default function Index({ me, projects }) {
           font-display: swap;
         }
 
+        @font-face {
+          font-family: 'SpaceMono';
+          src: url('/fonts/SpaceMono/SpaceMono-Regular.ttf');
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'SpaceMono';
+          src: url('/fonts/SpaceMono/SpaceMono-Bold.ttf');
+          font-style: normal;
+          font-weight: 700;
+          font-display: swap;
+        }
+
         html,
         html[data-theme='dark'] {
           --primary-bg-color: rgb(0, 0, 0);
@@ -171,6 +187,11 @@ export default function Index({ me, projects }) {
         h1 {
           font-size: 64px;
           font-weight: normal;
+        }
+
+        p {
+          margin-top: 10px;
+          margin-bottom: 0;
         }
 
         /* Most of the Smartphones Mobiles (Portrait) */

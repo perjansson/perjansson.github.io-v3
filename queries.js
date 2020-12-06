@@ -14,10 +14,14 @@ export const getIndexPageData = `{
     projectCollection(order: startdate_DESC) {
         items {
             title
+            client
             description { json }
             me { json }
-            role
+            role      
             startdate
+            enddate
+            city
+            tags
             asset {
                 fileName
                 url
