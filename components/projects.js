@@ -44,6 +44,7 @@ export function Projects({ projects }) {
     </section>
   )
 }
+
 Projects.propTypes = {
   projects: ProjectsType,
 }
@@ -126,7 +127,7 @@ function Project({ project, odd, selected, onSelect }) {
           cursor: pointer;
           padding: 50px 0;
           width: 100%;
-          margin-bottom: 8em;
+          margin-bottom: 6em;
           transition: background-color 0.5s linear;
           background: ${selected ? 'rgba(0, 0, 0, 0.05)' : 'transparent'};
           border: 2px dashed ${selected ? 'rgba(0, 0, 0, 0.15)' : 'transparent'};
@@ -286,6 +287,7 @@ function Project({ project, odd, selected, onSelect }) {
     </Fade>
   )
 }
+
 Project.propTypes = {
   project: ProjectType,
   odd: bool,

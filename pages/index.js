@@ -8,6 +8,7 @@ import { getIndexPageData } from '../queries'
 import { Header } from '../components/header'
 import { Me } from '../components/me'
 import { Projects } from '../components/projects'
+import { TagCloud } from '../components/tagCloud'
 
 export async function getServerSideProps() {
   const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
@@ -51,6 +52,7 @@ export default function Index({ me, projects }) {
       <Header contacts={me.contactsCollection.items} />
       <main className="main">
         <Me me={me} />
+        <TagCloud allTags={projects} />
         <Projects projects={projects} />
       </main>
 
