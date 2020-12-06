@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import smoothscroll from 'smoothscroll-polyfill'
 import Head from 'next/head'
 
 import { backgroundChanger } from '../utils'
@@ -9,6 +10,10 @@ import { Header } from '../components/header'
 import { Me } from '../components/me'
 import { Projects } from '../components/projects'
 import { TagCloud } from '../components/tagCloud'
+
+if (process.browser) {
+  smoothscroll.polyfill()
+}
 
 export async function getServerSideProps() {
   const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
