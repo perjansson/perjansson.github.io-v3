@@ -120,7 +120,7 @@ function Project({ project, odd, selected, onSelect }) {
           margin-bottom: 8em;
           transition: background-color 0.5s linear;
           background: ${selected ? 'rgba(0, 0, 0, 0.05)' : 'transparent'};
-          border: 4px solid ${selected ? 'rgba(0, 0, 0, 0.15)' : 'transparent'};
+          border: 2px dashed ${selected ? 'rgba(0, 0, 0, 0.15)' : 'transparent'};
         }
 
         article:hover {
@@ -206,6 +206,7 @@ function Project({ project, odd, selected, onSelect }) {
         /* Most of the Smartphones Mobiles (Portrait) */
         @media (min-width: 320px) and (max-width: 480px) {
           article {
+            border-width: 1px;
             padding: 20px;
           }
 
