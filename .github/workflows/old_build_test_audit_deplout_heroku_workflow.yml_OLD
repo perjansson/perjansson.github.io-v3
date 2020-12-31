@@ -1,0 +1,70 @@
+# name: Continuous Delivery
+
+# on: [push]
+
+# jobs:
+#   smoke-test:
+#     name: Smoke Test
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [14.x]
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#       - name: Install packages
+#         run: yarn
+#       - name: Build app
+#         run: yarn build
+#       - name: Test app
+#         env: 
+#           NEXT_PUBLIC_CONTENTFUL_SPACE_ID: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_SPACE_ID }}
+#           NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN }}
+#         run: yarn test:ci
+
+#   lhci:
+#     name: Lighthouse CI
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [14.x]
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#       - name: Install packages
+#         run: yarn
+#       - name: Build app
+#         run: yarn build
+#       - name: Audit with Lighthouse CI
+#         env: 
+#           NEXT_PUBLIC_CONTENTFUL_SPACE_ID: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_SPACE_ID }}
+#           NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN }}
+#         run: |
+#           npm install -g @lhci/cli@0.3.x
+#           lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
+
+#   build:
+#     name: Build & Deploy
+#     needs: [smoke-test, lhci]
+#     if: success()
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v1
+#     - name: Login to Heroku Container registry
+#       env: 
+#         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#       run: heroku container:login 
+#     - name: Build and push
+#       env:
+#         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#       run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web 
+#     - name: Release
+#       env:
+#         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#       run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web 

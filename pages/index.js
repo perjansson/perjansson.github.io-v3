@@ -15,7 +15,7 @@ if (process.browser) {
   smoothscroll.polyfill()
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
   const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
 
