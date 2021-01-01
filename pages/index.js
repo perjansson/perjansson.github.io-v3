@@ -52,7 +52,7 @@ export default function Index({ me, projects }) {
   return (
     <>
       <Head>
-        <title>Per Jansson - Fullstack Web Developer</title>
+        <title>Per Jansson - Fullstack Web Developer 👋</title>
       </Head>
       <Header contacts={me.contactsCollection.items} />
       <main className="main">
