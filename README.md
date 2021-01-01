@@ -1,6 +1,6 @@
 # My resumé:
 
-This is my personal resumé website created with [Next.js](https://vercel.com/solutions/nextjs), [React](https://reactjs.org)tested with [Cypress](https://www.cypress.io), measured with [Google Lighthouse](https://developers.google.com/web/tools/lighthouse), built with [GitHub actions](https://github.com/features/actions), [Docker](https://www.docker.com) and deployed on [Heroku](https://www.thecuriousdeveloper.com).
+This is my personal resumé website built as a Static Site with [Next.js](https://vercel.com/solutions/nextjs), [React](https://reactjs.org) with content from [Contentful](https://www.contentful.com) tested with [Cypress](https://www.cypress.io), measured with [Google Lighthouse](https://developers.google.com/web/tools/lighthouse), built with [GitHub actions](https://github.com/features/actions) and deployed on [Netlify](https://www.netlify.com). Available on [www.thecuriousdeveloper.com](https://www.thecuriousdeveloper.com).
 
 ## Get started
 
