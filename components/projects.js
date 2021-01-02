@@ -62,6 +62,9 @@ function Project({ project, odd, selected, onSelect }) {
     city,
     tags,
   } = project
+  const lqipAssetUrl = asset
+    ? `${asset.url}?fl=progressive&w=67&h=100`
+    : undefined
   const assetUrl = asset ? `${asset.url}?fl=progressive&w=534&h=800` : undefined
 
   const element = useRef(null)
@@ -79,9 +82,10 @@ function Project({ project, odd, selected, onSelect }) {
         <div ref={element} className="scroll-section"></div>
         <div className="content">
           <img
-            src={assetUrl}
+            src={lqipAssetUrl}
+            data-src={assetUrl}
             alt={`Image for project ${title}`}
-            className="image"
+            className="image lazyload"
             width="400"
             height="267"
           />
