@@ -2,12 +2,14 @@ export const getIndexPageData = `{
     me(id: "6DJvlbWzPKLgZvCzVDRzos") {
         name
         title
-            contactsCollection {
+        short { json }
+        long { json }
+        contactsCollection {
             items {
-            ... on Contact {
-                medium
-                url
-            }
+                ... on Contact {
+                    medium
+                    url
+                }
             }
         }
     }

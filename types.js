@@ -30,6 +30,6 @@ export const MeType = shape({
   name: string,
   title: string,
   contacts: ContactsCollectionType,
-  short: string,
-  long: string,
+  short: object,
+  long: object,
 })

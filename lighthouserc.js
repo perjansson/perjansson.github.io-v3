@@ -1,13 +1,13 @@
 module.exports = {
   ci: {
     collect: {
-      numberOfRuns: 5,
+      numberOfRuns: 3,
       staticDistDir: './out',
     },
     assert: {
       // preset: 'lighthouse:recommended',
       assertions: {
-        'categories:performance': ['error', { minScore: 1 }],
+        'categories:performance': ['error', { minScore: 0.85 }],
         'categories:accessibility': ['error', { minScore: 1 }],
         // 'categories:best-practices': ['error', { minScore: 1 }],
         // 'categories:seo': ['error', { minScore: 1 }],

@@ -59,9 +59,8 @@ jobs:
         run: yarn build
 
       - name: Audit with Lighthouse CI
-        env:
-          NEXT_PUBLIC_CONTENTFUL_SPACE_ID: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_SPACE_ID }}
-          NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN }}
-        run: |
-          npm install -g @lhci/cli@0.3.x
-          lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
+        uses: treosh/lighthouse-ci-action@v3
+        with:
+          configPath: 'lighthouserc.js'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
