@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
-import smoothscroll from 'smoothscroll-polyfill'
 import Head from 'next/head'
+import smoothscroll from 'smoothscroll-polyfill'
+import 'lazysizes'
 
 import { backgroundChanger } from '../utils'
 import { MeType, ProjectsType } from '../types'
@@ -45,7 +46,7 @@ export async function getStaticProps() {
 
 export default function Index({ me, projects }) {
   useEffect(() => {
-    window.addEventListener('scroll', backgroundChanger)
+    window.addEventListener('scroll', backgroundChanger, { passive: true })
     return () => window.removeEventListener('scroll', backgroundChanger)
   }, [])
 
