@@ -1,13 +1,18 @@
+const THEME_BREAKPOINT = 1500
+
 export function backgroundChanger() {
   const scrollFromTop = window.pageYOffset
   const htmlElement = document.documentElement
   const currentTheme = htmlElement.getAttribute('data-theme')
 
-  if ((currentTheme === 'dark' || !currentTheme) && scrollFromTop > 1100) {
+  if (
+    (currentTheme === 'dark' || !currentTheme) &&
+    scrollFromTop > THEME_BREAKPOINT
+  ) {
     htmlElement.setAttribute('data-theme', 'light')
   } else if (
     htmlElement.getAttribute('data-theme') === 'light' &&
-    scrollFromTop <= 1100
+    scrollFromTop <= THEME_BREAKPOINT
   ) {
     htmlElement.setAttribute('data-theme', 'dark')
   }

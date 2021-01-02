@@ -45,7 +45,7 @@ export function Me({ me }) {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          animation: colorChange 4s ease-in 3s infinite;
+          animation: colorChange 4s ease-in 5s infinite;
           font-size: 1.8em;
           color: var(--primary-text-color);
         }
