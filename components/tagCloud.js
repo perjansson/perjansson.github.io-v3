@@ -77,6 +77,12 @@ export const TagCloud = memo(({ projects }) => {
               minSize={minFontSize}
               maxSize={minFontSize * 3}
               tags={data}
+              colorOptions={{
+                count: 1,
+                hue: 'green',
+                luminosity: 'light',
+                alpha: 1,
+              }}
               shuffle
             />
           </article>
