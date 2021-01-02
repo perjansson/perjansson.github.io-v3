@@ -48,10 +48,7 @@ export const TagCloud = memo(({ projects }) => {
       setSelectedMinYear(newMinYear)
     }
   }
-  const options = {
-    luminosity: 'light',
-    hue: 'blue',
-  }
+
   return (
     <section className="tags" data-cy="tags">
       {minFontSize && (
