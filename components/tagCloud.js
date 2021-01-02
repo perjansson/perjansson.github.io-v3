@@ -66,6 +66,7 @@ export const TagCloud = memo(({ projects }) => {
               min={minYear}
               max={maxYear}
               defaultValue={selectedMinYear}
+              getAriaLabel={(value) => `Buzzword slider at value: ${value}`}
               step={1}
               onChange={handleSliderChange}
             />
