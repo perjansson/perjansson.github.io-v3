@@ -1,4 +1,4 @@
-const THEME_BREAKPOINT = 1500
+const THEME_BREAKPOINT = 2100
 
 export function backgroundChanger() {
   const scrollFromTop = window.pageYOffset

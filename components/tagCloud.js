@@ -89,16 +89,6 @@ export const TagCloud = memo(({ projects }) => {
         </>
       )}
       <style jsx>{`
-        header {
-          opacity: 0.7;
-          font-size: 1.8em;
-          font-weight: 700;
-          text-transform: uppercase;
-          color: var(--primary-text-color);
-          text-align: center;
-          margin-bottom: 20px;
-        }
-
         .tags {
           max-width: 1100px;
           margin-bottom: 250px;
@@ -106,6 +96,16 @@ export const TagCloud = memo(({ projects }) => {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          color: var(--primary-text-color);
+          font-size: 1.8em;
+        }
+
+        header {
+          opacity: 0.85;
+          font-size: 1.8em;
+          color: var(--primary-text-color);
+          text-align: center;
+          margin-bottom: 20px;
         }
 
         .slider {
