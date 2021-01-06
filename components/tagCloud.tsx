@@ -18,8 +18,14 @@ const MIN_FONT_SIZE = {
   nonMobile: 18,
 }
 
-export const TagCloud = memo(({ projects }) => {
-  const [firstProjectYear, lastProjectYear] = useMemo(() => {
+interface TagCloudProps {
+  projects: ProjectsType
+}
+
+export const TagCloud: React.FC<TagCloudProps> = memo(({ projects }) => {
+  const [firstProjectStartYear, lastProjectStartYear] = useMemo<
+    [number | undefined, number | undefined]
+  >(() => {
     const [firstProject, ...restOfProjects] = sortProjectsOnStartDate(projects)
     return [
       yearFromIsoDate(firstProject.startdate),
@@ -27,23 +33,28 @@ export const TagCloud = memo(({ projects }) => {
     ]
   }, [projects])
 
-  const [minYear] = useState(firstProjectYear)
+  const tagCloudLastYear = lastProjectStartYear || new Date().getFullYear()
+
+  const [minYear] = useState(firstProjectStartYear)
   const [selectedMinYear, setSelectedMinYear] = useState(
-    Math.max(minYear, lastProjectYear - TAG_CLOUD_INITIAL_YEARS_OF_HISTORY)
+    Math.max(
+      minYear || 0,
+      tagCloudLastYear - TAG_CLOUD_INITIAL_YEARS_OF_HISTORY
+    )
   )
-  const [maxYear] = useState(lastProjectYear)
+  const [maxYear] = useState(tagCloudLastYear)
 
   const data = useMemo(
     () => projectTagsToTagCloudData(projects, selectedMinYear, maxYear),
     [projects, selectedMinYear, maxYear]
   )
 
-  const [minFontSize, setMinFontSize] = useState(undefined)
+  const [minFontSize, setMinFontSize] = useState<number>(MIN_FONT_SIZE.mobile)
   useEffect(() => {
     setMinFontSize(isMobile() ? MIN_FONT_SIZE.mobile : MIN_FONT_SIZE.nonMobile)
   }, [])
 
-  const handleSliderChange = (newMinYear) => {
+  const handleSliderChange = (newMinYear: number) => {
     if (newMinYear !== selectedMinYear) {
       setSelectedMinYear(newMinYear)
     }
@@ -154,7 +165,3 @@ export const TagCloud = memo(({ projects }) => {
 })
 
 TagCloud.displayName = 'TagCloud'
-
-TagCloud.propTypes = {
-  projects: ProjectsType,
-}
