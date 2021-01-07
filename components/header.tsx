@@ -1,9 +1,11 @@
 import React from 'react'
-import { arrayOf } from 'prop-types'
+import { ContactsType } from '../types'
 
-import { ContactType } from '../types'
+interface HeaderProps {
+  contacts: ContactsType
+}
 
-export function Header({ contacts }) {
+export const Header: React.FC<HeaderProps> = ({ contacts }) => {
   return (
     <header className="header" data-cy="header">
       {contacts.map(({ url, medium }) => (
@@ -83,7 +85,4 @@ export function Header({ contacts }) {
       `}</style>
     </header>
   )
-}
-Header.propTypes = {
-  contacts: arrayOf(ContactType),
 }

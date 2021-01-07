@@ -3,7 +3,11 @@ import RichText from '@madebyconnor/rich-text-to-jsx'
 
 import { MeType } from '../types'
 
-export function Me({ me }) {
+interface MeProps {
+  me: MeType
+}
+
+export const Me: React.FC<MeProps> = ({ me }) => {
   return (
     <>
       <section className="me" data-cy="me">
@@ -105,7 +109,4 @@ export function Me({ me }) {
       `}</style>
     </>
   )
-}
-Me.propTypes = {
-  me: MeType,
 }

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import { bool, func } from 'prop-types'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import { Fade } from 'react-awesome-reveal'
 import SmoothCollapse from 'react-smooth-collapse'
@@ -7,15 +6,19 @@ import SmoothCollapse from 'react-smooth-collapse'
 import { ProjectsType, ProjectType } from '../types'
 import { formatProjectDates } from '../utils'
 
-export function Projects({ projects }) {
-  const [selectedProject, setSelectedProject] = useState(undefined)
+interface ProjectsProps {
+  projects: ProjectsType
+}
 
-  const handleOnSelect = (project) => {
-    setSelectedProject((previouslySelectedProject) => {
-      setSelectedProject(
-        project !== previouslySelectedProject ? project : undefined
-      )
-    })
+export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
+  const [selectedProject, setSelectedProject] = useState<
+    ProjectType | undefined
+  >(undefined)
+
+  const handleOnSelect = (project: ProjectType) => {
+    setSelectedProject((previouslySelectedProject) =>
+      project !== previouslySelectedProject ? project : undefined
+    )
   }
 
   return (
@@ -45,11 +48,14 @@ export function Projects({ projects }) {
   )
 }
 
-Projects.propTypes = {
-  projects: ProjectsType,
+interface ProjectProps {
+  project: ProjectType
+  odd: boolean
+  selected: boolean
+  onSelect: (project: ProjectType) => void
 }
 
-function Project({ project, odd, selected, onSelect }) {
+function Project({ project, odd, selected, onSelect }: ProjectProps) {
   const {
     title,
     client,
@@ -67,7 +73,7 @@ function Project({ project, odd, selected, onSelect }) {
     : undefined
   const assetUrl = asset ? `${asset.url}?fl=progressive&w=534&h=800` : undefined
 
-  const element = useRef(null)
+  const element = useRef<null | HTMLDivElement>(null)
   const handleOnClick = () => {
     onSelect(project)
     setTimeout(
@@ -181,7 +187,7 @@ function Project({ project, odd, selected, onSelect }) {
 
         header {
           opacity: 0.5;
-          font-size: 0.9em;
+          font-size: 1.4em;
           font-weight: 700;
           text-transform: uppercase;
           color: var(--primary-text-color);
@@ -249,7 +255,7 @@ function Project({ project, odd, selected, onSelect }) {
 
           header {
             opacity: 0.5;
-            font-size: 1.7em;
+            font-size: 1.8em;
             text-transform: uppercase;
             text-align: center;
           }
@@ -286,7 +292,7 @@ function Project({ project, odd, selected, onSelect }) {
         /* Laptops, Desktops */
         @media (min-width: 1025px) and (max-width: 1280px) {
           .details {
-            min-width: 600px;
+            min-width: 400px;
           }
         }
 
@@ -299,11 +305,4 @@ function Project({ project, odd, selected, onSelect }) {
       `}</style>
     </Fade>
   )
-}
-
-Project.propTypes = {
-  project: ProjectType,
-  odd: bool,
-  selected: bool,
-  onSelect: func,
 }

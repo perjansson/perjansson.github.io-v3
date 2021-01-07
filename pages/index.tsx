@@ -16,7 +16,14 @@ if (process.browser) {
   smoothscroll.polyfill()
 }
 
-export async function getStaticProps() {
+type StaticProps = {
+  props: {
+    me: MeType
+    projects: ProjectsType
+  }
+}
+
+export async function getStaticProps(): Promise<StaticProps> {
   const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
   const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
 
@@ -44,7 +51,12 @@ export async function getStaticProps() {
   }
 }
 
-export default function Index({ me, projects }) {
+interface IndexProps {
+  me: MeType
+  projects: ProjectsType
+}
+
+const Index: React.FC<IndexProps> = ({ me, projects }) => {
   useEffect(() => {
     window.addEventListener('scroll', backgroundChanger, { passive: true })
     return () => window.removeEventListener('scroll', backgroundChanger)
@@ -251,7 +263,5 @@ export default function Index({ me, projects }) {
     </>
   )
 }
-Index.propTypes = {
-  me: MeType,
-  projects: ProjectsType,
-}
+
+export default Index
