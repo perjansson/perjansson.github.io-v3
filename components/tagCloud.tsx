@@ -5,12 +5,13 @@ import '@reach/slider/styles.css'
 
 import {
   formatProjectDates,
-  isMobile,
   projectTagsToTagCloudData,
   sortProjectsOnStartDate,
   yearFromIsoDate,
-} from '../utils'
+} from '../utils/projectHelper'
+import isMobile from '../utils/isMobile'
 import { ProjectsType } from '../types'
+import { event } from '../utils/gtag'
 
 const TAG_CLOUD_INITIAL_YEARS_OF_HISTORY = 5
 const MIN_FONT_SIZE = {
@@ -57,6 +58,13 @@ export const TagCloud: React.FC<TagCloudProps> = memo(({ projects }) => {
   const handleSliderChange = (newMinYear: number) => {
     if (newMinYear !== selectedMinYear) {
       setSelectedMinYear(newMinYear)
+
+      event({
+        category: 'user_interaction',
+        action: 'tag_cloud_min_date_change',
+        label: newMinYear + '',
+        value: 1,
+      })
     }
   }
 

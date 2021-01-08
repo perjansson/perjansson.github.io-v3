@@ -3,8 +3,8 @@ import Head from 'next/head'
 import smoothscroll from 'smoothscroll-polyfill'
 import 'lazysizes'
 
-import { backgroundChanger } from '../utils'
-import { MeType, ProjectsType } from '../types'
+import backgroundChanger from '../utils/backgroundChanger'
+import { IndexPageData, MeType, ProjectsType } from '../types'
 import { getIndexPageData } from '../queries'
 
 import { Header } from '../components/header'
@@ -41,12 +41,12 @@ export async function getStaticProps(): Promise<StaticProps> {
     }
   )
 
-  const { data } = await res.json()
+  const { data } = await (res.json() as Promise<IndexPageData>)
 
   return {
     props: {
       me: data.me,
-      projects: data.projectCollection.items,
+      projects: data.projects.items,
     },
   }
 }
@@ -67,7 +67,7 @@ const Index: React.FC<IndexProps> = ({ me, projects }) => {
       <Head>
         <title>Per Jansson - Fullstack Web Developer 👋</title>
       </Head>
-      <Header contacts={me.contactsCollection.items} />
+      <Header contacts={me.contacts.items} />
       <main className="main">
         <Me me={me} />
         <TagCloud projects={projects} />

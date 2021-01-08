@@ -4,7 +4,7 @@ export const getIndexPageData = `{
         title
         short { json }
         long { json }
-        contactsCollection {
+        contacts: contactsCollection {
             items {
                 ... on Contact {
                     medium
@@ -13,7 +13,7 @@ export const getIndexPageData = `{
             }
         }
     }
-    projectCollection(order: startdate_DESC) {
+    projects: projectCollection(order: startdate_DESC) {
         items {
             title
             client

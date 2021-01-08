@@ -1,9 +1,5 @@
 module.exports = {
   ci: {
-    collect: {
-      numberOfRuns: 3,
-      staticDistDir: './out',
-    },
     assert: {
       // preset: 'lighthouse:recommended',
       assertions: {

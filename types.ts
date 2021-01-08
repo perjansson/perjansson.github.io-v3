@@ -26,7 +26,7 @@ export interface ImageType {
 export interface MeType {
   name: string
   title: string
-  contactsCollection: {
+  contacts: {
     items: ContactType[]
   }
   short: RichTextJson
@@ -38,4 +38,13 @@ export type ContactsType = ContactType[]
 export interface ContactType {
   medium: string
   url: string
+}
+
+export interface IndexPageData {
+  data: {
+    me: MeType
+    projects: {
+      items: ProjectsType
+    }
+  }
 }
