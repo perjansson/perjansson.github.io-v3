@@ -6,6 +6,7 @@ on:
 
 jobs:
   deploy:
+    name: Deploy production (Contentful)
     runs-on: ubuntu-latest
     strategy:
       matrix:
