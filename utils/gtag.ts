@@ -1,8 +1,6 @@
-export const GA_TRACKING_ID = 'G-VTE1ELRYSN'
-
 export const pageview = (url: URL) => {
-  window.gtag &&
-    window.gtag('config', GA_TRACKING_ID, {
+  process.env.GA_TRACKING_ID &&
+    window.gtag('config', process.env.GA_TRACKING_ID, {
       page_path: url,
     })
 }
