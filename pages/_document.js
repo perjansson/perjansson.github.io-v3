@@ -96,14 +96,15 @@ class MyDocument extends Document {
             property="og:image"
             content="https://www.thecuriousdeveloper.com/icons/apple-touch-icon.png"
           />
-
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
+          {process.env.NODE_ENV === 'production' && (
+            <>
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+              />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
@@ -111,8 +112,10 @@ class MyDocument extends Document {
                 page_path: window.location.pathname,
               });
           `,
-            }}
-          />
+                }}
+              />
+            </>
+          )}
         </Head>
         <body>
           <Main />
