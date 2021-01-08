@@ -96,7 +96,7 @@ class MyDocument extends Document {
             property="og:image"
             content="https://www.thecuriousdeveloper.com/icons/apple-touch-icon.png"
           />
-          {process.env.NODE_ENV === 'production' && (
+          {process.env.TRACK_GA === 'true' && (
             <>
               <script
                 async
