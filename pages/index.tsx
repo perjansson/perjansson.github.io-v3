@@ -3,7 +3,7 @@ import Head from 'next/head'
 import smoothscroll from 'smoothscroll-polyfill'
 import 'lazysizes'
 
-import { backgroundChanger } from '../utils'
+import backgroundChanger from '../utils/backgroundChanger'
 import { IndexPageData, MeType, ProjectsType } from '../types'
 import { getIndexPageData } from '../queries'
 

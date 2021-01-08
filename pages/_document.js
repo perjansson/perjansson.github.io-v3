@@ -1,6 +1,8 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
+import { GA_TRACKING_ID } from '../utils/gtag'
+
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx)
@@ -37,7 +39,6 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#2B5797" />
           <meta name="msapplication-tap-highlight" content="no" />
           <meta name="theme-color" content="#000000" />
-
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -62,7 +63,6 @@ class MyDocument extends Document {
             color="#5bbad5"
           />
           <link rel="shortcut icon" href="/icons/favicon.ico" />
-
           <meta name="twitter:card" content="summary" />
           <meta
             name="twitter:url"
@@ -95,6 +95,23 @@ class MyDocument extends Document {
           <meta
             property="og:image"
             content="https://www.thecuriousdeveloper.com/icons/apple-touch-icon.png"
+          />
+
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+          `,
+            }}
           />
         </Head>
         <body>

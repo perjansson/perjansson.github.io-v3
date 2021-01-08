@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import { Fade } from 'react-awesome-reveal'
 import SmoothCollapse from 'react-smooth-collapse'
 
 import { ProjectsType, ProjectType } from '../types'
-import { formatProjectDates } from '../utils'
+import { formatProjectDates } from '../utils/projectHelper'
+import { event } from '../utils/gtag'
 
 interface ProjectsProps {
   projects: ProjectsType
@@ -16,9 +17,21 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   >(undefined)
 
   const handleOnSelect = (project: ProjectType) => {
-    setSelectedProject((previouslySelectedProject) =>
-      project !== previouslySelectedProject ? project : undefined
-    )
+    setSelectedProject((previouslySelectedProject) => {
+      const newProject =
+        project !== previouslySelectedProject ? project : undefined
+
+      if (newProject) {
+        event({
+          category: 'user_interaction',
+          action: 'project_selected',
+          label: newProject.title,
+          value: 1,
+        })
+      }
+
+      return newProject
+    })
   }
 
   return (
@@ -68,6 +81,7 @@ function Project({ project, odd, selected, onSelect }: ProjectProps) {
     city,
     tags,
   } = project
+
   const lqipAssetUrl = asset
     ? `${asset.url}?fl=progressive&w=67&h=100`
     : undefined

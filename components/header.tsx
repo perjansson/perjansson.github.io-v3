@@ -1,15 +1,30 @@
 import React from 'react'
 import { ContactsType } from '../types'
+import { event } from '../utils/gtag'
 
 interface HeaderProps {
   contacts: ContactsType
 }
 
 export const Header: React.FC<HeaderProps> = ({ contacts }) => {
+  const handleOnContactClick = (medium: string) =>
+    event({
+      category: 'user_interaction',
+      action: 'contact_click',
+      label: medium,
+      value: 1,
+    })
+
   return (
     <header className="header" data-cy="header">
       {contacts.map(({ url, medium }) => (
-        <a href={url} target="_blank" rel="noopener noreferrer" key={medium}>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          key={medium}
+          onClick={() => handleOnContactClick(medium)}
+        >
           {medium}
         </a>
       ))}
