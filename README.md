@@ -6,6 +6,15 @@ This is my personal resumé website built as a Static Site with [Next.js](https:
 
 ### Local dev
 
+#### 0. Create .env file and add:
+
+```
+NEXT_PUBLIC_CONTENTFUL_SPACE_ID=XXX
+NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN==XXX
+```
+
+#### 1. Start local dev server
+
 `$ yarn dev`
 
 Runs the app in development mode.

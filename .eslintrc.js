@@ -21,11 +21,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/ban-ts-comment': [
-      'warn',
-      { allowWithDescription: true },
-    ],
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
   },
   settings: {
     react: {

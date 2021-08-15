@@ -115,7 +115,7 @@ class MyDocument extends Document {
             </>
           )}
         </Head>
-        <body>
+        <body className="text-md md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl ">
           <Main />
           <NextScript />
         </body>

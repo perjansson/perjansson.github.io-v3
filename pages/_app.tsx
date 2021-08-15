@@ -3,6 +3,8 @@ import Head from 'next/head'
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
+import 'tailwindcss/tailwind.css'
+
 import * as gtag from '../utils/gtag'
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {

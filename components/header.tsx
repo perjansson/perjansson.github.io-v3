@@ -39,7 +39,6 @@ export const Header: React.FC<HeaderProps> = ({ contacts }) => {
           align-items: flex-end;
           flex-wrap: wrap;
           font-size: 0.9em;
-          color: rgba(255, 255, 255, 0.8);
         }
 
         .header a::after {

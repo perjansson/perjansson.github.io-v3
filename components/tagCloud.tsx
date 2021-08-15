@@ -73,7 +73,7 @@ export const TagCloud: React.FC<TagCloudProps> = memo(({ projects }) => {
       {minFontSize && (
         <>
           <article className="slider">
-            <header>
+            <header className="text-2xl mb-4 text-center">
               Buzz word cloud
               <br />
               {formatProjectDates(selectedMinYear, maxYear)}
@@ -120,11 +120,7 @@ export const TagCloud: React.FC<TagCloudProps> = memo(({ projects }) => {
         }
 
         header {
-          opacity: 0.85;
-          font-size: 1.8em;
           color: var(--primary-text-color);
-          text-align: center;
-          margin-bottom: 20px;
         }
 
         .slider {

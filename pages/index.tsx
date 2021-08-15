@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import smoothscroll from 'smoothscroll-polyfill'
 import 'lazysizes'
 
-import backgroundChanger from '../utils/backgroundChanger'
 import { IndexPageData, MeType, ProjectsType } from '../types'
 import { getIndexPageData } from '../queries'
 
@@ -57,62 +56,45 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = ({ me, projects }) => {
-  useEffect(() => {
-    window.addEventListener('scroll', backgroundChanger, { passive: true })
-    return () => window.removeEventListener('scroll', backgroundChanger)
-  }, [])
-
   return (
     <>
       <Head>
         <title>Per Jansson - Fullstack Web Developer 👋</title>
       </Head>
-      <Header contacts={me.contacts.items} />
-      <main className="main">
-        <Me me={me} />
-        <TagCloud projects={projects} />
-        <Projects projects={projects} />
-      </main>
-
-      <style jsx>{`
-        .main {
-          margin-left: auto;
-          margin-right: auto;
-          width: 85%;
-          min-width: 320px;
-          max-width: 1600px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        /* Most of the Smartphones Mobiles (Portrait) */
-        @media (min-width: 320px) and (max-width: 480px) {
-        }
-
-        /* Low Resolution Tablets, Mobiles (Landscape) */
-        @media (min-width: 481px) and (max-width: 767px) {
-        }
-
-        /* Tablets, Ipads (portrait) */
-        @media (min-width: 768px) and (max-width: 1024px) {
-        }
-
-        /* Tablets, Ipads (landscape) */
-        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-        }
-
-        /* Laptops, Desktops */
-        @media (min-width: 1025px) and (max-width: 1280px) {
-        }
-
-        /* Desktops */
-        @media (min-width: 1281px) {
-        }
-      `}</style>
+      <div className="text-black dark:text-white">
+        <Header contacts={me.contacts.items} />
+        <main className="max-w-screen-lg my-0 mx-auto p-4 md:p-8 lg:p-12 xl:p-0 space-y-20">
+          <Me me={me} />
+          <TagCloud projects={projects} />
+          <Projects projects={projects} />
+        </main>
+      </div>
 
       <style global jsx>{`
+        @font-face {
+          font-family: 'Inter';
+          src: url('/fonts/Inter/Inter-ExtraBold.ttf');
+          font-style: normal;
+          font-weight: 800;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          src: url('/fonts/Inter/Inter-Medium.ttf');
+          font-style: normal;
+          font-weight: 500;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          src: url('/fonts/Inter/Inter-Light.ttf');
+          font-style: normal;
+          font-weight: 300;
+          font-display: swap;
+        }
+
         @font-face {
           font-family: 'NerkoOne';
           src: url('/fonts/NerkoOne/NerkoOne-Regular.ttf');
@@ -153,21 +135,14 @@ const Index: React.FC<IndexProps> = ({ me, projects }) => {
           font-display: swap;
         }
 
-        html,
-        html[data-theme='dark'] {
+        :root {
           --primary-bg-color: rgb(0, 0, 0);
-          --primary-text-color: rgb(255, 255, 255);
-          --secondary-text-color: rgb(56, 48, 46, 0.9);
-          --slider-active-color: rgba(255, 255, 255, 0.9);
-          --slider-inactive-color: rgba(0, 0, 0, 0.85);
         }
 
-        html[data-theme='light'] {
-          --primary-bg-color: rgb(255, 255, 255);
-          --primary-text-color: rgb(0, 0, 0);
-          --secondary-text-color: rgb(56, 48, 46, 0.5);
-          --slider-active-color: rgba(0, 0, 0, 0.85);
-          --slider-inactive-color: rgba(255, 255, 255, 0.9);
+        @media screen and (prefers-color-scheme: light) {
+          :root {
+            --primary-bg-color: rgb(255, 255, 255);
+          }
         }
 
         html,
@@ -182,11 +157,11 @@ const Index: React.FC<IndexProps> = ({ me, projects }) => {
         }
 
         body {
-          font-family: HKGrotesk, Helvetica Neue, sans-serif;
+          font-family: Inter, Helvetica Neue, sans-serif;
+          font-weight: 500;
           -webkit-font-smoothing: antialiased;
           -ms-overflow-style: none;
           scrollbar-width: none;
-          font-size: 10px;
         }
 
         body::-webkit-scrollbar {
@@ -216,48 +191,6 @@ const Index: React.FC<IndexProps> = ({ me, projects }) => {
         p {
           margin-top: 10px;
           margin-bottom: 0;
-        }
-
-        /* Most of the Smartphones Mobiles (Portrait) */
-        @media (min-width: 320px) and (max-width: 480px) {
-          body {
-            font-size: 10px;
-          }
-        }
-
-        /* Low Resolution Tablets, Mobiles (Landscape) */
-        @media (min-width: 481px) and (max-width: 767px) {
-          body {
-            font-size: 12px;
-          }
-        }
-
-        /* Tablets, Ipads (portrait) */
-        @media (min-width: 768px) and (max-width: 1024px) {
-          body {
-            font-size: 16px;
-          }
-        }
-
-        /* Tablets, Ipads (landscape) */
-        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-          body {
-            font-size: 16px;
-          }
-        }
-
-        /* Laptops, Desktops */
-        @media (min-width: 1025px) and (max-width: 1280px) {
-          body {
-            font-size: 16px;
-          }
-        }
-
-        /* Desktops */
-        @media (min-width: 1281px) {
-          body {
-            font-size: 16px;
-          }
         }
       `}</style>
     </>
