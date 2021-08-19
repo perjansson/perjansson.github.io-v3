@@ -30,7 +30,7 @@ export const Me: React.FC<MeProps> = ({ me }) => {
         </div>
       </section>
       <section>
-        <h2 className="text-xl md:text-2xl lg:text-4xl xl:text-6xl 2xl:text-8xl">
+        <h2 className="text-4xl lg:text-4xl xl:text-6xl 2xl:text-8xl">
           About me
         </h2>
         <div className="leading-5 md:leading-6 lg:leading-9">

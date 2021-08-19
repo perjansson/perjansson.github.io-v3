@@ -16,7 +16,10 @@ export const Header: React.FC<HeaderProps> = ({ contacts }) => {
     })
 
   return (
-    <header className="header" data-cy="header">
+    <header
+      className="header h-40 md:h-20 w-4/5 m-auto flex justify-center xl:justify-end items-end md:items-center flex-wrap text-sm lg:text-lg xl:text-xl"
+      data-cy="header"
+    >
       {contacts.map(({ url, medium }) => (
         <a
           href={url}
@@ -24,79 +27,11 @@ export const Header: React.FC<HeaderProps> = ({ contacts }) => {
           rel="noopener noreferrer"
           key={medium}
           onClick={() => handleOnContactClick(medium)}
+          className="px-6 md:border-r-2 last:border-r-0"
         >
           {medium}
         </a>
       ))}
-
-      <style jsx>{`
-        .header {
-          height: 80px;
-          width: 90%;
-          margin: auto;
-          display: flex;
-          justify-content: center;
-          align-items: flex-end;
-          flex-wrap: wrap;
-          font-size: 0.9em;
-        }
-
-        .header a::after {
-          margin: 0 10px;
-          content: '|';
-        }
-
-        .header a:last-child:after {
-          content: '';
-        }
-
-        /* Most of the Smartphones Mobiles (Portrait) */
-        @media (min-width: 320px) and (max-width: 480px) {
-          .header {
-            height: 60px;
-            justify-content: center;
-          }
-        }
-
-        @media (min-width: 481px) and (max-width: 767px) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-
-        /* Tablets, Ipads (portrait) */
-        @media (min-width: 768px) and (max-width: 1024px) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-
-        /* Tablets, Ipads (landscape) */
-        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-
-        /* Laptops, Desktops */
-        @media (min-width: 1025px) and (max-width: 1280px) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-
-        /* Desktops */
-        @media (min-width: 1281px) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-      `}</style>
     </header>
   )
 }

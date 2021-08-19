@@ -12,6 +12,7 @@ import {
 import isMobile from '../utils/isMobile'
 import { ProjectsType } from '../types'
 import { event } from '../utils/gtag'
+import { useDarkMode } from '../hooks/useDarkMode'
 
 const TAG_CLOUD_INITIAL_YEARS_OF_HISTORY = 5
 const MIN_FONT_SIZE = {
@@ -68,16 +69,18 @@ export const TagCloud: React.FC<TagCloudProps> = memo(({ projects }) => {
     }
   }
 
+  const isDarkModeUsed = useDarkMode()
+
   return (
     <section className="tags" data-cy="tags">
       {minFontSize && (
         <>
           <article className="slider">
-            <header className="text-2xl mb-4 text-center">
+            <h2 className="text-4xl lg:text-4xl xl:text-6xl 2xl:text-8xl">
               Buzz word cloud
               <br />
               {formatProjectDates(selectedMinYear, maxYear)}
-            </header>
+            </h2>
             <Slider
               min={minYear}
               max={maxYear}
@@ -85,8 +88,9 @@ export const TagCloud: React.FC<TagCloudProps> = memo(({ projects }) => {
               getAriaLabel={(value) => `Buzzword slider at value: ${value}`}
               step={1}
               onChange={handleSliderChange}
+              className="my-4"
             />
-            <div className="slider-controls">
+            <div className="flex justify-between opacity-70">
               <div>{minYear}</div>
               <div>{maxYear}</div>
             </div>
@@ -98,55 +102,15 @@ export const TagCloud: React.FC<TagCloudProps> = memo(({ projects }) => {
               tags={data}
               colorOptions={{
                 count: 1,
-                hue: 'green',
-                luminosity: 'light',
                 alpha: 1,
+                luminosity: isDarkModeUsed ? 'light' : 'dark',
               }}
               shuffle
+              className="mt-4"
             />
           </article>
         </>
       )}
-      <style jsx>{`
-        .tags {
-          max-width: 1100px;
-          margin-bottom: 250px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          color: var(--primary-text-color);
-          font-size: 1.8em;
-        }
-
-        header {
-          color: var(--primary-text-color);
-        }
-
-        .slider {
-          margin-top: 50px;
-          width: 100%;
-        }
-
-        .slider-controls {
-          margin-top: 20px;
-          height: 50px;
-          display: flex;
-          justify-content: space-between;
-          color: var(--primary-text-color);
-          font-size: 0.9em;
-          opacity: 0.7;
-        }
-
-        /* Most of the Smartphones Mobiles (Portrait) */
-        @media (min-width: 320px) and (max-width: 480px) {
-          .tags {
-            max-width: 1100px;
-            margin-bottom: 150px;
-          }
-        }
-      `}</style>
-
       <style global jsx>{`
         [data-reach-slider-handle],
         [data-reach-slider-track] {

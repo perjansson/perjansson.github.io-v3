@@ -63,7 +63,7 @@ const Index: React.FC<IndexProps> = ({ me, projects }) => {
       </Head>
       <div className="text-black dark:text-white">
         <Header contacts={me.contacts.items} />
-        <main className="max-w-screen-lg my-0 mx-auto p-4 md:p-8 lg:p-12 xl:p-0 space-y-20">
+        <main className="max-w-screen-lg my-0 mx-auto p-4 md:p-8 lg:p-12 xl:p-0 space-y-8 md:space-y-16">
           <Me me={me} />
           <TagCloud projects={projects} />
           <Projects projects={projects} />
@@ -137,11 +137,15 @@ const Index: React.FC<IndexProps> = ({ me, projects }) => {
 
         :root {
           --primary-bg-color: rgb(0, 0, 0);
+          --slider-active-color: rgba(255, 255, 255, 0.9);
+          --slider-inactive-color: rgba(0, 0, 0, 0.85);
         }
 
         @media screen and (prefers-color-scheme: light) {
           :root {
             --primary-bg-color: rgb(255, 255, 255);
+            --slider-active-color: rgba(0, 0, 0, 0.85);
+            --slider-inactive-color: rgba(255, 255, 255, 0.9);
           }
         }
 
@@ -186,11 +190,6 @@ const Index: React.FC<IndexProps> = ({ me, projects }) => {
         h1 {
           font-size: 64px;
           font-weight: normal;
-        }
-
-        p {
-          margin-top: 10px;
-          margin-bottom: 0;
         }
       `}</style>
     </>
