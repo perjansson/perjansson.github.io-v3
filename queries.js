@@ -1,5 +1,7 @@
 export const getIndexPageData = `{
     me(id: "6DJvlbWzPKLgZvCzVDRzos") {
+        firstName
+        lastName
         name
         title
         short { json }

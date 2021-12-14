@@ -1,6 +1,8 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
+import { getCssText, globalStyles } from '../stitches.config'
+
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx)
@@ -9,8 +11,9 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" data-theme="light">
         <Head>
+          {globalStyles()}
           <meta
             name="application-name"
             content="Per Jansson - Fullstack Web Developer"
@@ -37,6 +40,24 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#2B5797" />
           <meta name="msapplication-tap-highlight" content="no" />
           <meta name="theme-color" content="#000000" />
+          <style
+            id="stitches"
+            dangerouslySetInnerHTML={{ __html: getCssText() }}
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="true"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=block"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=block"
+            rel="stylesheet"
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -103,17 +124,18 @@ class MyDocument extends Document {
               <script
                 dangerouslySetInnerHTML={{
                   __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${process.env.GA_TRACKING_ID}', {
-                page_path: window.location.pathname,
-              });
-          `,
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.GA_TRACKING_ID}', {
+                      page_path: window.location.pathname,
+                    });
+                `,
                 }}
               />
             </>
           )}
+          {globalStyles()}
         </Head>
         <body>
           <Main />
