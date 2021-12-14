@@ -3,18 +3,16 @@ import RichText from '@madebyconnor/rich-text-to-jsx'
 import { Fade } from 'react-awesome-reveal'
 import SmoothCollapse from 'react-smooth-collapse'
 
+import { useData } from '../providers/DataContextProvider'
 import { ProjectsType, ProjectType } from '../types'
 import { formatProjectDates } from '../utils/projectHelper'
 import { event } from '../utils/gtag'
 
-interface ProjectsProps {
-  projects: ProjectsType
-}
+type ProjectMaybe = ProjectType | undefined
 
-export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
-  const [selectedProject, setSelectedProject] = useState<
-    ProjectType | undefined
-  >(undefined)
+export const Projects: React.FC = () => {
+  const { data } = useData()
+  const [selectedProject, setSelectedProject] = useState<ProjectMaybe>()
 
   const handleOnSelect = (project: ProjectType) => {
     setSelectedProject((previouslySelectedProject) => {
@@ -36,7 +34,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
 
   return (
     <section className="projects" data-cy="projects">
-      {projects?.map((project, i) => (
+      {data?.projects.items.map((project, i) => (
         <Project
           key={i}
           project={project}
@@ -45,18 +43,6 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           onSelect={handleOnSelect}
         />
       ))}
-
-      <style jsx>{`
-        .projects {
-          max-width: 1100px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          color: var(--primary-text-color);
-          font-size: 1.2em;
-        }
-      `}</style>
     </section>
   )
 }
