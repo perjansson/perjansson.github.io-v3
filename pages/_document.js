@@ -39,7 +39,15 @@ class MyDocument extends Document {
           />
           <meta name="msapplication-TileColor" content="#2B5797" />
           <meta name="msapplication-tap-highlight" content="no" />
-          <meta name="theme-color" content="#000000" />
+          <meta name="theme-color" content="#111111" />
+          <style>
+            {`
+							html {
+								min-width: 320px;
+								background-color: #111111;
+							}
+						`}
+          </style>
           <style
             id="stitches"
             dangerouslySetInnerHTML={{ __html: getCssText() }}
