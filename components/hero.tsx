@@ -5,6 +5,7 @@ import { styled } from '../stitches.config'
 const Container = styled('div', {
   height: '75vh',
   width: '100%',
+  padding: '$space2',
   display: 'grid',
   gridTemplateRows: '1.4fr 1fr',
   gridTemplateColumns: 'auto',
@@ -13,10 +14,10 @@ const Container = styled('div', {
     'profile-image'
   `,
   gap: '$space8',
-  padding: '$space5',
 
   '@bp1': {
     marginTop: '$space20',
+    padding: '$space5',
     fontSize: '$fontSize9',
     gridTemplateRows: 'auto',
     gridTemplateColumns: '1.5fr 1fr',
@@ -35,7 +36,7 @@ const Title = styled('h1', {
   '-webkit-background-clip': 'text',
   '-webkit-text-fill-color': 'transparent',
   color: '$cultured',
-  fontSize: '$fontSize8',
+  fontSize: '$fontSize9',
   letterSpacing: '-1.5px',
   lineHeight: '110%',
   transition: 'font-size 0.8s ease-in-out',
