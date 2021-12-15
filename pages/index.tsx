@@ -50,6 +50,9 @@ export async function getStaticProps(): Promise<StaticProps> {
 }
 
 const Main = styled('main', {
+  minWidth: '320px',
+  maxWidth: '1536px',
+  margin: '0 auto',
   padding: '$space2',
 
   '@bp1': {

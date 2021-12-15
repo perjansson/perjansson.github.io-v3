@@ -9,17 +9,19 @@ const Container = styled('div', {
   gridTemplateRows: '1.4fr 1fr',
   gridTemplateColumns: 'auto',
   gridTemplateAreas: `
-    'profile-image'
     'title'
+    'profile-image'
   `,
+  gap: '$space8',
   padding: '$space5',
-  marginTop: '$space20',
 
   '@bp1': {
+    marginTop: '$space20',
     fontSize: '$fontSize9',
     gridTemplateRows: 'auto',
     gridTemplateColumns: '1.5fr 1fr',
     gridTemplateAreas: "'title profile-image'",
+    gap: '$space16',
   },
 })
 
@@ -89,15 +91,14 @@ const ProfileImage = styled('img', {
   gridArea: 'profile-image',
   width: 'calc(100vw - ($space$space5 * 3))',
   height: '100%',
-  maxHeight: '500px',
+  maxHeight: '350px',
   transition: 'all 0.8s ease-in-out',
   justifySelf: 'center',
   objectFit: 'cover',
-  border: '$space$space2 solid',
-  borderImage: 'linear-gradient(45deg, $colorful3, $colorful1) 1',
-  backgroundColor: '$colorful2',
   boxSizing: 'content-box',
-  borderRadius: '15px',
+  borderRadius: '50px',
+  border: '10px solid transparent',
+  background: 'linear-gradient(45deg, $colorful3, $colorful4) border-box',
 
   '@bp1': {
     maxHeight: '100%',
@@ -105,7 +106,7 @@ const ProfileImage = styled('img', {
     width: '268px',
     height: '349px',
     justifySelf: 'end',
-    objectFit: 'contain',
+    objectFit: 'cover',
   },
 
   '@bp2': {
