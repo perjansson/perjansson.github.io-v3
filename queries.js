@@ -18,6 +18,7 @@ export const getIndexPageData = `{
     projects: projectCollection(order: startdate_DESC) {
         items {
             title
+            titleShort
             client
             description { json }
             me { json }

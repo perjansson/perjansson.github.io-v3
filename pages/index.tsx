@@ -11,6 +11,7 @@ import { TagCloud } from '../components/tagCloud'
 import { Hero } from '../components/hero'
 import { DataContextProvider } from '../providers/DataContextProvider'
 import { styled } from '../stitches.config'
+import { Spacer } from '../components/spacer'
 
 if (process.browser) {
   smoothscroll.polyfill()
@@ -53,7 +54,7 @@ const Main = styled('main', {
   minWidth: '320px',
   maxWidth: '1536px',
   margin: '0 auto',
-  padding: '$space2',
+  padding: '$space4 $space4 $space8 $space4',
 
   '@bp1': {
     padding: '$space6',
@@ -68,6 +69,15 @@ const Main = styled('main', {
   },
 })
 
+const ContentSpacer = () => (
+  <Spacer
+    size={{
+      '@initial': 'medium',
+      '@bp1': 'large',
+    }}
+  />
+)
+
 interface IndexProps {
   data: IndexPageData
 }
@@ -80,7 +90,8 @@ const Index: React.FC<IndexProps> = ({ data }) => {
       </Head>
       <Main>
         <Hero />
-        {/* <Projects /> */}
+        <ContentSpacer />
+        <Projects />
       </Main>
     </DataContextProvider>
   )

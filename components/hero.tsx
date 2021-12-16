@@ -3,11 +3,9 @@ import RichText from '@madebyconnor/rich-text-to-jsx'
 import { styled } from '../stitches.config'
 
 const Container = styled('div', {
-  height: '75vh',
   width: '100%',
-  padding: '$space2',
   display: 'grid',
-  gridTemplateRows: '1.4fr 1fr',
+  gridTemplateRows: 'auto',
   gridTemplateColumns: 'auto',
   gridTemplateAreas: `
     'title'
@@ -17,7 +15,6 @@ const Container = styled('div', {
 
   '@bp1': {
     marginTop: '$space20',
-    padding: '$space5',
     fontSize: '$fontSize9',
     gridTemplateRows: 'auto',
     gridTemplateColumns: '1.5fr 1fr',
@@ -97,7 +94,7 @@ const ProfileImage = styled('img', {
   justifySelf: 'center',
   objectFit: 'cover',
   boxSizing: 'content-box',
-  borderRadius: '50px',
+  borderRadius: '$radii5',
   border: '10px solid transparent',
   background: 'linear-gradient(45deg, $colorful3, $colorful4) border-box',
 
