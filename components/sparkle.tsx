@@ -2,11 +2,9 @@ import { useState } from 'react'
 import { isMobile, isTablet } from 'react-device-detect'
 import { useReducedMotion } from 'framer-motion'
 
-import { keyframes, styled } from '../stitches.config'
+import { keyframes, styled, theme } from '../stitches.config'
 import { useRandomInterval } from '../hooks/useRandomInterval'
 import { random } from '../utils/random'
-
-const DEFAULT_COLOR = '#FFC700'
 
 const SIZES = {
   min: 10,
@@ -44,7 +42,7 @@ interface SparklesProps {
 }
 
 export const Sparkles: React.FC<SparklesProps> = ({
-  color = DEFAULT_COLOR,
+  color = theme.colors.colorful6.value,
   children,
   ...rest
 }) => {

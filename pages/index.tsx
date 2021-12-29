@@ -1,21 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Head from 'next/head'
-import smoothscroll from 'smoothscroll-polyfill'
 
-import { IndexPageData, MeType, ProjectsType } from '../types'
+import { IndexPageData } from '../types'
 import { getIndexPageData } from '../queries'
-
-import { Header } from '../components/header'
-import { Projects } from '../components/projects'
-import { TagCloud } from '../components/tagCloud'
 import { Hero } from '../components/hero'
 import { DataContextProvider } from '../providers/DataContextProvider'
 import { styled } from '../stitches.config'
 import { Spacer } from '../components/spacer'
-
-if (process.browser) {
-  smoothscroll.polyfill()
-}
 
 type StaticProps = {
   props: {

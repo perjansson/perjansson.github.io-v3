@@ -24,7 +24,7 @@
     "react-device-detect": "^2.1.2",
     "react-dom": "17.0.1",
     "react-tagcloud": "^2.0.0",
-    "smoothscroll-polyfill": "^0.4.4",
+    "social-media-icons-react": "^1.1.10",
     "styled-jsx": "^3.3.2"
   },
   "devDependencies": {
@@ -32,7 +32,6 @@
     "@types/gtag.js": "^0.0.4",
     "@types/react": "^17.0.0",
     "@types/react-tagcloud": "^1.1.5",
-    "@types/smoothscroll-polyfill": "^0.3.1",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
     "cypress": "^6.0.0",

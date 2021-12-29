@@ -1,7 +1,9 @@
 import { useData } from '../providers/DataContextProvider'
 import RichText from '@madebyconnor/rich-text-to-jsx'
+
 import { styled } from '../stitches.config'
 import { Sparkles } from './sparkle'
+import { SocialMediaLinks } from './socialMediaLinks'
 
 const Container = styled('div', {
   width: '100%',
@@ -9,15 +11,19 @@ const Container = styled('div', {
   fontSize: '$fontSize9',
   gridTemplateRows: 'auto',
   gridTemplateColumns: '1.5fr 1fr',
-  gridTemplateAreas: "'title profile-image'",
-  gap: '$space16',
+  gridTemplateAreas: `
+    'title profile-image'
+    'social-media-links profile-image'
+  `,
+  columnGap: '$space16',
 
   '@bp1': {
     gridTemplateRows: 'auto',
-    gridTemplateColumns: 'auto',
+    gridTemplateColumns: '1fr',
     gridTemplateAreas: `
       'title'
       'profile-image'
+      'social-media-links'
     `,
     gap: '$space8',
   },
@@ -63,18 +69,16 @@ const Title = styled('h1', {
 
 const Subtitle = styled('div', {
   color: '$cultured',
-  fontSize: '$fontSize2',
   lineHeight: '1.4',
   transition: 'font-size 0.8s ease-in-out',
   fontFamily: 'Nunito, sans-serif',
 
   '@bp1': {
-    fontSize: '$fontSize3',
-    textAlign: 'justify',
+    fontSize: '$fontSize4',
   },
 
   '@bp2': {
-    fontSize: '$fontSize3',
+    fontSize: '$fontSize4',
   },
 
   '@bp3': {
@@ -90,8 +94,16 @@ const Subtitle = styled('div', {
   },
 })
 
+const SocialMediaContainer = styled('div', {
+  gridArea: 'social-media-links',
+})
+
 const Spacer = styled('div', {
   height: '$space$space8',
+
+  '@bp1': {
+    height: '$space$space4',
+  },
 })
 
 const ProfileImage = styled('img', {
@@ -148,7 +160,11 @@ export const Hero: React.FC = () => {
         <Subtitle>
           <RichText richText={data?.me.short.json} />
         </Subtitle>
+        <Spacer />
       </TitleContainer>
+      <SocialMediaContainer>
+        <SocialMediaLinks />
+      </SocialMediaContainer>
       <ProfileImage src="/images/profile-2x.png" />
     </Container>
   )
