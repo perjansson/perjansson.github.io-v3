@@ -93,13 +93,6 @@ export const Projects: React.FC = () => {
   )
 }
 
-const ProjectHeader = styled('h2', {
-  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
-  color: '$color12',
-  fontSize: '$fontSize4',
-  maxWidth: '300px',
-})
-
 interface ProjectProps {
   project: ProjectType
   onSelect: (project: ProjectType) => void
@@ -108,9 +101,36 @@ interface ProjectProps {
 const ProjectContainer = styled('article', {
   height: '100%',
   width: '100%',
+  maxWidth: '100%',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  overflow: 'hidden',
+})
+
+const ProjectHeader = styled('h2', {
+  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
+  color: '$color12',
+
+  '@bp1': {
+    fontSize: '$fontSize0',
+  },
+
+  '@bp2': {
+    fontSize: '$fontSize1',
+  },
+
+  '@bp3': {
+    fontSize: '$fontSize2',
+  },
+
+  '@bp4': {
+    fontSize: '$fontSize3',
+  },
+
+  '@bp5': {
+    fontSize: '$fontSize4',
+  },
 })
 
 const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
@@ -140,7 +160,9 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
 
   return (
     <ProjectContainer onClick={handleOnClick}>
-      <ProjectHeader>{titleShort}</ProjectHeader>
+      <div style={{ maxHeight: '50vh' }}>
+        <ProjectHeader>{titleShort}</ProjectHeader>
+      </div>
     </ProjectContainer>
   )
 }

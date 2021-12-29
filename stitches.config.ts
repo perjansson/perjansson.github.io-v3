@@ -42,8 +42,12 @@ export const {
       colorful3: '#E9C46A',
       colorful4: '#2A9D8F',
       colorful5: '#264653',
+      colorful6: '#ffe100',
+      colorful7: '#5773ff',
+      colorful8: '#0e141b',
     },
     fontSizes: {
+      fontSize0: calcFontSize('10px'),
       fontSize1: calcFontSize('12px'),
       fontSize2: calcFontSize('14px'),
       fontSize3: calcFontSize('16px'),
@@ -56,6 +60,7 @@ export const {
       fontSize10: calcFontSize('60px'),
       fontSize11: calcFontSize('72px'),
       fontSize12: calcFontSize('88px'),
+      fontSize13: calcFontSize('102px'),
     },
     space: {
       space1: calcSpace(0.25), // 4px
@@ -98,10 +103,11 @@ export const {
     transitions: {},
   },
   media: {
-    bp1: '(min-width: 768px)',
-    bp2: '(min-width: 1024px)',
-    bp3: '(min-width: 1280px)',
-    bp4: '(min-width: 1536px)',
+    bp1: 'only screen and (max-width: 767px)',
+    bp2: 'only screen and (min-width: 768px) and (max-width: 1023px)',
+    bp3: 'only screen and (min-width: 1024px) and (max-width: 1279px)',
+    bp4: 'only screen and (min-width: 1280px) and (max-width: 1535px)',
+    bp5: 'only screen and (min-width: 1536px)',
   },
 })
 
@@ -116,5 +122,9 @@ export const globalStyles = globalCss({
   body: {
     backgroundColor: '$color2',
     color: '$color11',
+  },
+
+  strong: {
+    fontWeight: '800',
   },
 })

@@ -67,13 +67,25 @@ const Main = styled('main', {
   '@bp3': {
     padding: '$space14',
   },
+
+  '@bp4': {
+    padding: '$space14',
+  },
+
+  '@bp5': {
+    padding: '$space14',
+  },
 })
 
 const ContentSpacer = () => (
   <Spacer
     size={{
-      '@initial': 'medium',
-      '@bp1': 'large',
+      '@initial': 'small',
+      '@bp1': 'medium',
+      '@bp2': 'medium',
+      '@bp3': 'medium',
+      '@bp4': 'large',
+      '@bp5': 'large',
     }}
   />
 )
@@ -86,12 +98,14 @@ const Index: React.FC<IndexProps> = ({ data }) => {
   return (
     <DataContextProvider data={data}>
       <Head>
-        <title>Per Jansson - Fullstack Web Developer 👋</title>
+        <title>✨ Per Jansson - Fullstack Web Developer ✨</title>
       </Head>
       <Main>
+        <Spacer size="small" />
         <Hero />
         <ContentSpacer />
-        <Projects />
+        {/* <Projects />
+        <ContentSpacer /> */}
       </Main>
     </DataContextProvider>
   )
