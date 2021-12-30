@@ -1,13 +1,21 @@
-import { useMemo } from 'react'
+import {
+  PointerEvent,
+  PointerEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { useData } from '../providers/DataContextProvider'
 import RichText from '@madebyconnor/rich-text-to-jsx'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
 
 import { styled } from '../stitches.config'
 import { Sparkles } from './sparkle'
 import { SocialMediaLinks } from './socialMediaLinks'
 import { ResponsiveImage, ResponsiveImageSrcSet } from './responsiveImage'
 
-const Container = styled('div', {
+const Container = styled(motion.div, {
   width: '100%',
   display: 'grid',
   fontSize: '$fontSize9',
@@ -152,8 +160,37 @@ const ProfileImage = styled(ResponsiveImage, {
   },
 })
 
+const PerspectiveWrapper = styled('div', {
+  perspective: 500,
+})
+
+const PerspectiveContent = styled(motion.div)
+
 export const Hero: React.FC = () => {
   const { data } = useData()
+
+  const [angle] = useState(10)
+  const y = useMotionValue(0.5)
+  const x = useMotionValue(0.5)
+  const rotateY = useTransform(x, [0, 1], [-angle, angle], { clamp: true })
+  const rotateX = useTransform(y, [0, 1], [angle, -angle], { clamp: true })
+
+  const handleOnPointerMove = useCallback(
+    (e: any) => {
+      const bounds = e.currentTarget.getBoundingClientRect()
+      const xValue = (e.clientX - bounds.x) / e.currentTarget.clientWidth
+      const yValue = (e.clientY - bounds.y) / e.currentTarget.clientHeight
+      x.set(xValue, true)
+      y.set(yValue, true)
+    },
+    [x, y]
+  )
+
+  useEffect(() => {
+    document.body.addEventListener('pointermove', handleOnPointerMove)
+    return () => window.removeEventListener('pointermove', handleOnPointerMove)
+  }, [handleOnPointerMove])
+
   const profileImageUrl = `${data!.me.profileImage.url}`
   const profileImageSrcSet = useMemo(
     () => [
@@ -204,7 +241,11 @@ export const Hero: React.FC = () => {
       <SocialMediaContainer>
         <SocialMediaLinks />
       </SocialMediaContainer>
-      <ProfileImage srcSet={profileImageSrcSet} alt="Profile image" />
+      <PerspectiveWrapper>
+        <PerspectiveContent style={{ rotateY, rotateX }}>
+          <ProfileImage srcSet={profileImageSrcSet} alt="Profile image" />
+        </PerspectiveContent>
+      </PerspectiveWrapper>
     </Container>
   )
 }
