@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { SocialMediaIconsReact } from 'social-media-icons-react'
-import { isMobile } from 'react-device-detect'
 
 import { useData } from '../providers/DataContextProvider'
 import { styled, theme } from '../stitches.config'
@@ -24,6 +23,8 @@ const Container = styled('div', {
 
   svg: {
     transition: 'all 150ms ease-out',
+    width: 48,
+    height: 48,
 
     '&:hover': {
       transform: 'scale(1.2)',
@@ -31,6 +32,11 @@ const Container = styled('div', {
       path: {
         fill: theme.colors.colorful3.value,
       },
+    },
+
+    '@bp1': {
+      width: 28,
+      height: 28,
     },
   },
 })
@@ -59,6 +65,5 @@ const SocialMediaLink = ({ contact }: { contact: ContactType }) => (
     backgroundColor="transparent"
     borderWidth="0"
     url={contact.url}
-    size={isMobile ? '28' : '48'}
   />
 )
