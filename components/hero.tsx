@@ -191,7 +191,7 @@ export const Hero: React.FC = () => {
       <TitleContainer>
         <Sparkles>
           <Title>
-            Hi. I'm {data?.me.firstName}.
+            Hi. I&apos;m {data?.me.firstName}.
             <br />A Fullstack Web Developer.
           </Title>
         </Sparkles>

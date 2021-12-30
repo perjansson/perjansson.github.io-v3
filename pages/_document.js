@@ -59,11 +59,11 @@ class MyDocument extends Document {
             crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=block"
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
             rel="stylesheet"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&display=block"
+            href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&display=swap"
             rel="stylesheet"
           />
           <link
