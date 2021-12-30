@@ -29,6 +29,7 @@ export interface MeType {
   lastName: string
   name: string
   title: string
+  profileImage: ImageType
   contacts: {
     items: ContactType[]
   }

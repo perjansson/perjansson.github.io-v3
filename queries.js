@@ -4,6 +4,10 @@ export const getIndexPageData = `{
         lastName
         name
         title
+        profileImage {
+            fileName
+            url
+        }
         short { json }
         long { json }
         contacts: contactsCollection {

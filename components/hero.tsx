@@ -1,9 +1,11 @@
+import { useMemo } from 'react'
 import { useData } from '../providers/DataContextProvider'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 
 import { styled } from '../stitches.config'
 import { Sparkles } from './sparkle'
 import { SocialMediaLinks } from './socialMediaLinks'
+import { ResponsiveImage, ResponsiveImageSrcSet } from './responsiveImage'
 
 const Container = styled('div', {
   width: '100%',
@@ -106,7 +108,7 @@ const Spacer = styled('div', {
   },
 })
 
-const ProfileImage = styled('img', {
+const ProfileImage = styled(ResponsiveImage, {
   gridArea: 'profile-image',
   width: 'calc(100vw - ($space$space5 * 3))',
   height: '100%',
@@ -121,31 +123,68 @@ const ProfileImage = styled('img', {
 
   '@bp1': {
     width: '100%',
-    maxWidth: '100%',
+    maxWidth: '100vw',
     height: '100%',
-    maxHeight: '348px',
+    maxHeight: '100vw',
+    aspectRatio: 1,
     justifySelf: 'end',
     objectFit: 'cover',
   },
 
   '@bp2': {
     width: '335px',
-    height: '436px',
+    height: '440px',
   },
 
   '@bp3': {
     width: '402px',
-    height: '523px',
+    height: '443px',
   },
 
   '@bp4': {
     width: '469px',
-    height: '610px',
+    height: '520px',
+  },
+
+  '@bp5': {
+    width: '469px',
+    height: '520px',
   },
 })
 
 export const Hero: React.FC = () => {
   const { data } = useData()
+  const profileImageUrl = `${data!.me.profileImage.url}`
+  const profileImageSrcSet = useMemo(
+    () => [
+      [
+        `${profileImageUrl}?w=375&h=375`,
+        `${profileImageUrl}?w=750&h=750`,
+        `${profileImageUrl}?w=1125&h=1125`,
+      ],
+      [
+        `${profileImageUrl}?w=335&h=440`,
+        `${profileImageUrl}?w=670&h=880`,
+        `${profileImageUrl}?w=1005&h=1320`,
+      ],
+      [
+        `${profileImageUrl}?w=402&h=469`,
+        `${profileImageUrl}?w=804&h=938`,
+        `${profileImageUrl}?w=1260&h=1407`,
+      ],
+      [
+        `${profileImageUrl}?w=469&h=520`,
+        `${profileImageUrl}?w=938&h=1040`,
+        `${profileImageUrl}?w=1407&h=1560`,
+      ],
+      [
+        `${profileImageUrl}?w=469&h=520`,
+        `${profileImageUrl}?w=938&h=1040`,
+        `${profileImageUrl}?w=1407&h=1560`,
+      ],
+    ],
+    [profileImageUrl]
+  ) as ResponsiveImageSrcSet
 
   return (
     <Container>
@@ -165,7 +204,7 @@ export const Hero: React.FC = () => {
       <SocialMediaContainer>
         <SocialMediaLinks />
       </SocialMediaContainer>
-      <ProfileImage src="/images/profile-2x.png" />
+      <ProfileImage srcSet={profileImageSrcSet} alt="Profile image" />
     </Container>
   )
 }
