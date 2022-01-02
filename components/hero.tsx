@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import Image from 'next/image'
+import { useCallback, useEffect, useState } from 'react'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 
@@ -7,7 +6,7 @@ import { styled } from '../stitches.config'
 import { useData } from '../providers/DataContextProvider'
 import { Sparkles } from './sparkle'
 import { SocialMediaLinks } from './socialMediaLinks'
-import { contentfulImageLoader } from '../utils/contentfulImageLoader'
+import { ContentfulImage } from './contentfulImage'
 
 const Container = styled(motion.div, {
   width: '100%',
@@ -110,7 +109,7 @@ const Spacer = styled('div', {
   },
 })
 
-const ProfileImage = styled(Image, {
+const ProfileImage = styled(ContentfulImage, {
   gridArea: 'profile-image',
   width: 'calc(100vw - ($space$space5 * 3))',
   height: '100%',
@@ -212,7 +211,6 @@ export const Hero: React.FC = () => {
             layout="intrinsic"
             loading="eager"
             priority
-            loader={contentfulImageLoader}
             width={469}
             height={520}
             alt="Profile image"
