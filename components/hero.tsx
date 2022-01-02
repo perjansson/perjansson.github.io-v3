@@ -1,19 +1,13 @@
-import {
-  PointerEvent,
-  PointerEventHandler,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
-import { useData } from '../providers/DataContextProvider'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import Image from 'next/image'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 
 import { styled } from '../stitches.config'
+import { useData } from '../providers/DataContextProvider'
 import { Sparkles } from './sparkle'
 import { SocialMediaLinks } from './socialMediaLinks'
-import { ResponsiveImage, ResponsiveImageSrcSet } from './responsiveImage'
+import { contentfulImageLoader } from '../utils/contentfulImageLoader'
 
 const Container = styled(motion.div, {
   width: '100%',
@@ -116,7 +110,7 @@ const Spacer = styled('div', {
   },
 })
 
-const ProfileImage = styled(ResponsiveImage, {
+const ProfileImage = styled(Image, {
   gridArea: 'profile-image',
   width: 'calc(100vw - ($space$space5 * 3))',
   height: '100%',
@@ -126,7 +120,7 @@ const ProfileImage = styled(ResponsiveImage, {
   justifySelf: 'center',
   objectFit: 'cover',
   borderRadius: '$radii5',
-  border: '10px solid transparent',
+  border: '10px solid transparent !important',
   background: 'linear-gradient(45deg, $colorful3, $colorful4) border-box',
 
   '@bp1': {
@@ -192,36 +186,6 @@ export const Hero: React.FC = () => {
   }, [handleOnPointerMove])
 
   const profileImageUrl = `${data!.me.profileImage.url}`
-  const profileImageSrcSet = useMemo(
-    () => [
-      [
-        `${profileImageUrl}?w=375&h=375`,
-        `${profileImageUrl}?w=750&h=750`,
-        `${profileImageUrl}?w=1125&h=1125`,
-      ],
-      [
-        `${profileImageUrl}?w=335&h=440`,
-        `${profileImageUrl}?w=670&h=880`,
-        `${profileImageUrl}?w=1005&h=1320`,
-      ],
-      [
-        `${profileImageUrl}?w=402&h=469`,
-        `${profileImageUrl}?w=804&h=938`,
-        `${profileImageUrl}?w=1260&h=1407`,
-      ],
-      [
-        `${profileImageUrl}?w=469&h=520`,
-        `${profileImageUrl}?w=938&h=1040`,
-        `${profileImageUrl}?w=1407&h=1560`,
-      ],
-      [
-        `${profileImageUrl}?w=469&h=520`,
-        `${profileImageUrl}?w=938&h=1040`,
-        `${profileImageUrl}?w=1407&h=1560`,
-      ],
-    ],
-    [profileImageUrl]
-  ) as ResponsiveImageSrcSet
 
   return (
     <Container>
@@ -243,7 +207,16 @@ export const Hero: React.FC = () => {
       </SocialMediaContainer>
       <PerspectiveWrapper>
         <PerspectiveContent style={{ rotateY, rotateX }}>
-          <ProfileImage srcSet={profileImageSrcSet} alt="Profile image" />
+          <ProfileImage
+            src={profileImageUrl}
+            layout="intrinsic"
+            loading="eager"
+            priority
+            loader={contentfulImageLoader}
+            width={469}
+            height={520}
+            alt="Profile image"
+          />
         </PerspectiveContent>
       </PerspectiveWrapper>
     </Container>
