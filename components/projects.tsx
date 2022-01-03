@@ -69,6 +69,7 @@ const ProjectContainer = styled(motion.article, {
     'title'
     'asset'
   `,
+  cursor: 'pointer',
 
   '@bp1': {
     padding: '$space6',
@@ -162,7 +163,12 @@ const AssetWrapper = styled('div', {
 
 const Asset = styled(ContentfulImage, {
   background: '$color13 border-box !important',
-  filter: 'grayscale(40%) opacity(80%)',
+  filter: 'brightness(0.7) sepia(0.2)',
+  transition: 'filter 200ms ease-in-out',
+
+  [`${ProjectContainer}:hover &`]: {
+    filter: 'brightness(1) sepia(0.1)',
+  },
 
   '@bp1': {
     border: '$space$space4 solid transparent !important',
