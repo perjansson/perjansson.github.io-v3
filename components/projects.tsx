@@ -169,11 +169,11 @@ const AssetWrapper = styled('div', {
 
 const Asset = styled(ContentfulImage, {
   background: '$color13 border-box !important',
-  filter: 'brightness(0.7) sepia(0.2)',
+  filter: 'brightness(0.7)',
   transition: 'filter 200ms ease-in-out',
 
   [`${ProjectContainer}:hover &`]: {
-    filter: 'brightness(1) sepia(0.1)',
+    filter: 'brightness(1)',
   },
 
   '@bp1': {
