@@ -134,9 +134,13 @@ const AssetWrapper = styled('div', {
     position: 'unset !important',
   },
 
+  img: {
+    objectFit: 'cover',
+  },
+
   '@bp1': {
     width: '250px',
-    height: '350px',
+    height: '320px',
     marginTop: '$space5',
   },
 
