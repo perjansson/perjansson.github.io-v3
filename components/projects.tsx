@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import RichText from '@madebyconnor/rich-text-to-jsx'
-import {
-  AnimatePresence,
-  motion,
-  useElementScroll,
-  useTransform,
-  useViewportScroll,
-} from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 
 import { styled } from '../stitches.config'
 import { useData } from '../providers/DataContextProvider'
@@ -60,7 +55,7 @@ interface ProjectProps {
   onSelect: (project: ProjectType) => void
 }
 
-const ProjectContainer = styled('article', {
+const ProjectContainer = styled(motion.article, {
   height: 'max(calc(100vw / 3), 50vh)',
   width: '100%',
   display: 'grid',
@@ -110,6 +105,11 @@ const ProjectHeader = styled('h2', {
   },
 })
 
+const projectVariants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
+}
+
 const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
   const {
     title,
@@ -130,13 +130,28 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
     : undefined
   const assetUrl = asset ? `${asset.url}?fl=progressive&w=534&h=800` : undefined
 
+  const controls = useAnimation()
+  const [ref, inView] = useInView()
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible')
+    }
+  }, [controls, inView])
+
   const handleOnClick = () => {
     onSelect(project)
     // TODO: Navigate to project page
   }
 
   return (
-    <ProjectContainer onClick={handleOnClick}>
+    <ProjectContainer
+      ref={ref}
+      animate={controls}
+      initial="hidden"
+      variants={projectVariants}
+      onClick={handleOnClick}
+    >
       <ProjectHeader>{titleShort}</ProjectHeader>
     </ProjectContainer>
   )
