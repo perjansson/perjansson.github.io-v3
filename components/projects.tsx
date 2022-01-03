@@ -40,14 +40,10 @@ export const Projects: React.FC = () => {
   return (
     <section data-cy="projects">
       {data?.projects.items.map((project) => (
-        <>
-          <Project
-            key={project.title}
-            project={project}
-            onSelect={handleOnSelect}
-          />
+        <React.Fragment key={project.title + project.client}>
+          <Project project={project} onSelect={handleOnSelect} />
           <Spacer size="medium" />
-        </>
+        </React.Fragment>
       ))}
     </section>
   )
