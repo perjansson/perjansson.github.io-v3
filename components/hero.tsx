@@ -120,7 +120,8 @@ const ProfileImage = styled(ContentfulImage, {
   objectFit: 'cover',
   borderRadius: '$radii5',
   border: '10px solid transparent !important',
-  background: 'linear-gradient(45deg, $colorful3, $colorful4) border-box',
+  background:
+    'linear-gradient(45deg, $colorful3, $colorful4) border-box !important',
 
   '@bp1': {
     width: '100%',
