@@ -58,12 +58,14 @@ class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           />
+          {/* eslint-disable-next-line @next/next/google-font-display */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=block"
             rel="stylesheet"
           />
+          {/* eslint-disable-next-line @next/next/google-font-display */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&display=block"
             rel="stylesheet"
           />
           <link
