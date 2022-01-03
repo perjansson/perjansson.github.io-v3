@@ -51,8 +51,6 @@ export const ContentfulImage: React.FC<ImageProps> = ({ alt, ...props }) => {
       return undefined
     }
 
-    console.log('###', supportAvif, supportWebp)
-
     if (supportAvif) {
       return contentfulImageLoader('avif')
     } else if (supportWebp) {
