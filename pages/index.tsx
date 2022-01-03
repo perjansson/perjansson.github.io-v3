@@ -3,9 +3,10 @@ import Head from 'next/head'
 
 import { IndexPageData } from '../types'
 import { getIndexPageData } from '../queries'
-import { Hero } from '../components/hero'
-import { DataContextProvider } from '../providers/DataContextProvider'
 import { styled } from '../stitches.config'
+import { DataContextProvider } from '../providers/DataContextProvider'
+import { Hero } from '../components/hero'
+import { Projects } from '../components/projects'
 import { Spacer } from '../components/spacer'
 
 type StaticProps = {
@@ -95,8 +96,8 @@ const Index: React.FC<IndexProps> = ({ data }) => {
         <Spacer size="small" />
         <Hero />
         <ContentSpacer />
-        {/* <Projects />
-        <ContentSpacer /> */}
+        <Projects />
+        <ContentSpacer />
       </Main>
     </DataContextProvider>
   )
