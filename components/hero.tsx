@@ -46,7 +46,7 @@ const TitleContainer = styled('div', {
   gridArea: 'title',
 })
 
-const Title = styled('h1', {
+const PageTitle = styled('h1', {
   background:
     'linear-gradient(271deg, $colorful3 30%, $colorful4 50%, $colorful1 70%, $colorful3 94%)',
   '-webkit-background-clip': 'text',
@@ -199,10 +199,10 @@ export const Hero: React.FC = () => {
     <Container>
       <TitleContainer>
         <Sparkles>
-          <Title>
+          <PageTitle>
             Hi. I&apos;m {data?.me.firstName}.
             <br />A Fullstack Web Developer.
-          </Title>
+          </PageTitle>
         </Sparkles>
         <Spacer />
         <Subtitle>

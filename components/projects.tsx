@@ -15,6 +15,36 @@ import { ParallaxEffect } from './parallaxEffect'
 
 type ProjectMaybe = ProjectType | undefined
 
+const PageTitle = styled('h2', {
+  color: '$color12',
+  fontSize: '$fontSize8',
+  letterSpacing: '-1.5px',
+  lineHeight: '110%',
+  transition: 'font-size 0.8s ease-in-out',
+  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
+  fontWeight: 700,
+
+  '@bp1': {
+    fontSize: '$fontSize7',
+  },
+
+  '@bp2': {
+    fontSize: '$fontSize7',
+  },
+
+  '@bp3': {
+    fontSize: '$fontSize8',
+  },
+
+  '@bp4': {
+    fontSize: '$fontSize9',
+  },
+
+  '@bp5': {
+    fontSize: '$fontSize10',
+  },
+})
+
 export const Projects: React.FC = () => {
   const { data } = useData()
   const [selectedProject, setSelectedProject] = useState<ProjectMaybe>()
@@ -38,14 +68,20 @@ export const Projects: React.FC = () => {
   }
 
   return (
-    <section data-cy="projects">
-      {data?.projects.items.map((project) => (
-        <React.Fragment key={project.title + project.client}>
-          <Project project={project} onSelect={handleOnSelect} />
-          <Spacer size="medium" />
-        </React.Fragment>
-      ))}
-    </section>
+    <>
+      <PageTitle>
+        Check out some projects I&apos;ve done as a consultant or freelancer
+      </PageTitle>
+      <Spacer size="large" />
+      <section data-cy="projects">
+        {data?.projects.items.map((project) => (
+          <React.Fragment key={project.title + project.client}>
+            <Project project={project} onSelect={handleOnSelect} />
+            <Spacer size="medium" />
+          </React.Fragment>
+        ))}
+      </section>
+    </>
   )
 }
 
@@ -98,25 +134,25 @@ const Role = styled('div', {
 const Title = styled('h2', {
   gridArea: 'title',
   fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
-  color: '$color13',
+  color: '$color12',
   textAlign: 'right',
 
   '@bp1': {
-    fontSize: '$fontSize7',
+    fontSize: '$fontSize6',
     lineHeight: '32px',
     textAlign: 'left',
   },
 
   '@bp2': {
-    fontSize: '$fontSize7',
+    fontSize: '$fontSize6',
   },
 
   '@bp3': {
-    fontSize: '$fontSize8',
+    fontSize: '$fontSize7',
   },
 
   '@bp4': {
-    fontSize: '$fontSize9',
+    fontSize: '$fontSize8',
   },
 })
 
