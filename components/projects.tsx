@@ -58,7 +58,6 @@ interface ProjectProps {
 }
 
 const ProjectContainer = styled(motion.article, {
-  // height: 'max(calc(100vw / 1.65), 50vh)',
   width: '100%',
   display: 'grid',
   backgroundColor: '$color3',
@@ -140,6 +139,7 @@ const AssetWrapper = styled('div', {
   '@bp1': {
     width: '250px',
     height: '150px',
+    marginTop: '$space5',
   },
 
   '@bp2': {
