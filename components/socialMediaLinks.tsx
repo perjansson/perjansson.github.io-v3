@@ -4,6 +4,7 @@ import { SocialMediaIconsReact } from 'social-media-icons-react'
 import { useData } from '../providers/DataContextProvider'
 import { styled, theme } from '../stitches.config'
 import { ContactType } from '../types'
+import { event } from '../utils/gtag'
 
 const Container = styled('div', {
   display: 'flex',
@@ -52,21 +53,43 @@ export const SocialMediaLinks: React.FC = () => {
     [data?.me.contacts.items]
   )
 
+  const handleOnContactClick = (medium: string) => {
+    console.log('### onclick', medium)
+    event({
+      category: 'user_interaction',
+      action: 'contact_click',
+      label: medium,
+      value: 1,
+    })
+  }
+
   return (
     <Container>
       {socialMediaLinks?.map((contact, i) => (
-        <SocialMediaLink contact={contact} key={i} />
+        <SocialMediaLink
+          contact={contact}
+          key={i}
+          onClick={() => handleOnContactClick(contact.medium)}
+        />
       ))}
     </Container>
   )
 }
 
-const SocialMediaLink = ({ contact }: { contact: ContactType }) => (
-  <SocialMediaIconsReact
-    icon={contact.medium.replace(' ', '').toLocaleLowerCase()}
-    iconColor={theme.colors.color7.value}
-    backgroundColor="transparent"
-    borderWidth="0"
-    url={contact.url}
-  />
+const SocialMediaLink = ({
+  contact,
+  onClick,
+}: {
+  contact: ContactType
+  onClick: () => void
+}) => (
+  <div onClick={onClick}>
+    <SocialMediaIconsReact
+      icon={contact.medium.replace(' ', '').toLocaleLowerCase()}
+      iconColor={theme.colors.color7.value}
+      backgroundColor="transparent"
+      borderWidth="0"
+      url={contact.url}
+    />
+  </div>
 )
