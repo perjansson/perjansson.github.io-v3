@@ -130,6 +130,12 @@ const AssetWrapper = styled('div', {
   placeSelf: 'center',
   display: 'flex',
   justifyContent: 'center',
+  transform: 'scale(1)',
+  transition: 'transform 200ms ease-out',
+
+  [`${ProjectContainer}:hover &`]: {
+    transform: 'scale(1.05)',
+  },
 
   '> div': {
     position: 'unset !important',
@@ -187,8 +193,18 @@ const Asset = styled(ContentfulImage, {
 })
 
 const projectVariants = {
-  hidden: { opacity: 0, scale: 0.5 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
+  hidden: {
+    opacity: 0,
+    scale: 0.5,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: (progress: number) => progress * progress,
+    },
+  },
 }
 
 const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
