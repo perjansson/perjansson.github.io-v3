@@ -61,15 +61,16 @@ const ProjectContainer = styled(motion.article, {
   display: 'grid',
   backgroundColor: '$color3',
   borderRadius: '$radii5',
-  gridTemplateRows: '0.2fr 0.8fr',
+  gridTemplateRows: '0.05fr 0.15fr 0.8fr',
   gridTemplateColumns: 'auto',
   gridTemplateAreas: `
-    'project-header'
-    'project-image'
+    'role'
+    'title'
+    'asset'
   `,
 
   '@bp1': {
-    padding: '$space4',
+    padding: '$space6',
   },
 
   '@bp2': {
@@ -77,8 +78,24 @@ const ProjectContainer = styled(motion.article, {
   },
 })
 
-const ProjectHeader = styled('h2', {
-  gridArea: 'project-header',
+const Role = styled('div', {
+  color: '$color8',
+  textTransform: 'uppercase',
+
+  '@bp1': {
+    fontSize: '$fontSize0',
+    textAlign: 'center',
+  },
+
+  '@bp2': {
+    fontSize: '$fontSize3',
+    fontWeight: '600',
+    textAlign: 'right',
+  },
+})
+
+const Title = styled('h2', {
+  gridArea: 'title',
   fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
   color: '$color12',
   textAlign: 'right',
@@ -102,6 +119,20 @@ const ProjectHeader = styled('h2', {
 
   '@bp5': {
     fontSize: '$fontSize9',
+  },
+})
+
+const Asset = styled('div', {
+  width: '50%',
+  height: '90%',
+  margin: '0 auto',
+  border: '10px solid transparent !important',
+  borderRadius: '$radii5',
+  background: 'linear-gradient(45deg, $color5, $color6) border-box !important',
+
+  '@bp1': {
+    width: '85%',
+    height: '100%',
   },
 })
 
@@ -152,7 +183,11 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
       variants={projectVariants}
       onClick={handleOnClick}
     >
-      <ProjectHeader>{titleShort}</ProjectHeader>
+      <Role>
+        {role} at {client}
+      </Role>
+      <Title>{titleShort}</Title>
+      <Asset></Asset>
     </ProjectContainer>
   )
 }
