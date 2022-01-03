@@ -102,10 +102,10 @@ class MyDocument extends Document {
             name="twitter:description"
             content="Per Jansson - Fullstack Web Developer"
           />
-          <meta
+          {/* <meta
             name="twitter:image"
             content="https://www.thecuriousdeveloper.com/icons/android-chrome-192x192.png"
-          />
+          /> */}
           <meta name="twitter:creator" content="@perjansson" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="Per Jansson" />
@@ -121,10 +121,10 @@ class MyDocument extends Document {
             property="og:url"
             content="https://www.thecuriousdeveloper.com"
           />
-          <meta
+          {/* <meta
             property="og:image"
             content="https://www.thecuriousdeveloper.com/icons/apple-touch-icon.png"
-          />
+          /> */}
           {process.env.GA_TRACKING_ID && (
             <>
               <script
