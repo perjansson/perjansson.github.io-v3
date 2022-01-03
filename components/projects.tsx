@@ -11,6 +11,7 @@ import { formatProjectDates } from '../utils/projectHelper'
 import { event } from '../utils/gtag'
 import { Spacer } from './spacer'
 import { ContentfulImage } from './contentfulImage'
+import { ParallaxEffect } from './parallaxEffect'
 
 type ProjectMaybe = ProjectType | undefined
 
@@ -101,7 +102,7 @@ const Role = styled('div', {
 const Title = styled('h2', {
   gridArea: 'title',
   fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
-  color: '$color12',
+  color: '$color13',
   textAlign: 'right',
 
   '@bp1': {
@@ -134,15 +135,7 @@ const AssetWrapper = styled('div', {
   transition: 'transform 200ms ease-out',
 
   [`${ProjectContainer}:hover &`]: {
-    transform: 'scale(1.05)',
-  },
-
-  '> div': {
-    position: 'unset !important',
-  },
-
-  img: {
-    objectFit: 'cover',
+    transform: 'scale(1.03)',
   },
 
   '@bp1': {
@@ -167,13 +160,18 @@ const AssetWrapper = styled('div', {
   },
 })
 
-const Asset = styled(ContentfulImage, {
+const Border = styled('div', {
+  height: '100%',
+  width: '100%',
   background: '$color13 border-box !important',
-  filter: 'brightness(0.7)',
-  transition: 'filter 200ms ease-in-out',
 
-  [`${ProjectContainer}:hover &`]: {
-    filter: 'brightness(1)',
+  '> div': {
+    position: 'unset !important',
+    borderRadius: '$radii3',
+  },
+
+  img: {
+    objectFit: 'cover',
   },
 
   '@bp1': {
@@ -189,6 +187,15 @@ const Asset = styled(ContentfulImage, {
   '@bp4': {
     border: '$space$space10 solid transparent !important',
     borderRadius: '$radii6',
+  },
+})
+
+const Asset = styled(ContentfulImage, {
+  filter: 'brightness(0.7)',
+  transition: 'filter 200ms ease-in-out',
+
+  [`${ProjectContainer}:hover &`]: {
+    filter: 'brightness(1)',
   },
 })
 
@@ -249,12 +256,16 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
       </Role>
       <Title>{titleShort}</Title>
       <AssetWrapper ref={observe}>
-        <Asset
-          src={asset.url}
-          layout="fixed"
-          width={`${Math.round(width)}px`}
-          height={`${Math.round(height)}px`}
-        ></Asset>
+        <Border>
+          <ParallaxEffect>
+            <Asset
+              src={asset.url}
+              layout="fixed"
+              width={`${Math.round(width)}px`}
+              height={`${Math.round(height)}px`}
+            />
+          </ParallaxEffect>
+        </Border>
       </AssetWrapper>
     </ProjectContainer>
   )

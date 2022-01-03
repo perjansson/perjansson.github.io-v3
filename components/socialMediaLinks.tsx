@@ -64,7 +64,7 @@ export const SocialMediaLinks: React.FC = () => {
   }
 
   return (
-    <Container>
+    <Container data-cy="social-media">
       {socialMediaLinks?.map((contact, i) => (
         <SocialMediaLink
           contact={contact}

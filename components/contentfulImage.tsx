@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { default as NextImage } from 'next/image'
-import { ImageLoader, ImageProps } from 'next/image'
+import { ImageProps } from 'next/image'
 
 import { contentfulImageLoader } from '../utils/contentfulImageLoader'
 

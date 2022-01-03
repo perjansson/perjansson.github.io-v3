@@ -30,7 +30,7 @@ describe('Smoke test', () => {
     // cy.get('[data-cy=me]').contains('curious software developer')
 
     contacts.forEach((contact) => {
-      cy.get('[data-cy=header]').contains(contact)
+      cy.get('[data-cy=social-media]').contains(contact)
     })
 
     cy.get('[data-cy=projects]').scrollIntoView()
