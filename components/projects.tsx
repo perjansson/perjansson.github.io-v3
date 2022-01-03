@@ -85,8 +85,9 @@ const Role = styled('div', {
   textTransform: 'uppercase',
 
   '@bp1': {
-    fontSize: '$fontSize0',
-    textAlign: 'center',
+    fontSize: '$fontSize1',
+    lineHeight: '18px',
+    textAlign: 'left',
   },
 
   '@bp2': {
@@ -103,23 +104,20 @@ const Title = styled('h2', {
   textAlign: 'right',
 
   '@bp1': {
-    fontSize: '$fontSize3',
-    textAlign: 'center',
+    fontSize: '$fontSize7',
+    lineHeight: '32px',
+    textAlign: 'left',
   },
 
   '@bp2': {
-    fontSize: '$fontSize6',
-  },
-
-  '@bp3': {
     fontSize: '$fontSize7',
   },
 
-  '@bp4': {
+  '@bp3': {
     fontSize: '$fontSize8',
   },
 
-  '@bp5': {
+  '@bp4': {
     fontSize: '$fontSize9',
   },
 })
@@ -138,7 +136,7 @@ const AssetWrapper = styled('div', {
 
   '@bp1': {
     width: '250px',
-    height: '150px',
+    height: '350px',
     marginTop: '$space5',
   },
 
@@ -159,8 +157,23 @@ const AssetWrapper = styled('div', {
 })
 
 const Asset = styled(ContentfulImage, {
-  borderRadius: '$radii5',
+  background: '$color13 border-box !important',
   filter: 'grayscale(40%) opacity(80%)',
+
+  '@bp1': {
+    border: '$space$space4 solid transparent !important',
+    borderRadius: '$radii3',
+  },
+
+  '@bp2': {
+    border: '$space$space6 solid transparent !important',
+    borderRadius: '$radii4',
+  },
+
+  '@bp4': {
+    border: '$space$space10 solid transparent !important',
+    borderRadius: '$radii6',
+  },
 })
 
 const projectVariants = {
