@@ -73,9 +73,9 @@ const ContentSpacer = () => (
   <Spacer
     size={{
       '@initial': 'small',
-      '@bp1': 'medium',
-      '@bp2': 'medium',
-      '@bp3': 'medium',
+      '@bp1': 'large',
+      '@bp2': 'large',
+      '@bp3': 'large',
       '@bp4': 'large',
       '@bp5': 'large',
     }}
