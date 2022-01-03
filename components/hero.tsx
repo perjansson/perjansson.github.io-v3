@@ -12,13 +12,6 @@ const Container = styled(motion.div, {
   width: '100%',
   display: 'grid',
   fontSize: '$fontSize9',
-  gridTemplateRows: 'auto',
-  gridTemplateColumns: '1.5fr 1fr',
-  gridTemplateAreas: `
-    'title profile-image'
-    'social-media-links profile-image'
-  `,
-  columnGap: '$space16',
 
   '@bp1': {
     gridTemplateRows: 'auto',
@@ -29,6 +22,23 @@ const Container = styled(motion.div, {
       'social-media-links'
     `,
     gap: '$space8',
+  },
+
+  '@bp2': {
+    gridTemplateRows: 'auto',
+    gridTemplateColumns: '1.5fr 1fr',
+    gridTemplateAreas: `
+      'title profile-image'
+      'social-media-links social-media-links'
+    `,
+    columnGap: '$space16',
+  },
+
+  '@bp3': {
+    gridTemplateAreas: `
+      'title profile-image'
+      'social-media-links profile-image'
+    `,
   },
 })
 

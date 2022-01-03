@@ -23,8 +23,6 @@ const Container = styled('div', {
 
   svg: {
     transition: 'all 150ms ease-out',
-    width: 48,
-    height: 48,
 
     '&:hover': {
       transform: 'scale(1.2)',
@@ -37,6 +35,11 @@ const Container = styled('div', {
     '@bp1': {
       width: 28,
       height: 28,
+    },
+
+    '@bp2': {
+      width: 48,
+      height: 48,
     },
   },
 })
