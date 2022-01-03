@@ -104,9 +104,9 @@ export const {
   },
   media: {
     bp1: 'only screen and (max-width: 767px)',
-    bp2: 'only screen and (min-width: 768px) and (max-width: 1023px)',
-    bp3: 'only screen and (min-width: 1024px) and (max-width: 1279px)',
-    bp4: 'only screen and (min-width: 1280px) and (max-width: 1535px)',
+    bp2: 'only screen and (min-width: 768px)',
+    bp3: 'only screen and (min-width: 1024px)',
+    bp4: 'only screen and (min-width: 1280px)',
     bp5: 'only screen and (min-width: 1536px)',
   },
 })
