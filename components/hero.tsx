@@ -158,8 +158,6 @@ const PerspectiveWrapper = styled('div', {
   perspective: 500,
 })
 
-const PerspectiveContent = styled(motion.div)
-
 export const Hero: React.FC = () => {
   const { data } = useData()
 
@@ -173,7 +171,9 @@ export const Hero: React.FC = () => {
     (e: any) => {
       const bounds = e.currentTarget.getBoundingClientRect()
       const xValue = (e.clientX - bounds.x) / e.currentTarget.clientWidth
-      const yValue = (e.clientY - bounds.y) / e.currentTarget.clientHeight
+      const yValue =
+        (e.clientY - bounds.y) /
+        Math.min(e.currentTarget.clientHeight, window.innerHeight)
       x.set(xValue, true)
       y.set(yValue, true)
     },
@@ -206,7 +206,7 @@ export const Hero: React.FC = () => {
         <SocialMediaLinks />
       </SocialMediaContainer>
       <PerspectiveWrapper>
-        <PerspectiveContent style={{ rotateY, rotateX }}>
+        <motion.div style={{ rotateY, rotateX }}>
           <ProfileImage
             src={profileImageUrl}
             placeholder="blur"
@@ -218,7 +218,7 @@ export const Hero: React.FC = () => {
             height={520}
             alt="Profile image"
           />
-        </PerspectiveContent>
+        </motion.div>
       </PerspectiveWrapper>
     </Container>
   )
