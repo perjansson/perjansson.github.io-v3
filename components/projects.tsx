@@ -13,20 +13,9 @@ import { useData } from '../providers/DataContextProvider'
 import { ProjectsType, ProjectType } from '../types'
 import { formatProjectDates } from '../utils/projectHelper'
 import { event } from '../utils/gtag'
+import { Spacer } from './spacer'
 
 type ProjectMaybe = ProjectType | undefined
-
-const ProjectsContainer = styled('section', {
-  height: '90vh',
-  width: '100%',
-  backgroundColor: '$color3',
-  borderRadius: '$radii5',
-  overflow: 'auto',
-})
-
-const ScrollableContainer = styled('div', {
-  width: '100%',
-})
 
 export const Projects: React.FC = () => {
   const { data } = useData()
@@ -50,46 +39,19 @@ export const Projects: React.FC = () => {
     })
   }
 
-  const numberOfProjects = data!.projects.items.length
-  const ref = useRef<HTMLDivElement>(null)
-  const [projectIndex, setProjectIndex] = useState(0)
-  const { scrollYProgress } = useElementScroll(ref)
-  scrollYProgress.onChange((progress) => {
-    const project = Math.min(
-      Math.floor(numberOfProjects * progress),
-      numberOfProjects - 1
-    )
-    setProjectIndex(project)
-  })
-
-  const project = data!.projects.items[projectIndex]
-
   return (
-    <ProjectsContainer ref={ref} data-cy="projects">
-      <ScrollableContainer
-        style={{
-          height: `calc(125vh * ${numberOfProjects})`,
-        }}
-      >
-        <AnimatePresence exitBeforeEnter>
-          <motion.div
+    <section data-cy="projects">
+      {data?.projects.items.map((project) => (
+        <>
+          <Project
             key={project.title}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 2 }}
-            exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 0.25 }}
-            style={{
-              position: 'sticky',
-              top: 0,
-              height: '90vh',
-              width: '100%',
-            }}
-          >
-            <Project project={project} onSelect={handleOnSelect} />
-          </motion.div>
-        </AnimatePresence>
-      </ScrollableContainer>
-    </ProjectsContainer>
+            project={project}
+            onSelect={handleOnSelect}
+          />
+          <Spacer size="medium" />
+        </>
+      ))}
+    </section>
   )
 }
 
@@ -99,37 +61,52 @@ interface ProjectProps {
 }
 
 const ProjectContainer = styled('article', {
-  height: '100%',
+  height: 'max(calc(100vw / 3), 50vh)',
   width: '100%',
-  maxWidth: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  overflow: 'hidden',
-})
-
-const ProjectHeader = styled('h2', {
-  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
-  color: '$color12',
+  display: 'grid',
+  backgroundColor: '$color3',
+  borderRadius: '$radii5',
+  gridTemplateRows: '0.2fr 0.8fr',
+  gridTemplateColumns: 'auto',
+  gridTemplateAreas: `
+    'project-header'
+    'project-image'
+  `,
 
   '@bp1': {
-    fontSize: '$fontSize0',
+    padding: '$space4',
   },
 
   '@bp2': {
-    fontSize: '$fontSize1',
+    padding: '$space8 $space12',
+  },
+})
+
+const ProjectHeader = styled('h2', {
+  gridArea: 'project-header',
+  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
+  color: '$color12',
+  textAlign: 'right',
+
+  '@bp1': {
+    fontSize: '$fontSize3',
+    textAlign: 'center',
+  },
+
+  '@bp2': {
+    fontSize: '$fontSize6',
   },
 
   '@bp3': {
-    fontSize: '$fontSize2',
+    fontSize: '$fontSize7',
   },
 
   '@bp4': {
-    fontSize: '$fontSize3',
+    fontSize: '$fontSize8',
   },
 
   '@bp5': {
-    fontSize: '$fontSize4',
+    fontSize: '$fontSize9',
   },
 })
 
@@ -160,9 +137,7 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
 
   return (
     <ProjectContainer onClick={handleOnClick}>
-      <div style={{ maxHeight: '50vh' }}>
-        <ProjectHeader>{titleShort}</ProjectHeader>
-      </div>
+      <ProjectHeader>{titleShort}</ProjectHeader>
     </ProjectContainer>
   )
 }
