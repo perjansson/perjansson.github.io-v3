@@ -68,7 +68,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&display=block"
             rel="stylesheet"
           />
-          <link
+          {/* <link
             rel="apple-touch-icon"
             sizes="180x180"
             href="/icons/apple-touch-icon.png"
@@ -78,7 +78,7 @@ class MyDocument extends Document {
             type="image/png"
             sizes="32x32"
             href="/icons/apple-touch-icon.png"
-          />
+          /> */}
           <link
             rel="icon"
             type="image/png"

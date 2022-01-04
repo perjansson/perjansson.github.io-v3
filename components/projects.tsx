@@ -15,7 +15,7 @@ import { ParallaxEffect } from './parallaxEffect'
 
 type ProjectMaybe = ProjectType | undefined
 
-const PageTitle = styled('h2', {
+const SectionTitle = styled('h2', {
   color: '$color12',
   fontSize: '$fontSize8',
   letterSpacing: '-1.5px',
@@ -69,9 +69,9 @@ export const Projects: React.FC = () => {
 
   return (
     <>
-      <PageTitle>
+      <SectionTitle>
         Check out some projects I&apos;ve done as a consultant or freelancer
-      </PageTitle>
+      </SectionTitle>
       <Spacer size="large" />
       <section data-cy="projects">
         {data?.projects.items.map((project) => (
@@ -292,6 +292,7 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
           <ParallaxEffect>
             <Asset
               src={asset.url}
+              alt={`Project image for ${role} at ${client}`}
               layout="fixed"
               width={`${Math.round(width)}px`}
               height={`${Math.round(height)}px`}

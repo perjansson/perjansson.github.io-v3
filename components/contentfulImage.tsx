@@ -26,7 +26,15 @@ const supportsWebp = () => {
   })
 }
 
-export const ContentfulImage: React.FC<ImageProps> = ({ alt, ...props }) => {
+interface Props extends ImageProps {
+  waitForBestFileType?: boolean
+}
+
+export const ContentfulImage: React.FC<ImageProps> = ({
+  alt,
+  priority,
+  ...props
+}) => {
   const [supportAvif, setSupportAvif] = useState<boolean | undefined>(undefined)
   const [supportWebp, setSupportWebp] = useState<boolean | undefined>(undefined)
 
@@ -60,7 +68,12 @@ export const ContentfulImage: React.FC<ImageProps> = ({ alt, ...props }) => {
     }
   }, [supportAvif, supportWebp])
 
-  return imageLoader ? (
-    <NextImage loader={imageLoader} alt={alt} {...props} />
+  return priority || imageLoader ? (
+    <NextImage
+      loader={!priority ? imageLoader : contentfulImageLoader()}
+      alt={alt}
+      priority={priority}
+      {...props}
+    />
   ) : null
 }

@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { SocialMediaIconsReact } from 'social-media-icons-react'
 
 import { useData } from '../providers/DataContextProvider'
@@ -66,14 +66,13 @@ export const SocialMediaLinks: React.FC = () => {
   return (
     <Container data-cy="social-media">
       {socialMediaLinks?.map((contact, i) => (
-        <>
+        <React.Fragment key={i}>
           <SocialMediaLink
             contact={contact}
-            key={i}
             onClick={() => handleOnContactClick(contact.medium)}
           />
           <VisuallyHidden>{contact.medium}</VisuallyHidden>
-        </>
+        </React.Fragment>
       ))}
     </Container>
   )
