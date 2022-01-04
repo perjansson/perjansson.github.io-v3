@@ -11,6 +11,11 @@ module.exports = {
         // interactive: ['error', { maxNumericValue: 1000 }],
       },
     },
+    collect: {
+      settings: {
+        preset: 'desktop',
+      },
+    },
     upload: {
       target: 'temporary-public-storage',
     },
