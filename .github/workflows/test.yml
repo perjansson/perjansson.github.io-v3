@@ -53,7 +53,7 @@ jobs:
         run: yarn
 
       - name: Audit with Lighthouse CI
-        uses: treosh/lighthouse-ci-action@v3
+        uses: treosh/lighthouse-ci-action@v8
         with:
           urls: |
             https://perjansson-dev.netlify.app

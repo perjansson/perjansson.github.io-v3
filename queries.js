@@ -1,7 +1,13 @@
 export const getIndexPageData = `{
     me(id: "6DJvlbWzPKLgZvCzVDRzos") {
+        firstName
+        lastName
         name
         title
+        profileImage {
+            fileName
+            url
+        }
         short { json }
         long { json }
         contacts: contactsCollection {
@@ -16,6 +22,7 @@ export const getIndexPageData = `{
     projects: projectCollection(order: startdate_DESC) {
         items {
             title
+            titleShort
             client
             description { json }
             me { json }

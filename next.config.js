@@ -1,8 +1,25 @@
-const withPWA = require('next-pwa')
+module.exports = {
+  webpack(config) {
+    config.module.rules.push(
+      ...[
+        {
+          test: /\.svg$/,
+          issuer: /\.(ts)x?$/,
+          use: ['@svgr/webpack'],
+        },
+        {
+          test: /\.svg$/,
+          issuer: /\.css$/,
+          use: ['svg-url-loader'],
+        },
+      ]
+    )
 
-module.exports = withPWA({
-  pwa: {
-    disable: process.env.NODE_ENV === 'development',
-    dest: 'public',
+    return config
   },
-})
+
+  images: {
+    domains: ['images.ctfassets.net'],
+    loader: 'custom',
+  },
+}

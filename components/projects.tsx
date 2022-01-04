@@ -1,20 +1,53 @@
 import React, { useEffect, useRef, useState } from 'react'
 import RichText from '@madebyconnor/rich-text-to-jsx'
-import { Fade } from 'react-awesome-reveal'
-import SmoothCollapse from 'react-smooth-collapse'
+import { motion, useAnimation } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import useDimensions from 'react-cool-dimensions'
 
+import { styled } from '../stitches.config'
+import { useData } from '../providers/DataContextProvider'
 import { ProjectsType, ProjectType } from '../types'
 import { formatProjectDates } from '../utils/projectHelper'
 import { event } from '../utils/gtag'
+import { Spacer } from './spacer'
+import { ContentfulImage } from './contentfulImage'
+import { ParallaxEffect } from './parallaxEffect'
 
-interface ProjectsProps {
-  projects: ProjectsType
-}
+type ProjectMaybe = ProjectType | undefined
 
-export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
-  const [selectedProject, setSelectedProject] = useState<
-    ProjectType | undefined
-  >(undefined)
+const SectionTitle = styled('h2', {
+  color: '$color12',
+  fontSize: '$fontSize8',
+  letterSpacing: '-1.5px',
+  lineHeight: '110%',
+  transition: 'font-size 0.8s ease-in-out',
+  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
+  fontWeight: 700,
+
+  '@bp1': {
+    fontSize: '$fontSize7',
+  },
+
+  '@bp2': {
+    fontSize: '$fontSize7',
+  },
+
+  '@bp3': {
+    fontSize: '$fontSize8',
+  },
+
+  '@bp4': {
+    fontSize: '$fontSize9',
+  },
+
+  '@bp5': {
+    fontSize: '$fontSize10',
+  },
+})
+
+export const Projects: React.FC = () => {
+  const { data } = useData()
+  const [selectedProject, setSelectedProject] = useState<ProjectMaybe>()
 
   const handleOnSelect = (project: ProjectType) => {
     setSelectedProject((previouslySelectedProject) => {
@@ -35,42 +68,188 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   }
 
   return (
-    <section className="projects" data-cy="projects">
-      {projects?.map((project, i) => (
-        <Project
-          key={i}
-          project={project}
-          odd={i % 2 === 1}
-          selected={project === selectedProject}
-          onSelect={handleOnSelect}
-        />
-      ))}
-
-      <style jsx>{`
-        .projects {
-          max-width: 1100px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          color: var(--primary-text-color);
-          font-size: 1.2em;
-        }
-      `}</style>
-    </section>
+    <>
+      <SectionTitle>
+        Check out some projects I&apos;ve done as a consultant or freelancer
+      </SectionTitle>
+      <Spacer size="large" />
+      <section data-cy="projects">
+        {data?.projects.items.map((project) => (
+          <React.Fragment key={project.title + project.client}>
+            <Project project={project} onSelect={handleOnSelect} />
+            <Spacer size="medium" />
+          </React.Fragment>
+        ))}
+      </section>
+    </>
   )
 }
 
 interface ProjectProps {
   project: ProjectType
-  odd: boolean
-  selected: boolean
   onSelect: (project: ProjectType) => void
 }
 
-function Project({ project, odd, selected, onSelect }: ProjectProps) {
+const ProjectContainer = styled(motion.article, {
+  width: '100%',
+  display: 'grid',
+  backgroundColor: '$color3',
+  borderRadius: '$radii5',
+  gridTemplateRows: '0.05fr 0.05fr 0.9fr',
+  gridTemplateColumns: 'auto',
+  gridTemplateAreas: `
+    'role'
+    'title'
+    'asset'
+  `,
+  cursor: 'pointer',
+
+  '@bp1': {
+    padding: '$space6',
+    height: '100%',
+  },
+
+  '@bp2': {
+    padding: '$space12',
+  },
+})
+
+const Role = styled('div', {
+  color: '$color8',
+  textTransform: 'uppercase',
+
+  '@bp1': {
+    fontSize: '$fontSize1',
+    lineHeight: '18px',
+    textAlign: 'left',
+  },
+
+  '@bp2': {
+    fontSize: '$fontSize3',
+    fontWeight: '600',
+    textAlign: 'right',
+  },
+})
+
+const Title = styled('h2', {
+  gridArea: 'title',
+  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
+  color: '$color12',
+  textAlign: 'right',
+
+  '@bp1': {
+    fontSize: '$fontSize6',
+    lineHeight: '32px',
+    textAlign: 'left',
+  },
+
+  '@bp2': {
+    fontSize: '$fontSize6',
+  },
+
+  '@bp3': {
+    fontSize: '$fontSize7',
+  },
+
+  '@bp4': {
+    fontSize: '$fontSize8',
+  },
+})
+
+const AssetWrapper = styled('div', {
+  gridArea: 'asset',
+  marginTop: '$space10',
+  position: 'relative',
+  placeSelf: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+  transform: 'scale(1)',
+  transition: 'transform 200ms ease-out',
+
+  [`${ProjectContainer}:hover &`]: {
+    transform: 'scale(1.03)',
+  },
+
+  '@bp1': {
+    width: '250px',
+    height: '320px',
+    marginTop: '$space5',
+  },
+
+  '@bp2': {
+    width: '500px',
+    height: '300px',
+  },
+
+  '@bp3': {
+    width: '640px',
+    height: '400px',
+  },
+
+  '@bp4': {
+    width: '1000px',
+    height: '600px',
+  },
+})
+
+const Border = styled('div', {
+  height: '100%',
+  width: '100%',
+  background: '$color13 border-box !important',
+
+  '> div': {
+    position: 'unset !important',
+    borderRadius: '$radii3',
+  },
+
+  img: {
+    objectFit: 'cover',
+  },
+
+  '@bp1': {
+    border: '$space$space4 solid transparent !important',
+    borderRadius: '$radii3',
+  },
+
+  '@bp2': {
+    border: '$space$space6 solid transparent !important',
+    borderRadius: '$radii4',
+  },
+
+  '@bp4': {
+    border: '$space$space10 solid transparent !important',
+    borderRadius: '$radii6',
+  },
+})
+
+const Asset = styled(ContentfulImage, {
+  filter: 'brightness(0.7)',
+  transition: 'filter 200ms ease-in-out',
+
+  [`${ProjectContainer}:hover &`]: {
+    filter: 'brightness(1)',
+  },
+})
+
+const projectVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.5,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: (progress: number) => progress * progress,
+    },
+  },
+}
+
+const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
   const {
     title,
+    titleShort,
     client,
     description,
     me,
@@ -81,242 +260,46 @@ function Project({ project, odd, selected, onSelect }: ProjectProps) {
     city,
     tags,
   } = project
+  const { observe, width, height } = useDimensions<HTMLDivElement | null>()
+  const controls = useAnimation()
+  const [ref, inView] = useInView()
 
-  const lqipAssetUrl = asset
-    ? `${asset.url}?fl=progressive&w=67&h=100`
-    : undefined
-  const assetUrl = asset ? `${asset.url}?fl=progressive&w=534&h=800` : undefined
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible')
+    }
+  }, [controls, inView])
 
-  const element = useRef<null | HTMLDivElement>(null)
   const handleOnClick = () => {
     onSelect(project)
-    setTimeout(
-      () => element.current?.scrollIntoView({ behavior: 'smooth' }),
-      600
-    )
+    // TODO: Navigate to project page
   }
 
   return (
-    <Fade direction="up" triggerOnce>
-      <article onClick={handleOnClick}>
-        <div ref={element} className="scroll-section"></div>
-        <div className="content">
-          <img
-            src={lqipAssetUrl}
-            data-src={assetUrl}
-            alt={`Image for project ${title}`}
-            className="image lazyload"
-            width="400"
-            height="267"
-          />
-          <div className="details">
-            <header>{title}</header>
-            <main>
-              <div className="sub-header">{role}</div>
-              <RichText richText={description.json} />
-            </main>
-          </div>
-          <div className="toggle">
-            <div className="toggle-icon">{selected ? '-' : '+'}</div>
-          </div>
-        </div>
-        <SmoothCollapse expanded={selected} heightTransition="0.4s">
-          <div className="me">
-            {me && (
-              <>
-                <div className="sub-header">
-                  What I did {formatProjectDates(startdate, enddate)} for{' '}
-                  {client}
-                </div>
-                <RichText richText={me.json} />
-              </>
-            )}
-            {city && (
-              <>
-                <div className="sub-header">City</div>
-                <p>{city}</p>
-              </>
-            )}
-            {tags && (
-              <>
-                <div className="sub-header">Buzz words</div>
-                <p className="tags">{tags?.join(', ')}</p>
-              </>
-            )}
-          </div>
-        </SmoothCollapse>
-      </article>
-
-      <style jsx>{`
-        article {
-          position: relative;
-          cursor: pointer;
-          padding: 50px 0;
-          width: 100%;
-          margin-bottom: 6em;
-          transition: background-color 0.5s linear;
-          background: ${selected ? 'rgba(0, 0, 0, 0.05)' : 'transparent'};
-          border: 2px dashed ${selected ? 'rgba(0, 0, 0, 0.15)' : 'transparent'};
-        }
-
-        article:hover {
-          background: rgba(0, 0, 0, 0.05);
-        }
-
-        .scroll-section {
-          position: absolute;
-          top: -50px;
-        }
-
-        .content {
-          display: flex;
-          flex-direction: ${odd ? 'row-reverse' : 'row'};
-          justify-content: space-between;
-          align-items: stretch;
-          padding-left: ${odd ? undefined : '50px'};
-          padding-right: ${odd ? '50px' : undefined};
-        }
-
-        .image {
-          aspect-ratio: attr(width) / attr(height);
-          background-color: rgba(0, 0, 0, 0.2);
-          height: 267px;
-          margin-bottom: 12px;
-          width: 400px;
-          object-fit: cover;
-          border-radius: 20px;
-        }
-
-        .details {
-          width: 100%;
-          max-width: 600px;
-          text-align: left;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          margin-left: ${odd ? undefined : '2em'};
-          margin-right: ${odd ? '2em' : undefined};
-          color: var(--primary-text-color);
-        }
-
-        header {
-          opacity: 0.5;
-          font-size: 1.4em;
-          font-weight: 700;
-          text-transform: uppercase;
-          color: var(--primary-text-color);
-        }
-
-        main {
-          font-size: 1em;
-          margin-top: 10px;
-        }
-
-        .sub-header {
-          margin-top: 30px;
-          opacity: 0.5;
-          font-size: 1.2em;
-          font-weight: 700;
-        }
-
-        .toggle {
-          margin-top: -50px;
-          min-width: 50px;
-          text-align: center;
-        }
-
-        .toggle-icon {
-          font-size: 2em;
-          opacity: 0.4;
-          transform: scale(0) rotate(-540deg);
-          transition: all 0.4s ease;
-        }
-
-        article:hover .toggle-icon {
-          transform: scale(1) rotate(0);
-        }
-
-        .me {
-          margin: 0 50px;
-        }
-
-        .tags {
-          font-family: SpaceMono;
-          opacity: 0.5;
-          font-size: 0.8em;
-        }
-
-        /* Most of the Smartphones Mobiles (Portrait) */
-        @media (min-width: 320px) and (max-width: 480px) {
-          article {
-            border-width: 1px;
-            padding: 20px;
-          }
-
-          .content {
-            padding: 0;
-            flex-direction: column;
-            align-items: center;
-          }
-
-          .image {
-            width: 100%;
-          }
-
-          .details {
-            margin: 0;
-          }
-
-          header {
-            opacity: 0.5;
-            font-size: 1.8em;
-            text-transform: uppercase;
-            text-align: center;
-          }
-
-          main {
-            font-size: 1.4em;
-            text-align: justify;
-          }
-
-          .me {
-            margin: 0;
-            font-size: 1.4em;
-            text-align: justify;
-          }
-
-          .toggle {
-            display: none;
-          }
-        }
-
-        /* Low Resolution Tablets, Mobiles (Landscape) */
-        @media (min-width: 481px) and (max-width: 812px) {
-          .image {
-            max-width: 30%;
-            width: 300px;
-          }
-
-          main {
-            font-size: 0.9em;
-            text-align: justify;
-          }
-        }
-
-        /* Laptops, Desktops */
-        @media (min-width: 1025px) and (max-width: 1280px) {
-          .details {
-            min-width: 400px;
-          }
-        }
-
-        /* Desktops */
-        @media (min-width: 1281px) {
-          .details {
-            min-width: 600px;
-          }
-        }
-      `}</style>
-    </Fade>
+    <ProjectContainer
+      ref={ref}
+      animate={controls}
+      initial="hidden"
+      variants={projectVariants}
+      onClick={handleOnClick}
+    >
+      <Role>
+        {role} at {client}
+      </Role>
+      <Title>{titleShort}</Title>
+      <AssetWrapper ref={observe}>
+        <Border>
+          <ParallaxEffect>
+            <Asset
+              src={asset.url}
+              alt={`Project image for ${role} at ${client}`}
+              layout="fixed"
+              width={`${Math.round(width)}px`}
+              height={`${Math.round(height)}px`}
+            />
+          </ParallaxEffect>
+        </Border>
+      </AssetWrapper>
+    </ProjectContainer>
   )
 }

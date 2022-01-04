@@ -6,6 +6,7 @@ export type ProjectsType = ProjectType[]
 
 export interface ProjectType {
   title: string
+  titleShort: string
   client: string
   description: RichTextJson
   me: RichTextJson
@@ -24,8 +25,11 @@ export interface ImageType {
 }
 
 export interface MeType {
+  firstName: string
+  lastName: string
   name: string
   title: string
+  profileImage: ImageType
   contacts: {
     items: ContactType[]
   }
