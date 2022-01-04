@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { SocialMediaIconsReact } from 'social-media-icons-react'
 
 import { useData } from '../providers/DataContextProvider'
+import { VisuallyHidden } from './visuallyHidden'
 import { styled, theme } from '../stitches.config'
 import { ContactType } from '../types'
 import { event } from '../utils/gtag'
@@ -54,7 +55,6 @@ export const SocialMediaLinks: React.FC = () => {
   )
 
   const handleOnContactClick = (medium: string) => {
-    console.log('### onclick', medium)
     event({
       category: 'user_interaction',
       action: 'contact_click',
@@ -66,11 +66,14 @@ export const SocialMediaLinks: React.FC = () => {
   return (
     <Container data-cy="social-media">
       {socialMediaLinks?.map((contact, i) => (
-        <SocialMediaLink
-          contact={contact}
-          key={i}
-          onClick={() => handleOnContactClick(contact.medium)}
-        />
+        <>
+          <SocialMediaLink
+            contact={contact}
+            key={i}
+            onClick={() => handleOnContactClick(contact.medium)}
+          />
+          <VisuallyHidden>{contact.medium}</VisuallyHidden>
+        </>
       ))}
     </Container>
   )

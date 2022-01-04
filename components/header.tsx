@@ -1,103 +1,50 @@
-import React from 'react'
-import { ContactsType } from '../types'
-import { event } from '../utils/gtag'
+import React, { useEffect } from 'react'
+import {
+  motion,
+  useAnimation,
+  useSpring,
+  useTransform,
+  useViewportScroll,
+} from 'framer-motion'
 
-interface HeaderProps {
-  contacts: ContactsType
+import { styled } from '../stitches.config'
+
+const Container = styled(motion.header, {
+  position: 'fixed',
+  top: 0,
+  height: '100px',
+  width: '100%',
+  background:
+    'linear-gradient(45deg, $colorful3, $colorful4) border-box !important',
+  zIndex: '9999',
+  transform: 'translateY(-100vh)',
+  transition: 'transform 200ms ease-out',
+})
+
+const variants = {
+  hidden: {
+    y: '-100%',
+  },
+  visible: {
+    y: 0,
+  },
 }
 
-export const Header: React.FC<HeaderProps> = ({ contacts }) => {
-  const handleOnContactClick = (medium: string) =>
-    event({
-      category: 'user_interaction',
-      action: 'contact_click',
-      label: medium,
-      value: 1,
-    })
+export const Header: React.FC = () => {
+  const controls = useAnimation()
+  const { scrollY } = useViewportScroll()
 
-  return (
-    <header className="header" data-cy="header">
-      {contacts.map(({ url, medium }) => (
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          key={medium}
-          onClick={() => handleOnContactClick(medium)}
-        >
-          {medium}
-        </a>
-      ))}
-
-      <style jsx>{`
-        .header {
-          height: 80px;
-          width: 90%;
-          margin: auto;
-          display: flex;
-          justify-content: center;
-          align-items: flex-end;
-          flex-wrap: wrap;
-          font-size: 0.9em;
-          color: rgba(255, 255, 255, 0.8);
+  useEffect(
+    () =>
+      scrollY.onChange((y) => {
+        if (y > 1000) {
+          controls.start('visible')
+        } else {
+          controls.start('hidden')
         }
-
-        .header a::after {
-          margin: 0 10px;
-          content: '|';
-        }
-
-        .header a:last-child:after {
-          content: '';
-        }
-
-        /* Most of the Smartphones Mobiles (Portrait) */
-        @media (min-width: 320px) and (max-width: 480px) {
-          .header {
-            height: 60px;
-            justify-content: center;
-          }
-        }
-
-        @media (min-width: 481px) and (max-width: 767px) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-
-        /* Tablets, Ipads (portrait) */
-        @media (min-width: 768px) and (max-width: 1024px) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-
-        /* Tablets, Ipads (landscape) */
-        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-
-        /* Laptops, Desktops */
-        @media (min-width: 1025px) and (max-width: 1280px) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-
-        /* Desktops */
-        @media (min-width: 1281px) {
-          .header {
-            height: 60px;
-            justify-content: flex-end;
-          }
-        }
-      `}</style>
-    </header>
+      }),
+    [controls, scrollY]
   )
+
+  return <Container animate={controls} variants={variants}></Container>
 }

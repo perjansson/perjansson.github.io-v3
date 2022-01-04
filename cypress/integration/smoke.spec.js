@@ -6,28 +6,20 @@ const contacts = [
   'Twitter',
   'Instagram',
   'Facebook',
-  'Email',
 ]
 
 const projects = [
-  'Panasonic Avionics Corporation',
-  'HBO GO - Smart TV app',
-  'Unibet Web for Kindred Group',
-  'Mindmend prototype',
-  'Insourcing Matchmaking Tool for EY',
-  'Digitalization and Advisory Cockpit Tool for Nordea Bank',
-  'New Admin web for Leadenhancer',
+  'ID solution & marketing website',
+  'Wi-Fi Connectivity Platform',
+  'New Internet Bank',
 ]
 
 describe('Smoke test', () => {
   it('works', () => {
     cy.visit('http://localhost:5000')
 
-    cy.get('body').contains('Per Jansson')
+    cy.get('body').contains('Per')
     cy.get('body').contains('Fullstack Web Developer')
-
-    // cy.get('[data-cy=me').scrollIntoView()
-    // cy.get('[data-cy=me]').contains('curious software developer')
 
     contacts.forEach((contact) => {
       cy.get('[data-cy=social-media]').contains(contact)
@@ -35,6 +27,8 @@ describe('Smoke test', () => {
 
     cy.get('[data-cy=projects]').scrollIntoView()
     cy.get('[data-cy=projects]').contains(projects[0])
+    cy.scrollTo((0, 500), { duration: 500 })
+    cy.get('[data-cy=projects]').contains(projects[1])
     cy.scrollTo('bottom', { duration: 500 })
     cy.get('[data-cy=projects]').contains(projects[projects.length - 1])
   })

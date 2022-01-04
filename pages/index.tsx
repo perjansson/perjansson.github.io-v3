@@ -8,6 +8,7 @@ import { DataContextProvider } from '../providers/DataContextProvider'
 import { Hero } from '../components/hero'
 import { Projects } from '../components/projects'
 import { Spacer } from '../components/spacer'
+import { Header } from '../components/header'
 
 type StaticProps = {
   props: {
@@ -92,6 +93,7 @@ const Index: React.FC<IndexProps> = ({ data }) => {
       <Head>
         <title>✨ Per Jansson - Fullstack Web Developer ✨</title>
       </Head>
+      {/* <Header /> */}
       <Main>
         <Spacer size="small" />
         <Hero />
