@@ -1,11 +1,28 @@
 import React, { useMemo } from 'react'
-import { SocialMediaIconsReact } from 'social-media-icons-react'
 
 import { useData } from '../providers/DataContextProvider'
 import { VisuallyHidden } from './visuallyHidden'
 import { styled, theme } from '../stitches.config'
 import { ContactType } from '../types'
 import { event } from '../utils/gtag'
+
+import FacebookLogo from '../assets/social-media/facebook.svg'
+import GithubLogo from '../assets/social-media/github.svg'
+import InstagramLogo from '../assets/social-media/instagram.svg'
+import LinkedinLogo from '../assets/social-media/linkedin.svg'
+import MediumLogo from '../assets/social-media/medium.svg'
+import StackOverflowLogo from '../assets/social-media/stackoverflow.svg'
+import TwitterLogo from '../assets/social-media/twitter.svg'
+
+const logos: { [name: string]: any } = {
+  facebook: FacebookLogo,
+  github: GithubLogo,
+  instagram: InstagramLogo,
+  linkedin: LinkedinLogo,
+  medium: MediumLogo,
+  'stack overflow': StackOverflowLogo,
+  twitter: TwitterLogo,
+}
 
 const Container = styled('div', {
   display: 'flex',
@@ -71,27 +88,34 @@ export const SocialMediaLinks: React.FC = () => {
             contact={contact}
             onClick={() => handleOnContactClick(contact.medium)}
           />
-          <VisuallyHidden>{contact.medium}</VisuallyHidden>
         </React.Fragment>
       ))}
     </Container>
   )
 }
 
-const SocialMediaLink = ({
-  contact,
-  onClick,
-}: {
+interface SocialMediaLinkProps {
   contact: ContactType
   onClick: () => void
-}) => (
-  <div onClick={onClick}>
-    <SocialMediaIconsReact
-      icon={contact.medium.replace(' ', '').toLocaleLowerCase()}
-      iconColor={theme.colors.color7.value}
-      backgroundColor="transparent"
-      borderWidth="0"
-      url={contact.url}
-    />
-  </div>
-)
+}
+
+const SocialMediaLink: React.FC<SocialMediaLinkProps> = ({
+  contact,
+  onClick,
+}) => {
+  const Logo = logos[contact.medium.toLowerCase()]
+
+  return (
+    <div onClick={onClick}>
+      <a
+        href={contact.url}
+        target="_blank"
+        rel="noreferrer noopener"
+        onClick={onClick}
+      >
+        <Logo style={{ fill: '#fff' }} />
+        <VisuallyHidden>{contact.medium}</VisuallyHidden>
+      </a>
+    </div>
+  )
+}
