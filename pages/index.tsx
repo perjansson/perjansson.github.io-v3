@@ -10,16 +10,10 @@ import { Projects } from '../components/projects'
 import { Spacer } from '../components/spacer'
 import { Header } from '../components/header'
 
-type StaticProps = {
-  props: {
-    data: IndexPageData
-  }
-}
+const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
-  const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
-
+export const getStaticProps = async () => {
   const res = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${space}`,
     {
