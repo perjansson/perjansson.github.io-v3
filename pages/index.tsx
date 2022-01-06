@@ -1,11 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { styled } from '../stitches.config'
 
 import { IndexPageData, ProjectType } from '../types'
 import { getIndexPageData } from '../queries'
 import { DataContextProvider } from '../providers/DataContextProvider'
-import { Main } from '../components/main'
 import { Hero } from '../components/hero'
 import { Projects } from '../components/projects'
 import { Spacer } from '../components/spacer'
@@ -50,6 +50,33 @@ const ContentSpacer = () => (
     }}
   />
 )
+
+export const Main = styled('main', {
+  minWidth: '320px',
+  maxWidth: '1536px',
+  margin: '0 auto',
+  padding: '$space4 $space4 $space8 $space4',
+
+  '@bp1': {
+    padding: '$space6',
+  },
+
+  '@bp2': {
+    padding: '$space10',
+  },
+
+  '@bp3': {
+    padding: '$space14',
+  },
+
+  '@bp4': {
+    padding: '$space14',
+  },
+
+  '@bp5': {
+    padding: '$space14',
+  },
+})
 
 interface IndexProps {
   data: IndexPageData
