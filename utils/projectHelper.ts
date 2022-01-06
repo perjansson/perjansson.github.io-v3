@@ -1,6 +1,8 @@
 import { ProjectsType } from '../types'
 
-export function sortProjectsOnStartDate(projects: ProjectsType): ProjectsType {
+export const sortProjectsOnStartDate = (
+  projects: ProjectsType
+): ProjectsType => {
   const sortedProjects = [...projects]
   sortedProjects.sort(
     (p1, p2) =>
@@ -9,30 +11,30 @@ export function sortProjectsOnStartDate(projects: ProjectsType): ProjectsType {
   return sortedProjects
 }
 
-export function formatProjectDates(
+export const formatProjectDates = (
   startdate: number | string,
   enddate: number | string
-): string | undefined {
+): string | undefined => {
   if (!startdate && !enddate) {
     return
   }
 
   if (startdate && !enddate) {
-    return `during ${yearFromIsoDate(startdate)}`
+    return `During ${yearFromIsoDate(startdate)}`
   }
 
   if (!startdate && enddate) {
-    return `during ${yearFromIsoDate(enddate)}`
+    return `During ${yearFromIsoDate(enddate)}`
   }
 
   const startYear = yearFromIsoDate(startdate)
   const endYear = yearFromIsoDate(enddate)
 
   if (startYear === endYear) {
-    return `during ${startYear}`
+    return `During ${startYear}`
   }
 
-  return `between ${startYear} and ${endYear}`
+  return `Between ${startYear} and ${endYear}`
 }
 
 export function yearFromIsoDate(isoDate: string | number): number | undefined {

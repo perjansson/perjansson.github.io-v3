@@ -1,11 +1,13 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { AnimatePresence } from 'framer-motion'
+import RichText from '@madebyconnor/rich-text-to-jsx'
 
 import { styled } from '../../stitches.config'
 import { AllProjectsData, ProjectPageData } from '../../types'
 import { getAllProjects, getProjectPageData } from '../../queries'
 import { BackgroundImage } from '../../components/backgroundImage'
 import { Spacer } from '../../components/spacer'
-import { AnimatePresence } from 'framer-motion'
+import { formatProjectDates } from '../../utils/projectHelper'
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
@@ -60,29 +62,36 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-export const Main = styled('main', {
+const Main = styled('main', {
   minWidth: '320px',
   maxWidth: '1536px',
   margin: '0 auto',
   padding: '$space4 $space4 $space8 $space4',
+})
 
+const Content = styled('div', {
   '@bp1': {
+    maxWidth: '100%',
     padding: '$space6',
   },
 
   '@bp2': {
+    maxWidth: '70%',
     padding: '$space10',
   },
 
   '@bp3': {
+    maxWidth: '60%',
     padding: '$space14',
   },
 
   '@bp4': {
+    maxWidth: '60%',
     padding: '$space14',
   },
 
   '@bp5': {
+    maxWidth: '50%',
     padding: '$space14',
   },
 })
@@ -112,17 +121,14 @@ const SectionTitle = styled('h1', {
   fontWeight: 700,
 
   '@bp1': {
-    maxWidth: '100%',
     fontSize: '$fontSize8',
   },
 
   '@bp2': {
-    maxWidth: '400px',
     fontSize: '$fontSize9',
   },
 
   '@bp3': {
-    maxWidth: '720px',
     fontSize: '$fontSize10',
   },
 
@@ -131,7 +137,33 @@ const SectionTitle = styled('h1', {
   },
 
   '@bp5': {
-    fontSize: '$fontSize12',
+    fontSize: '$fontSize11',
+  },
+})
+
+const Duration = styled('div', {
+  fontSize: '$fontSize2',
+
+  '@bp1': {
+    fontSize: '$fontSize1',
+  },
+})
+
+const ProjectInfo = styled('div', {
+  '@bp1': {
+    fontSize: '$fontSize2',
+  },
+
+  '@bp2': {
+    fontSize: '$fontSize3',
+  },
+
+  '@bp3': {
+    fontSize: '$fontSize4',
+  },
+
+  '@bp4': {
+    fontSize: '$fontSize5',
   },
 })
 
@@ -141,7 +173,8 @@ interface ProjectProps {
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
   // TODO: Put data in provider?
-  const { asset, titleShort } = data.data.project
+  const { asset, title, startdate, enddate, description, me } =
+    data.data.project
 
   return (
     <AnimatePresence>
@@ -163,7 +196,21 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
       >
         <TopSpacer />
         <Main>
-          <SectionTitle>{titleShort}</SectionTitle>
+          <Content>
+            <SectionTitle>{title}</SectionTitle>
+            <Spacer size="small" />
+            <Duration>{formatProjectDates(startdate, enddate)}</Duration>
+            <Spacer size="large" />
+            <ProjectInfo>
+              <strong>What was the project about?</strong>
+              <RichText richText={description.json} />
+            </ProjectInfo>
+            <Spacer size="small" />
+            <ProjectInfo>
+              <strong>More specifically what did I do?</strong>
+              <RichText richText={me.json} />
+            </ProjectInfo>
+          </Content>
         </Main>
       </ProjectBackgroundImage>
     </AnimatePresence>
