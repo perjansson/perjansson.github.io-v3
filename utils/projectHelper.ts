@@ -20,21 +20,21 @@ export const formatProjectDates = (
   }
 
   if (startdate && !enddate) {
-    return `During ${yearFromIsoDate(startdate)}`
+    return `during ${yearFromIsoDate(startdate)}`
   }
 
   if (!startdate && enddate) {
-    return `During ${yearFromIsoDate(enddate)}`
+    return `during ${yearFromIsoDate(enddate)}`
   }
 
   const startYear = yearFromIsoDate(startdate)
   const endYear = yearFromIsoDate(enddate)
 
   if (startYear === endYear) {
-    return `During ${startYear}`
+    return `during ${startYear}`
   }
 
-  return `Between ${startYear} and ${endYear}`
+  return `between ${startYear} and ${endYear}`
 }
 
 export function yearFromIsoDate(isoDate: string | number): number | undefined {

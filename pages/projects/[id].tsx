@@ -173,7 +173,7 @@ interface ProjectProps {
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
   // TODO: Put data in provider?
-  const { asset, title, startdate, enddate, description, me } =
+  const { asset, title, role, startdate, enddate, description, me } =
     data.data.project
 
   return (
@@ -199,7 +199,9 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
           <Content>
             <SectionTitle>{title}</SectionTitle>
             <Spacer size="small" />
-            <Duration>{formatProjectDates(startdate, enddate)}</Duration>
+            <Duration>
+              {role} {formatProjectDates(startdate, enddate)}
+            </Duration>
             <Spacer size="large" />
             <ProjectInfo>
               <strong>What was the project about?</strong>
