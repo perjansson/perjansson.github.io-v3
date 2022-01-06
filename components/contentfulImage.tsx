@@ -26,10 +26,6 @@ const supportsWebp = () => {
   })
 }
 
-interface Props extends ImageProps {
-  waitForBestFileType?: boolean
-}
-
 export const ContentfulImage: React.FC<ImageProps> = ({
   alt,
   priority,

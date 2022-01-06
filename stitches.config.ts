@@ -120,12 +120,22 @@ export const globalStyles = globalCss({
     fontFamily: 'Nunito, sans-serif',
   },
 
+  html: {
+    height: '100%',
+  },
+
   body: {
+    height: '100%',
     backgroundColor: '$color2',
     color: '$color11',
   },
 
   strong: {
     fontWeight: '800',
+  },
+
+  '#__next': {
+    height: '100%',
+    minHeight: '100%',
   },
 })
