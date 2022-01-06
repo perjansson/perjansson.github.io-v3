@@ -42,7 +42,11 @@ const SectionTitle = styled('h2', {
   },
 })
 
-export const Projects: React.FC = () => {
+interface ProjectsProps {
+  onProjectSelect: (project: ProjectType) => void
+}
+
+export const Projects: React.FC<ProjectsProps> = ({ onProjectSelect }) => {
   const router = useRouter()
   const { data } = useData()
 
@@ -54,7 +58,7 @@ export const Projects: React.FC = () => {
       value: 1,
     })
 
-    router.push(`/projects/${project.sys.id}`)
+    onProjectSelect(project)
   }
 
   return (

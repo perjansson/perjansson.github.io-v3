@@ -1,7 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import { IndexPageData } from '../types'
+import { IndexPageData, ProjectType } from '../types'
 import { getIndexPageData } from '../queries'
 import { styled } from '../stitches.config'
 import { DataContextProvider } from '../providers/DataContextProvider'
@@ -82,6 +83,12 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = ({ data }) => {
+  const router = useRouter()
+
+  const handleOnProjectSelect = (project: ProjectType) => {
+    router.push(`/projects/${project.sys.id}`)
+  }
+
   return (
     <DataContextProvider data={data}>
       <Head>
@@ -92,7 +99,7 @@ const Index: React.FC<IndexProps> = ({ data }) => {
         <Spacer size="small" />
         <Hero />
         <ContentSpacer />
-        <Projects />
+        <Projects onProjectSelect={handleOnProjectSelect} />
         <ContentSpacer />
       </Main>
     </DataContextProvider>
