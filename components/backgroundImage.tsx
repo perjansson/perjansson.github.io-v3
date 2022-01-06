@@ -24,6 +24,11 @@ const ImageContainer = styled('div', {
           backgroundImage:
             'radial-gradient(farthest-side at 73% 21%, transparent, $color2)',
           inset: '0px',
+
+          '@bp1': {
+            backgroundImage:
+              'linear-gradient(to bottom, transparent 0%, $color2 100%)',
+          },
         },
       },
       off: {},
@@ -62,7 +67,7 @@ const ContentContainer = styled('div', {
 interface Props extends ImageProps {
   gradient?: boolean
   motionProps?: any
-  imageStyles?: string
+  className?: string
   contentStyles?: string
 }
 
@@ -70,16 +75,13 @@ export const BackgroundImage: React.FC<Props> = ({
   gradient,
   children,
   motionProps,
-  imageStyles,
+  className,
   contentStyles,
   ...rest
 }) => {
   return (
     <>
-      <ImageContainer
-        className={imageStyles}
-        gradient={gradient ? 'on' : 'off'}
-      >
+      <ImageContainer className={className} gradient={gradient ? 'on' : 'off'}>
         <AnimationWrapper {...motionProps}>
           <Image {...rest} alt="" />
         </AnimationWrapper>

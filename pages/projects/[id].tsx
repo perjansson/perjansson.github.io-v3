@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 
+import { styled } from '../../stitches.config'
 import { AllProjectsData, ProjectPageData } from '../../types'
 import { getAllProjects, getProjectPageData } from '../../queries'
 import { Main } from '../../components/main'
@@ -60,17 +61,65 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
+const TopSpacer = styled(Spacer, {
+  '@bp1': {
+    marginTop: '35vh',
+  },
+})
+
+const ProjectBackgroundImage = styled(BackgroundImage, {
+  height: '100%',
+
+  '@bp1': {
+    height: '40vh',
+  },
+})
+
+const SectionTitle = styled('h1', {
+  color: '$color10',
+  textShadow:
+    '1px 1px 10px rgba(17, 17, 17, 0.2), 1px 1px 10px rgba(17, 17, 17, 0.2)',
+  letterSpacing: '-1.5px',
+  lineHeight: '120%',
+  transition: 'font-size 0.8s ease-in-out',
+  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
+  fontWeight: 700,
+
+  '@bp1': {
+    maxWidth: '100%',
+    fontSize: '$fontSize8',
+  },
+
+  '@bp2': {
+    maxWidth: '400px',
+    fontSize: '$fontSize9',
+  },
+
+  '@bp3': {
+    maxWidth: '720px',
+    fontSize: '$fontSize10',
+  },
+
+  '@bp4': {
+    fontSize: '$fontSize11',
+  },
+
+  '@bp5': {
+    fontSize: '$fontSize12',
+  },
+})
+
 interface ProjectProps {
   data: ProjectPageData
 }
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
   // TODO: Put data in provider?
-  const { asset } = data.data.project
+  const { asset, titleShort } = data.data.project
 
   return (
     <AnimatePresence>
-      <BackgroundImage
+      <ProjectBackgroundImage
         src={asset.url}
         gradient
         layout="fill"
@@ -86,9 +135,11 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
           },
         }}
       >
-        <Spacer size="small" />
-        <Main>{data.data.project.titleShort}</Main>
-      </BackgroundImage>
+        <TopSpacer />
+        <Main>
+          <SectionTitle>{titleShort}</SectionTitle>
+        </Main>
+      </ProjectBackgroundImage>
     </AnimatePresence>
   )
 }

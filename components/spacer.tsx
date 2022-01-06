@@ -14,4 +14,7 @@ export const Spacer = styled('div', {
       },
     },
   },
+  defaultVariants: {
+    size: 'small',
+  },
 })
