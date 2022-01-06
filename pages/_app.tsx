@@ -1,12 +1,24 @@
 import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import * as gtag from '../utils/gtag'
 
-const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  const router = useRouter()
+const variants = {
+  initial: {
+    opacity: 0,
+  },
+  enter: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+}
+
+const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
+  const url = `https://www.thecuriousdeveloper.com${router.route}`
 
   useEffect(() => {
     const handleRouteChange = (url: URL) => {
@@ -25,8 +37,18 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
-      </Head>
-      <Component {...pageProps} />
+      </Head>{' '}
+      <AnimatePresence exitBeforeEnter initial={false}>
+        <motion.div
+          initial="initial"
+          animate="enter"
+          variants={variants}
+          style={{ width: '100%', height: '100%' }}
+          key={url}
+        >
+          <Component {...pageProps} canonical={url} />
+        </motion.div>
+      </AnimatePresence>
     </>
   )
 }

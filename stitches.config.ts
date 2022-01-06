@@ -121,21 +121,29 @@ export const globalStyles = globalCss({
   },
 
   html: {
+    width: '100%',
     height: '100%',
   },
 
   body: {
+    width: '100%',
     height: '100%',
     backgroundColor: '$color2',
     color: '$color11',
   },
 
-  strong: {
-    fontWeight: '800',
-  },
-
   '#__next': {
+    width: '100%',
     height: '100%',
     minHeight: '100%',
+  },
+
+  main: {
+    minWidth: '320px',
+    maxWidth: '1536px',
+  },
+
+  strong: {
+    fontWeight: '800',
   },
 })
