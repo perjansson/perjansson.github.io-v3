@@ -4,6 +4,7 @@ import { AppProps } from 'next/app'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import * as gtag from '../utils/gtag'
+import { ScrollRestorer } from '../components/scrollRestorer'
 
 const variants = {
   initial: {
@@ -37,7 +38,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
-      </Head>{' '}
+      </Head>
       <AnimatePresence exitBeforeEnter initial={false}>
         <motion.div
           initial="initial"
@@ -46,6 +47,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
           style={{ width: '100%', height: '100%' }}
           key={url}
         >
+          <ScrollRestorer />
           <Component {...pageProps} canonical={url} />
         </motion.div>
       </AnimatePresence>
