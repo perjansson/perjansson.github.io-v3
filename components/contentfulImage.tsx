@@ -60,13 +60,13 @@ export const ContentfulImage: React.FC<ImageProps> = ({
     } else if (supportWebp) {
       return contentfulImageLoader('webp')
     } else {
-      return contentfulImageLoader()
+      return contentfulImageLoader('jpg')
     }
   }, [supportAvif, supportWebp])
 
   return priority || imageLoader ? (
     <NextImage
-      loader={!priority ? imageLoader : contentfulImageLoader()}
+      loader={!priority ? imageLoader : contentfulImageLoader('jpg')}
       alt={alt}
       priority={priority}
       {...props}
