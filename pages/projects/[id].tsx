@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 import { AnimatePresence } from 'framer-motion'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 
@@ -173,49 +174,64 @@ interface ProjectProps {
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
   // TODO: Put data in provider?
-  const { asset, title, role, startdate, enddate, description, me } =
-    data.data.project
+  const {
+    asset,
+    title,
+    titleShort,
+    role,
+    startdate,
+    enddate,
+    description,
+    me,
+  } = data.data.project
 
   return (
-    <AnimatePresence>
-      <ProjectBackgroundImage
-        src={asset.url}
-        gradient
-        layout="fill"
-        loading="eager"
-        priority
-        motionProps={{
-          initial: { transformOrigin: 'top right', scale: 1.1 },
-          animate: { scale: 1 },
-          exit: { scale: 0.9 },
-          transition: {
-            duration: 0.5,
-            ease: [0.61, 1, 0.88, 1],
-          },
-        }}
-      >
-        <TopSpacer />
-        <Main>
-          <Content>
-            <SectionTitle>{title}</SectionTitle>
-            <Spacer size="small" />
-            <Duration>
-              {role} {formatProjectDates(startdate, enddate)}
-            </Duration>
-            <Spacer size="large" />
-            <ProjectInfo>
-              <strong>What was the project about?</strong>
-              <RichText richText={description.json} />
-            </ProjectInfo>
-            <Spacer size="small" />
-            <ProjectInfo>
-              <strong>More specifically what did I do?</strong>
-              <RichText richText={me.json} />
-            </ProjectInfo>
-          </Content>
-        </Main>
-      </ProjectBackgroundImage>
-    </AnimatePresence>
+    <>
+      <Head>
+        <title>
+          ✨ Per Jansson - Fullstack Web Developer - {titleShort} ✨
+        </title>
+      </Head>
+      <AnimatePresence>
+        <ProjectBackgroundImage
+          src={asset.url}
+          gradient
+          layout="fill"
+          loading="eager"
+          priority
+          motionProps={{
+            initial: { transformOrigin: 'top right', scale: 1.1 },
+            animate: { scale: 1 },
+            exit: { scale: 0.9 },
+            transition: {
+              duration: 0.5,
+              ease: [0.61, 1, 0.88, 1],
+            },
+          }}
+        >
+          <TopSpacer />
+          <Main>
+            <Content>
+              <SectionTitle>{title}</SectionTitle>
+              <Spacer size="small" />
+              <Duration>
+                {role} {formatProjectDates(startdate, enddate)}
+              </Duration>
+              <Spacer size="large" />
+              <ProjectInfo>
+                <strong>What was the project about?</strong>
+                <RichText richText={description.json} />
+              </ProjectInfo>
+              <Spacer size="small" />
+              <ProjectInfo>
+                <strong>More specifically what did I do?</strong>
+                <RichText richText={me.json} />
+              </ProjectInfo>
+            </Content>
+          </Main>
+        </ProjectBackgroundImage>
+      </AnimatePresence>
+    </>
   )
 }
 
