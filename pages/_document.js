@@ -66,6 +66,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+            rel="stylesheet"
+          />
           {/* <link
             rel="apple-touch-icon"
             sizes="180x180"

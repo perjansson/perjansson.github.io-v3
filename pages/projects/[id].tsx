@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { AnimatePresence } from 'framer-motion'
-import RichText from '@madebyconnor/rich-text-to-jsx'
 
 import { styled } from '../../stitches.config'
 import { AllProjectsData, ProjectPageData } from '../../types'
@@ -9,6 +8,7 @@ import { getAllProjects, getProjectPageData } from '../../queries'
 import { BackgroundImage } from '../../components/backgroundImage'
 import { Spacer } from '../../components/spacer'
 import { formatProjectDates } from '../../utils/projectHelper'
+import { ProjectDetails } from '../../components/projectContent'
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
@@ -67,33 +67,47 @@ const Main = styled('main', {
   minWidth: '320px',
   maxWidth: '1536px',
   margin: '0 auto',
-  padding: '$space4 $space4 $space8 $space4',
-})
 
-const Content = styled('div', {
   '@bp1': {
-    maxWidth: '100%',
     padding: '$space6',
   },
 
   '@bp2': {
-    maxWidth: '70%',
     padding: '$space10',
   },
 
   '@bp3': {
-    maxWidth: '60%',
     padding: '$space14',
   },
 
   '@bp4': {
-    maxWidth: '60%',
     padding: '$space14',
   },
 
   '@bp5': {
-    maxWidth: '50%',
     padding: '$space14',
+  },
+})
+
+const TitleWrapper = styled('div', {
+  '@bp1': {
+    maxWidth: '100%',
+  },
+
+  '@bp2': {
+    maxWidth: '70%',
+  },
+
+  '@bp3': {
+    maxWidth: '60%',
+  },
+
+  '@bp4': {
+    maxWidth: '60%',
+  },
+
+  '@bp5': {
+    maxWidth: '50%',
   },
 })
 
@@ -112,6 +126,7 @@ const ProjectBackgroundImage = styled(BackgroundImage, {
 })
 
 const SectionTitle = styled('h1', {
+  marginLeft: '-$space1',
   color: '$color10',
   textShadow:
     '1px 1px 10px rgba(17, 17, 17, 0.2), 1px 1px 10px rgba(17, 17, 17, 0.2)',
@@ -142,29 +157,15 @@ const SectionTitle = styled('h1', {
   },
 })
 
-const Duration = styled('div', {
+const Info = styled('div', {
   fontSize: '$fontSize2',
+
+  strong: {
+    color: '$colorful4',
+  },
 
   '@bp1': {
     fontSize: '$fontSize1',
-  },
-})
-
-const ProjectInfo = styled('div', {
-  '@bp1': {
-    fontSize: '$fontSize2',
-  },
-
-  '@bp2': {
-    fontSize: '$fontSize3',
-  },
-
-  '@bp3': {
-    fontSize: '$fontSize4',
-  },
-
-  '@bp4': {
-    fontSize: '$fontSize5',
   },
 })
 
@@ -174,16 +175,8 @@ interface ProjectProps {
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
   // TODO: Put data in provider?
-  const {
-    asset,
-    title,
-    titleShort,
-    role,
-    startdate,
-    enddate,
-    description,
-    me,
-  } = data.data.project
+  const { project } = data.data
+  const { asset, title, titleShort, role, startdate, enddate, city } = project
 
   return (
     <>
@@ -211,23 +204,16 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
         >
           <TopSpacer />
           <Main>
-            <Content>
+            <TitleWrapper>
               <SectionTitle>{title}</SectionTitle>
               <Spacer size="small" />
-              <Duration>
-                {role} {formatProjectDates(startdate, enddate)}
-              </Duration>
-              <Spacer size="large" />
-              <ProjectInfo>
-                <strong>What was the project about?</strong>
-                <RichText richText={description.json} />
-              </ProjectInfo>
-              <Spacer size="small" />
-              <ProjectInfo>
-                <strong>More specifically what did I do?</strong>
-                <RichText richText={me.json} />
-              </ProjectInfo>
-            </Content>
+              <Info>
+                <strong>{role}</strong> {formatProjectDates(startdate, enddate)}{' '}
+                in <strong>{city}</strong>
+              </Info>
+            </TitleWrapper>
+            <Spacer size="xxLarge" />
+            <ProjectDetails project={project} />
           </Main>
         </ProjectBackgroundImage>
       </AnimatePresence>

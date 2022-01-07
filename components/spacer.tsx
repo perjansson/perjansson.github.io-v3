@@ -12,6 +12,12 @@ export const Spacer = styled('div', {
       large: {
         height: '60px',
       },
+      xLarge: {
+        height: '120px',
+      },
+      xxLarge: {
+        height: '240px',
+      },
     },
   },
   defaultVariants: {
