@@ -18,7 +18,6 @@ const SectionTitle = styled('h2', {
   letterSpacing: '-1.5px',
   lineHeight: '110%',
   transition: 'font-size 0.8s ease-in-out',
-  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
   fontWeight: 700,
 
   '@bp1': {
@@ -127,7 +126,6 @@ const Role = styled('div', {
 
 const Title = styled('h2', {
   gridArea: 'title',
-  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
   color: '$color12',
   textAlign: 'right',
 

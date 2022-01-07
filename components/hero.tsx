@@ -55,7 +55,6 @@ const SectionTitle = styled('h1', {
   letterSpacing: '-1.5px',
   lineHeight: '112%',
   transition: 'font-size 0.8s ease-in-out',
-  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
   fontWeight: 700,
 
   '@bp1': {
@@ -83,7 +82,6 @@ const Subtitle = styled('div', {
   color: '$cultured',
   lineHeight: '1.4',
   transition: 'font-size 0.8s ease-in-out',
-  fontFamily: 'Nunito, sans-serif',
 
   '@bp1': {
     fontSize: '$fontSize4',

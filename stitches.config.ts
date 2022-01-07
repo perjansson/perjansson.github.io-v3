@@ -117,7 +117,7 @@ export const globalStyles = globalCss({
     margin: 0,
     padding: 0,
     boxSizing: 'border-box',
-    fontFamily: 'Nunito, sans-serif',
+    fontFamily: 'Nunito, Georgia, sans-serif',
   },
 
   html: {
@@ -136,6 +136,10 @@ export const globalStyles = globalCss({
     width: '100%',
     height: '100%',
     minHeight: '100%',
+  },
+
+  'h1, h2, h3, h4, h5, h6': {
+    fontFamily: 'Playfair Display, Arial Narrow, serif;',
   },
 
   main: {
