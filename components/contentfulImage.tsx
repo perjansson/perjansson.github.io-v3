@@ -33,40 +33,47 @@ export const ContentfulImage: React.FC<ImageProps> = ({
 }) => {
   const [supportAvif, setSupportAvif] = useState<boolean | undefined>(undefined)
   const [supportWebp, setSupportWebp] = useState<boolean | undefined>(undefined)
+  const [filetype, setFileype] = useState<string | undefined>(undefined)
 
   useEffect(() => {
-    const checkAvif = async () => {
-      setSupportAvif(await supportsAvif())
-    }
-
-    const checkWebp = async () => {
-      setSupportWebp(await supportsWebp())
-    }
-
+    const checkAvif = async () => setSupportAvif(await supportsAvif())
+    const checkWebp = async () => setSupportWebp(await supportsWebp())
     checkAvif()
     checkWebp()
   }, [])
 
-  const imageLoader = useMemo(() => {
+  useEffect(() => {
     if (
       typeof supportAvif === 'undefined' ||
       typeof supportWebp === 'undefined'
     ) {
-      return undefined
+      return
     }
 
     if (supportAvif) {
-      return contentfulImageLoader('avif')
+      setFileype('avif')
     } else if (supportWebp) {
+      setFileype('webp')
+    } else {
+      setFileype('jpg')
+    }
+  }, [supportAvif, supportWebp])
+
+  const imageLoader = useMemo(() => {
+    if (!filetype) {
+      return
+    } else if (filetype === 'avif') {
+      return contentfulImageLoader('avif')
+    } else if (filetype === 'webp') {
       return contentfulImageLoader('webp')
     } else {
       return contentfulImageLoader('jpg')
     }
-  }, [supportAvif, supportWebp])
+  }, [filetype])
 
   return priority || imageLoader ? (
     <NextImage
-      loader={!priority ? imageLoader : contentfulImageLoader('jpg')}
+      loader={!priority ? imageLoader : contentfulImageLoader('webp')}
       alt={alt}
       priority={priority}
       {...props}
