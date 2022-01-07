@@ -4,7 +4,12 @@ type RichTextJson = { json: BLOCKS }
 
 export type ProjectsType = ProjectType[]
 
+interface SysId {
+  id: string
+}
+
 export interface ProjectType {
+  sys: SysId
   title: string
   titleShort: string
   client: string
@@ -50,5 +55,19 @@ export interface IndexPageData {
     projects: {
       items: ProjectsType
     }
+  }
+}
+
+export interface AllProjectsData {
+  data: {
+    projects: {
+      items: Array<{ sys: SysId }>
+    }
+  }
+}
+
+export interface ProjectPageData {
+  data: {
+    project: ProjectType
   }
 }

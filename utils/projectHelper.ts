@@ -1,6 +1,8 @@
 import { ProjectsType } from '../types'
 
-export function sortProjectsOnStartDate(projects: ProjectsType): ProjectsType {
+export const sortProjectsOnStartDate = (
+  projects: ProjectsType
+): ProjectsType => {
   const sortedProjects = [...projects]
   sortedProjects.sort(
     (p1, p2) =>
@@ -9,10 +11,10 @@ export function sortProjectsOnStartDate(projects: ProjectsType): ProjectsType {
   return sortedProjects
 }
 
-export function formatProjectDates(
+export const formatProjectDates = (
   startdate: number | string,
   enddate: number | string
-): string | undefined {
+): string | undefined => {
   if (!startdate && !enddate) {
     return
   }

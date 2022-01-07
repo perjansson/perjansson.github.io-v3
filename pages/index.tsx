@@ -1,25 +1,20 @@
 import React from 'react'
 import Head from 'next/head'
-
-import { IndexPageData } from '../types'
-import { getIndexPageData } from '../queries'
+import { useRouter } from 'next/router'
 import { styled } from '../stitches.config'
+
+import { IndexPageData, ProjectType } from '../types'
+import { getIndexPageData } from '../queries'
 import { DataContextProvider } from '../providers/DataContextProvider'
 import { Hero } from '../components/hero'
 import { Projects } from '../components/projects'
 import { Spacer } from '../components/spacer'
 import { Header } from '../components/header'
 
-type StaticProps = {
-  props: {
-    data: IndexPageData
-  }
-}
+const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
-  const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
-
+export const getStaticProps = async () => {
   const res = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${space}`,
     {
@@ -42,6 +37,19 @@ export async function getStaticProps(): Promise<StaticProps> {
     },
   }
 }
+
+const ContentSpacer = () => (
+  <Spacer
+    size={{
+      '@initial': 'small',
+      '@bp1': 'large',
+      '@bp2': 'large',
+      '@bp3': 'large',
+      '@bp4': 'large',
+      '@bp5': 'large',
+    }}
+  />
+)
 
 const Main = styled('main', {
   minWidth: '320px',
@@ -70,24 +78,17 @@ const Main = styled('main', {
   },
 })
 
-const ContentSpacer = () => (
-  <Spacer
-    size={{
-      '@initial': 'small',
-      '@bp1': 'large',
-      '@bp2': 'large',
-      '@bp3': 'large',
-      '@bp4': 'large',
-      '@bp5': 'large',
-    }}
-  />
-)
-
 interface IndexProps {
   data: IndexPageData
 }
 
 const Index: React.FC<IndexProps> = ({ data }) => {
+  const router = useRouter()
+
+  const handleOnProjectSelect = (project: ProjectType) => {
+    router.push(`/projects/${project.sys.id}`)
+  }
+
   return (
     <DataContextProvider data={data}>
       <Head>
@@ -98,7 +99,7 @@ const Index: React.FC<IndexProps> = ({ data }) => {
         <Spacer size="small" />
         <Hero />
         <ContentSpacer />
-        <Projects />
+        <Projects onProjectSelect={handleOnProjectSelect} />
         <ContentSpacer />
       </Main>
     </DataContextProvider>

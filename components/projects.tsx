@@ -1,19 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
-import RichText from '@madebyconnor/rich-text-to-jsx'
+import React, { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useDimensions from 'react-cool-dimensions'
 
 import { styled } from '../stitches.config'
 import { useData } from '../providers/DataContextProvider'
-import { ProjectsType, ProjectType } from '../types'
-import { formatProjectDates } from '../utils/projectHelper'
+import { ProjectType } from '../types'
 import { event } from '../utils/gtag'
 import { Spacer } from './spacer'
 import { ContentfulImage } from './contentfulImage'
 import { ParallaxEffect } from './parallaxEffect'
-
-type ProjectMaybe = ProjectType | undefined
 
 const SectionTitle = styled('h2', {
   color: '$color12',
@@ -21,7 +18,6 @@ const SectionTitle = styled('h2', {
   letterSpacing: '-1.5px',
   lineHeight: '110%',
   transition: 'font-size 0.8s ease-in-out',
-  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
   fontWeight: 700,
 
   '@bp1': {
@@ -45,26 +41,23 @@ const SectionTitle = styled('h2', {
   },
 })
 
-export const Projects: React.FC = () => {
+interface ProjectsProps {
+  onProjectSelect: (project: ProjectType) => void
+}
+
+export const Projects: React.FC<ProjectsProps> = ({ onProjectSelect }) => {
+  const router = useRouter()
   const { data } = useData()
-  const [selectedProject, setSelectedProject] = useState<ProjectMaybe>()
 
   const handleOnSelect = (project: ProjectType) => {
-    setSelectedProject((previouslySelectedProject) => {
-      const newProject =
-        project !== previouslySelectedProject ? project : undefined
-
-      if (newProject) {
-        event({
-          category: 'user_interaction',
-          action: 'project_selected',
-          label: newProject.title,
-          value: 1,
-        })
-      }
-
-      return newProject
+    event({
+      category: 'user_interaction',
+      action: 'project_selected',
+      label: project.title,
+      value: 1,
     })
+
+    onProjectSelect(project)
   }
 
   return (
@@ -75,7 +68,7 @@ export const Projects: React.FC = () => {
       <Spacer size="large" />
       <section data-cy="projects">
         {data?.projects.items.map((project) => (
-          <React.Fragment key={project.title + project.client}>
+          <React.Fragment key={project.titleShort + project.client}>
             <Project project={project} onSelect={handleOnSelect} />
             <Spacer size="medium" />
           </React.Fragment>
@@ -133,7 +126,6 @@ const Role = styled('div', {
 
 const Title = styled('h2', {
   gridArea: 'title',
-  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
   color: '$color12',
   textAlign: 'right',
 
@@ -247,19 +239,7 @@ const projectVariants = {
 }
 
 const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
-  const {
-    title,
-    titleShort,
-    client,
-    description,
-    me,
-    role,
-    asset,
-    startdate,
-    enddate,
-    city,
-    tags,
-  } = project
+  const { titleShort, client, role, asset } = project
   const { observe, width, height } = useDimensions<HTMLDivElement | null>()
   const controls = useAnimation()
   const [ref, inView] = useInView()
@@ -272,7 +252,6 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
 
   const handleOnClick = () => {
     onSelect(project)
-    // TODO: Navigate to project page
   }
 
   return (

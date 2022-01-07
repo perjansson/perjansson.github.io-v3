@@ -51,12 +51,10 @@ const SectionTitle = styled('h1', {
     'linear-gradient(271deg, $colorful3 30%, $colorful4 50%, $colorful1 70%, $colorful3 94%)',
   '-webkit-background-clip': 'text',
   '-webkit-text-fill-color': 'transparent',
-  color: '$cultured',
-  fontSize: '$fontSize9',
+  color: '$colorful3',
   letterSpacing: '-1.5px',
-  lineHeight: '110%',
+  lineHeight: '112%',
   transition: 'font-size 0.8s ease-in-out',
-  fontFamily: 'Playfair Display, Helvetica Neue, Helvetica, Arial, sans-serif;',
   fontWeight: 700,
 
   '@bp1': {
@@ -84,7 +82,6 @@ const Subtitle = styled('div', {
   color: '$cultured',
   lineHeight: '1.4',
   transition: 'font-size 0.8s ease-in-out',
-  fontFamily: 'Nunito, sans-serif',
 
   '@bp1': {
     fontSize: '$fontSize4',

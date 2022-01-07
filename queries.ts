@@ -21,20 +21,43 @@ export const getIndexPageData = `{
     }
     projects: projectCollection(order: startdate_DESC) {
         items {
-            title
+            sys {
+                id
+            }
             titleShort
             client
-            description { json }
-            me { json }
-            role      
-            startdate
-            enddate
-            city
-            tags
+            role
             asset {
-                fileName
                 url
             }
+        }
+    }
+}`
+
+export const getAllProjects = `{
+    projects: projectCollection(order: startdate_DESC) {
+        items {
+            sys {
+                id
+            }
+        }
+    }
+}`
+
+export const getProjectPageData = (id: string) => `{
+    project(id: "${id}") {
+        title
+        titleShort
+        client
+        description { json }
+        me { json }
+        role      
+        startdate
+        enddate
+        city
+        tags
+        asset {
+            url
         }
     }
 }`
