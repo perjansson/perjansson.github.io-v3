@@ -28,8 +28,8 @@ const Container = styled(motion.div, {
     gridTemplateRows: 'auto',
     gridTemplateColumns: '1.5fr 1fr',
     gridTemplateAreas: `
-      'title profile-image'
-      'social-media-links social-media-links'
+    'title profile-image'
+    'social-media-links social-media-links'
     `,
     columnGap: '$space16',
   },
@@ -58,22 +58,27 @@ const SectionTitle = styled('h1', {
   fontWeight: 700,
 
   '@bp1': {
+    minHeight: '200px',
     fontSize: '$fontSize9',
   },
 
   '@bp2': {
+    height: '210px',
     fontSize: '$fontSize10',
   },
 
   '@bp3': {
+    height: '250px',
     fontSize: '$fontSize11',
   },
 
   '@bp4': {
+    height: '310px',
     fontSize: '$fontSize12',
   },
 
   '@bp5': {
+    height: '360px',
     fontSize: '$fontSize13',
   },
 })

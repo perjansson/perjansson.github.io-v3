@@ -113,29 +113,39 @@ export const {
 })
 
 export const globalStyles = globalCss({
+  '*, *::before, *::after': {
+    boxSizing: 'border-box',
+  },
+
   '*': {
     margin: 0,
     padding: 0,
-    boxSizing: 'border-box',
     fontFamily: 'Nunito, Georgia, sans-serif',
   },
 
-  html: {
-    width: '100%',
+  'html, body': {
     height: '100%',
   },
 
   body: {
-    width: '100%',
-    height: '100%',
+    minWidth: '320px',
     backgroundColor: '$color2',
     color: '$color11',
+    lineHeight: 1.5,
+    '-webkit-font-smoothing': 'antialiased',
   },
 
-  '#__next': {
-    width: '100%',
-    height: '100%',
-    minHeight: '100%',
+  'img, picture, video, canvas, svg': {
+    display: 'block',
+    maxWidth: '100%',
+  },
+
+  'input, button, textarea, select': {
+    font: 'inherit',
+  },
+
+  'p, h1, h2, h3, h4, h5, h6': {
+    overflowWrap: 'break-word',
   },
 
   'h1, h2, h3, h4, h5, h6': {
@@ -149,5 +159,18 @@ export const globalStyles = globalCss({
 
   strong: {
     fontWeight: '800',
+  },
+
+  a: {
+    color: '$colorful3',
+  },
+
+  '#root, #__next': {
+    isolation: 'isolate',
+  },
+
+  '#__next': {
+    height: '100%',
+    minHeight: '100%',
   },
 })
