@@ -27,6 +27,7 @@
     "react-device-detect": "^2.1.2",
     "react-dom": "17.0.2",
     "react-intersection-observer": "^8.33.1",
+    "smooth-scroll-into-view-if-needed": "^1.1.32",
     "svg-url-loader": "^7.1.1"
   },
   "devDependencies": {

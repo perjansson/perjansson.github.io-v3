@@ -1,5 +1,6 @@
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 import RichText from '@madebyconnor/rich-text-to-jsx'
+import scrollIntoView from 'smooth-scroll-into-view-if-needed'
 
 import { styled } from '../stitches.config'
 import { ProjectType } from '../types'
@@ -102,13 +103,28 @@ interface Props {
 export const ProjectDetails: React.FC<Props> = ({ project }) => {
   const { description, me, title, tags } = project
 
+  const handleOnTabClick = (event: any) =>
+    scrollIntoView(event.target, {
+      behavior: 'smooth',
+      scrollMode: 'always',
+      duration: 100,
+    })
+
   return (
     <Tabs defaultValue="tab1">
       <TabsList aria-label={`Details about project ${title}`}>
-        <TabsTrigger value="tab1">Project story</TabsTrigger>
-        <TabsTrigger value="tab2">Main character</TabsTrigger>
-        <TabsTrigger value="tab3">Team</TabsTrigger>
-        <TabsTrigger value="tab4">Tech</TabsTrigger>
+        <TabsTrigger value="tab1" onClick={handleOnTabClick}>
+          Project story
+        </TabsTrigger>
+        <TabsTrigger value="tab2" onClick={handleOnTabClick}>
+          Main character
+        </TabsTrigger>
+        <TabsTrigger value="tab3" onClick={handleOnTabClick}>
+          Team
+        </TabsTrigger>
+        <TabsTrigger value="tab4" onClick={handleOnTabClick}>
+          Tech
+        </TabsTrigger>
       </TabsList>
       <Spacer size="small" />
       <TabsContent value="tab1">
