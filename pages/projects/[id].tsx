@@ -90,24 +90,31 @@ const Main = styled('main', {
 })
 
 const TitleWrapper = styled('div', {
+  overflowY: 'hidden',
+
   '@bp1': {
     maxWidth: '100%',
+    minHeight: '120px',
   },
 
   '@bp2': {
     maxWidth: '70%',
+    height: '400px',
   },
 
   '@bp3': {
     maxWidth: '60%',
+    height: '440px',
   },
 
   '@bp4': {
     maxWidth: '60%',
+    height: '480px',
   },
 
   '@bp5': {
     maxWidth: '50%',
+    height: '480px',
   },
 })
 
@@ -126,7 +133,6 @@ const ProjectBackgroundImage = styled(BackgroundImage, {
 })
 
 const SectionTitle = styled('h1', {
-  marginLeft: '-$space1',
   color: '$color10',
   textShadow:
     '1px 1px 10px rgba(17, 17, 17, 0.2), 1px 1px 10px rgba(17, 17, 17, 0.2)',
@@ -212,7 +218,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
                 in <strong>{city}</strong>
               </Info>
             </TitleWrapper>
-            <Spacer size="xxLarge" />
+            <Spacer size="medium" />
             <ProjectDetails project={project} />
           </Main>
         </ProjectBackgroundImage>
