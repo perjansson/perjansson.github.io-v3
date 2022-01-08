@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { styled } from '../stitches.config'
 
 import { IndexPageData, ProjectType } from '../types'
@@ -84,12 +83,6 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = ({ data }) => {
-  const router = useRouter()
-
-  const handleOnProjectSelect = (project: ProjectType) => {
-    router.push(`/projects/${project.sys.id}`)
-  }
-
   return (
     <>
       <Head>
@@ -113,7 +106,7 @@ const Index: React.FC<IndexProps> = ({ data }) => {
           <Spacer size="small" />
           <Hero />
           <ContentSpacer />
-          <Projects onProjectSelect={handleOnProjectSelect} />
+          <Projects />
           <ContentSpacer />
         </Main>
       </DataContextProvider>
