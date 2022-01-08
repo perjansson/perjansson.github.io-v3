@@ -59,5 +59,6 @@ export const getProjectPageData = (id: string) => `{
         asset {
             url
         }
+        assetPlaceholder
     }
 }`

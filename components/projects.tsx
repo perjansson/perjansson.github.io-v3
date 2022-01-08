@@ -232,7 +232,7 @@ interface ProjectProps {
 }
 
 const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
-  const { titleShort, client, role, asset } = project
+  const { titleShort, client, role, asset, assetPlaceholder } = project
   const { observe, width, height } = useDimensions<HTMLDivElement | null>()
   const controls = useAnimation()
   const [ref, inView] = useInView()
@@ -246,6 +246,10 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
   const handleOnClick = () => {
     onSelect(project)
   }
+
+  const placeholderProps: any = assetPlaceholder
+    ? { placeholder: 'blur', blurDataURL: assetPlaceholder }
+    : {}
 
   return (
     <Link href={`/projects/${project.sys.id}`} passHref>
@@ -265,6 +269,7 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
             <ParallaxEffect>
               <Asset
                 src={asset.url}
+                {...placeholderProps}
                 alt={`Project image for ${role} at ${client}`}
                 layout="fixed"
                 width={`${Math.round(width)}px`}

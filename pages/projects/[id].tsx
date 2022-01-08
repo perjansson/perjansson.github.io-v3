@@ -183,7 +183,12 @@ interface ProjectProps {
 const Project: React.FC<ProjectProps> = ({ data }) => {
   // TODO: Put data in provider?
   const { project } = data.data
-  const { asset, title, role, startdate, enddate, city } = project
+  const { asset, assetPlaceholder, title, role, startdate, enddate, city } =
+    project
+
+  const placeholderProps: any = assetPlaceholder
+    ? { placeholder: 'blur', blurDataURL: assetPlaceholder }
+    : {}
 
   return (
     <>
@@ -209,6 +214,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
           layout="fill"
           loading="eager"
           priority
+          {...placeholderProps}
           motionProps={{
             initial: { transformOrigin: 'top right', scale: 1.1 },
             animate: { scale: 1 },
