@@ -3,23 +3,47 @@ import RichText from '@madebyconnor/rich-text-to-jsx'
 
 import { styled } from '../stitches.config'
 import { ProjectType } from '../types'
+import { Spacer } from './spacer'
 
 const Tabs = styled(TabsPrimitive.Tabs, {
   display: 'flex',
   flexDirection: 'column',
   width: '80%',
+  minHeight: '200px',
+
+  '@bp1': {
+    width: '100%',
+  },
+})
+
+const TabsList = styled(TabsPrimitive.TabsList, {
+  height: '44px',
+  overflowX: 'scroll',
+  whiteSpace: 'nowrap',
+  scrollbarWidth: 'none',
+  '-webkit-overflow-scrolling': 'touch',
+  scrollBehavior: 'smooth',
+  scrollSnapType: 'x mandatory',
+
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
 })
 
 const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   all: 'unset',
-  marginRight: '$space8',
+  height: '40px',
   textTransform: 'uppercase',
   cursor: 'pointer',
   fontFamily: 'inherit',
-  height: 45,
   display: 'inline',
   fontWeight: 'bold',
   userSelect: 'none',
+  scrollSnapAlign: 'center',
+
+  '&:not(:last-child)': {
+    marginRight: '$space4',
+  },
 
   '&:hover': {
     color: '$colorful3',
@@ -48,11 +72,9 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
 })
 
 const TabsContent = styled(TabsPrimitive.TabsContent, {
-  marginTop: '$space4',
-  lineHeight: '125%',
+  lineHeight: '140%',
 
   '@bp1': {
-    marginTop: '$space2',
     fontSize: '$fontSize2',
   },
 
@@ -82,12 +104,13 @@ export const ProjectDetails: React.FC<Props> = ({ project }) => {
 
   return (
     <Tabs defaultValue="tab1">
-      <TabsPrimitive.TabsList aria-label={`Details about project ${title}`}>
+      <TabsList aria-label={`Details about project ${title}`}>
         <TabsTrigger value="tab1">Project story</TabsTrigger>
         <TabsTrigger value="tab2">Main character</TabsTrigger>
         <TabsTrigger value="tab3">Team</TabsTrigger>
         <TabsTrigger value="tab4">Tech</TabsTrigger>
-      </TabsPrimitive.TabsList>
+      </TabsList>
+      <Spacer size="small" />
       <TabsContent value="tab1">
         <RichText richText={description.json} />
       </TabsContent>
