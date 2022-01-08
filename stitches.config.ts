@@ -128,6 +128,7 @@ export const globalStyles = globalCss({
   },
 
   body: {
+    minWidth: '320px',
     backgroundColor: '$color2',
     color: '$color11',
     lineHeight: 1.5,
