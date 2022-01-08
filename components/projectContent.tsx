@@ -18,7 +18,6 @@ const Tabs = styled(TabsPrimitive.Tabs, {
 })
 
 const TabsList = styled(TabsPrimitive.TabsList, {
-  height: '44px',
   overflowX: 'scroll',
   whiteSpace: 'nowrap',
   scrollbarWidth: 'none',
@@ -29,11 +28,18 @@ const TabsList = styled(TabsPrimitive.TabsList, {
   '&::-webkit-scrollbar': {
     display: 'none',
   },
+
+  '@bp1': {
+    height: '44px',
+  },
+
+  '@bp3': {
+    height: '52px',
+  },
 })
 
 const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   all: 'unset',
-  height: '40px',
   textTransform: 'uppercase',
   cursor: 'pointer',
   fontFamily: 'inherit',
@@ -56,19 +62,29 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   },
 
   '@bp1': {
+    height: '40px',
     fontSize: '$fontSize3',
   },
 
   '@bp2': {
-    fontSize: '$fontSize4',
-  },
-
-  '@bp3': {
+    height: '48px',
     fontSize: '$fontSize5',
   },
 
-  '@bp4': {
+  '@bp3': {
     fontSize: '$fontSize6',
+
+    '&:not(:last-child)': {
+      marginRight: '$space8',
+    },
+  },
+
+  '@bp4': {
+    fontSize: '$fontSize7',
+  },
+
+  '@bp5': {
+    fontSize: '$fontSize7',
   },
 })
 
@@ -89,6 +105,10 @@ const TabsContent = styled(TabsPrimitive.TabsContent, {
 
   '@bp4': {
     fontSize: '$fontSize5',
+  },
+
+  '@bp5': {
+    fontSize: '$fontSize6',
   },
 })
 
