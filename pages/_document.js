@@ -19,7 +19,7 @@ class MyDocument extends Document {
           />
           <meta
             name="description"
-            content="Per Jansson - Fullstack Web Developer"
+            content="I'm Per, a curious software developer with a passion to build great applications and websites - and help others do the same."
           />
 
           <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -92,7 +92,44 @@ class MyDocument extends Document {
           />
           <meta name="theme-color" content="#2a9d8f" />
 
-          {/* TODO: Social media sharing */}
+          {/* Social media sharing */}
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:title"
+            content="Per Jansson - Fullstack Web Developer"
+          />
+          <meta
+            property="og:description"
+            content="I'm Per, a curious software developer with a passion to build great applications and websites - and help others do the same."
+          />
+          <meta
+            property="og:image"
+            content="https://www.thecuriousdeveloper.com/images/social-media.jpg"
+          />
+          <meta
+            property="og:url"
+            content="https://www.thecuriousdeveloper.com"
+          />
+          <meta
+            property="og:site_name"
+            content="Per Jansson - Fullstack Web Developer"
+          />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Per Jansson - Fullstack Web Developer"
+          />
+          <meta
+            name="twitter:description"
+            content="I'm Per, a curious software developer with a passion to build great applications and websites - and help others do the same."
+          />
+          <meta
+            name="twitter:image"
+            content="https://www.thecuriousdeveloper.com/images/social-media.jpg"
+          />
+          <meta name="twitter:site" content="@per_jansson" />
+          <meta name="twitter:creator" content="@per_jansson" />
 
           {/* Analytics */}
           {process.env.GA_TRACKING_ID && (
