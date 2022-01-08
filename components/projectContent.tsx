@@ -47,10 +47,7 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   fontWeight: 'bold',
   userSelect: 'none',
   scrollSnapAlign: 'center',
-
-  '&:not(:last-child)': {
-    marginRight: '$space4',
-  },
+  transition: 'box-shadow 300ms',
 
   '&:hover': {
     color: '$colorful3',
@@ -61,30 +58,35 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
     boxShadow: 'inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor',
   },
 
+  '&:not(:last-child)': {
+    marginRight: '$$marginRight',
+  },
+
   '@bp1': {
     height: '40px',
     fontSize: '$fontSize3',
+    $$marginRight: '$space$space6',
   },
 
   '@bp2': {
     height: '48px',
     fontSize: '$fontSize5',
+    $$marginRight: '$space$space8',
   },
 
   '@bp3': {
     fontSize: '$fontSize6',
-
-    '&:not(:last-child)': {
-      marginRight: '$space8',
-    },
+    $$marginRight: '$space$space10',
   },
 
   '@bp4': {
     fontSize: '$fontSize7',
+    $$marginRight: '$space$space12',
   },
 
   '@bp5': {
     fontSize: '$fontSize7',
+    $$marginRight: '$space$space14',
   },
 })
 
@@ -137,7 +139,7 @@ export const ProjectDetails: React.FC<Props> = ({ project }) => {
           Project story
         </TabsTrigger>
         <TabsTrigger value="tab2" onClick={handleOnTabClick}>
-          Main character
+          What I did
         </TabsTrigger>
         <TabsTrigger value="tab3" onClick={handleOnTabClick}>
           Team
