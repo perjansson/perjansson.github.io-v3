@@ -10,7 +10,7 @@ const Tabs = styled(TabsPrimitive.Tabs, {
   display: 'flex',
   flexDirection: 'column',
   width: '80%',
-  minHeight: '200px',
+  minHeight: '240px',
 
   '@bp1': {
     width: '100%',
@@ -94,7 +94,7 @@ const TabsContent = styled(TabsPrimitive.TabsContent, {
   lineHeight: '140%',
 
   '@bp1': {
-    fontSize: '$fontSize2',
+    fontSize: '$fontSize3',
   },
 
   '@bp2': {
