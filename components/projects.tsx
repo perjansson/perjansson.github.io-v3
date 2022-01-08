@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useDimensions from 'react-cool-dimensions'
@@ -41,12 +41,7 @@ const SectionTitle = styled('h2', {
   },
 })
 
-interface ProjectsProps {
-  onProjectSelect: (project: ProjectType) => void
-}
-
-export const Projects: React.FC<ProjectsProps> = ({ onProjectSelect }) => {
-  const router = useRouter()
+export const Projects: React.FC = () => {
   const { data } = useData()
 
   const handleOnSelect = (project: ProjectType) => {
@@ -56,8 +51,6 @@ export const Projects: React.FC<ProjectsProps> = ({ onProjectSelect }) => {
       label: project.title,
       value: 1,
     })
-
-    onProjectSelect(project)
   }
 
   return (
@@ -76,11 +69,6 @@ export const Projects: React.FC<ProjectsProps> = ({ onProjectSelect }) => {
       </section>
     </>
   )
-}
-
-interface ProjectProps {
-  project: ProjectType
-  onSelect: (project: ProjectType) => void
 }
 
 const ProjectContainer = styled(motion.article, {
@@ -238,6 +226,11 @@ const projectVariants = {
   },
 }
 
+interface ProjectProps {
+  project: ProjectType
+  onSelect: (project: ProjectType) => void
+}
+
 const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
   const { titleShort, client, role, asset } = project
   const { observe, width, height } = useDimensions<HTMLDivElement | null>()
@@ -255,30 +248,32 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
   }
 
   return (
-    <ProjectContainer
-      ref={ref}
-      animate={controls}
-      initial="hidden"
-      variants={projectVariants}
-      onClick={handleOnClick}
-    >
-      <Role>
-        {role} at {client}
-      </Role>
-      <Title>{titleShort}</Title>
-      <AssetWrapper ref={observe}>
-        <Border>
-          <ParallaxEffect>
-            <Asset
-              src={asset.url}
-              alt={`Project image for ${role} at ${client}`}
-              layout="fixed"
-              width={`${Math.round(width)}px`}
-              height={`${Math.round(height)}px`}
-            />
-          </ParallaxEffect>
-        </Border>
-      </AssetWrapper>
-    </ProjectContainer>
+    <Link href={`/projects/${project.sys.id}`} passHref>
+      <ProjectContainer
+        ref={ref}
+        animate={controls}
+        initial="hidden"
+        variants={projectVariants}
+        onClick={handleOnClick}
+      >
+        <Role>
+          {role} at {client}
+        </Role>
+        <Title>{titleShort}</Title>
+        <AssetWrapper ref={observe}>
+          <Border>
+            <ParallaxEffect>
+              <Asset
+                src={asset.url}
+                alt={`Project image for ${role} at ${client}`}
+                layout="fixed"
+                width={`${Math.round(width)}px`}
+                height={`${Math.round(height)}px`}
+              />
+            </ParallaxEffect>
+          </Border>
+        </AssetWrapper>
+      </ProjectContainer>
+    </Link>
   )
 }

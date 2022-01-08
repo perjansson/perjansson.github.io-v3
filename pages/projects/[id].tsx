@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 import { styled } from '../../stitches.config'
 import { AllProjectsData, ProjectPageData } from '../../types'
 import { getAllProjects, getProjectPageData } from '../../queries'
+import { PAGES_SEO_SETTINGS } from '../../utils/pagesSeo'
 import { BackgroundImage } from '../../components/backgroundImage'
 import { Spacer } from '../../components/spacer'
 import { formatProjectDates } from '../../utils/projectHelper'
@@ -90,24 +91,31 @@ const Main = styled('main', {
 })
 
 const TitleWrapper = styled('div', {
+  overflowY: 'hidden',
+
   '@bp1': {
     maxWidth: '100%',
+    minHeight: '120px',
   },
 
   '@bp2': {
     maxWidth: '70%',
+    height: '400px',
   },
 
   '@bp3': {
     maxWidth: '60%',
+    height: '440px',
   },
 
   '@bp4': {
     maxWidth: '60%',
+    height: '480px',
   },
 
   '@bp5': {
     maxWidth: '50%',
+    height: '480px',
   },
 })
 
@@ -126,7 +134,6 @@ const ProjectBackgroundImage = styled(BackgroundImage, {
 })
 
 const SectionTitle = styled('h1', {
-  marginLeft: '-$space1',
   color: '$color10',
   textShadow:
     '1px 1px 10px rgba(17, 17, 17, 0.2), 1px 1px 10px rgba(17, 17, 17, 0.2)',
@@ -176,14 +183,24 @@ interface ProjectProps {
 const Project: React.FC<ProjectProps> = ({ data }) => {
   // TODO: Put data in provider?
   const { project } = data.data
-  const { asset, title, titleShort, role, startdate, enddate, city } = project
+  const { asset, title, role, startdate, enddate, city } = project
 
   return (
     <>
       <Head>
-        <title>
-          ✨ Per Jansson - Fullstack Web Developer - {titleShort} ✨
-        </title>
+        <title>{PAGES_SEO_SETTINGS.PROJECT(project).title}</title>
+        <meta
+          name="description"
+          content={PAGES_SEO_SETTINGS.PROJECT(project).description}
+        />
+        <meta
+          name="twitter:description"
+          content={PAGES_SEO_SETTINGS.PROJECT(project).description}
+        />
+        <meta
+          property="og:description"
+          content={PAGES_SEO_SETTINGS.PROJECT(project).description}
+        />
       </Head>
       <AnimatePresence>
         <ProjectBackgroundImage
@@ -212,7 +229,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
                 in <strong>{city}</strong>
               </Info>
             </TitleWrapper>
-            <Spacer size="xxLarge" />
+            <Spacer size="medium" />
             <ProjectDetails project={project} />
           </Main>
         </ProjectBackgroundImage>

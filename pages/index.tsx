@@ -1,11 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { styled } from '../stitches.config'
 
 import { IndexPageData, ProjectType } from '../types'
 import { getIndexPageData } from '../queries'
 import { DataContextProvider } from '../providers/DataContextProvider'
+import { PAGES_SEO_SETTINGS } from '../utils/pagesSeo'
 import { Hero } from '../components/hero'
 import { Projects } from '../components/projects'
 import { Spacer } from '../components/spacer'
@@ -83,26 +83,34 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = ({ data }) => {
-  const router = useRouter()
-
-  const handleOnProjectSelect = (project: ProjectType) => {
-    router.push(`/projects/${project.sys.id}`)
-  }
-
   return (
-    <DataContextProvider data={data}>
+    <>
       <Head>
-        <title>✨ Per Jansson - Fullstack Web Developer ✨</title>
+        <title>{PAGES_SEO_SETTINGS.INDEX.title}</title>
+        <meta
+          name="description"
+          content={PAGES_SEO_SETTINGS.INDEX.description}
+        />
+        <meta
+          name="twitter:description"
+          content={PAGES_SEO_SETTINGS.INDEX.description}
+        />
+        <meta
+          property="og:description"
+          content={PAGES_SEO_SETTINGS.INDEX.description}
+        />
       </Head>
-      {/* <Header /> */}
-      <Main>
-        <Spacer size="small" />
-        <Hero />
-        <ContentSpacer />
-        <Projects onProjectSelect={handleOnProjectSelect} />
-        <ContentSpacer />
-      </Main>
-    </DataContextProvider>
+      <DataContextProvider data={data}>
+        {/* <Header /> */}
+        <Main>
+          <Spacer size="small" />
+          <Hero />
+          <ContentSpacer />
+          <Projects />
+          <ContentSpacer />
+        </Main>
+      </DataContextProvider>
+    </>
   )
 }
 

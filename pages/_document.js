@@ -17,11 +17,6 @@ class MyDocument extends Document {
             name="application-name"
             content="Per Jansson - Fullstack Web Developer"
           />
-          <meta
-            name="description"
-            content="I'm Per, a curious software developer with a passion to build great applications and websites - and help others do the same."
-          />
-
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta
@@ -99,10 +94,6 @@ class MyDocument extends Document {
             content="Per Jansson - Fullstack Web Developer"
           />
           <meta
-            property="og:description"
-            content="I'm Per, a curious software developer with a passion to build great applications and websites - and help others do the same."
-          />
-          <meta
             property="og:image"
             content="https://www.thecuriousdeveloper.com/images/social-media.jpg"
           />
@@ -119,10 +110,6 @@ class MyDocument extends Document {
           <meta
             name="twitter:title"
             content="Per Jansson - Fullstack Web Developer"
-          />
-          <meta
-            name="twitter:description"
-            content="I'm Per, a curious software developer with a passion to build great applications and websites - and help others do the same."
           />
           <meta
             name="twitter:image"
