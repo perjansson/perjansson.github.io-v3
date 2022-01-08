@@ -171,6 +171,6 @@ export const globalStyles = globalCss({
 
   '#__next': {
     height: '100%',
-    minHeight: '100%',
+    minHeight: '100vh',
   },
 })

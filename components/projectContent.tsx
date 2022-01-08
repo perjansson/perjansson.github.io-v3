@@ -65,7 +65,7 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   '@bp1': {
     height: '40px',
     fontSize: '$fontSize3',
-    $$marginRight: '$space$space6',
+    $$marginRight: '$space$space4',
   },
 
   '@bp2': {
