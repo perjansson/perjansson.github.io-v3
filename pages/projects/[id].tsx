@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 import { styled } from '../../stitches.config'
 import { AllProjectsData, ProjectPageData } from '../../types'
 import { getAllProjects, getProjectPageData } from '../../queries'
+import { PAGES_SEO_SETTINGS } from '../../utils/pagesSeo'
 import { BackgroundImage } from '../../components/backgroundImage'
 import { Spacer } from '../../components/spacer'
 import { formatProjectDates } from '../../utils/projectHelper'
@@ -182,14 +183,24 @@ interface ProjectProps {
 const Project: React.FC<ProjectProps> = ({ data }) => {
   // TODO: Put data in provider?
   const { project } = data.data
-  const { asset, title, titleShort, role, startdate, enddate, city } = project
+  const { asset, title, role, startdate, enddate, city } = project
 
   return (
     <>
       <Head>
-        <title>
-          ✨ Per Jansson - Fullstack Web Developer - {titleShort} ✨
-        </title>
+        <title>{PAGES_SEO_SETTINGS.PROJECT(project).title}</title>
+        <meta
+          name="description"
+          content={PAGES_SEO_SETTINGS.PROJECT(project).description}
+        />
+        <meta
+          name="twitter:description"
+          content={PAGES_SEO_SETTINGS.PROJECT(project).description}
+        />
+        <meta
+          property="og:description"
+          content={PAGES_SEO_SETTINGS.PROJECT(project).description}
+        />
       </Head>
       <AnimatePresence>
         <ProjectBackgroundImage
