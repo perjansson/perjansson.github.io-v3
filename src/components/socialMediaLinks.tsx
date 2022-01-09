@@ -1,8 +1,10 @@
-import React, { useMemo } from 'react'
+import React from 'react'
+import { useFocusRing } from '@react-aria/focus'
 
+import { styled, theme } from '../../stitches.config'
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { VisuallyHidden } from './visuallyHidden'
-import { styled, theme } from '../../stitches.config'
+import { AnchorWithinFocusable, Focusable } from './focusable'
 import { ContactType } from '../../types'
 import { event } from '../utils/gtag'
 
@@ -102,10 +104,15 @@ const SocialMediaLink: React.FC<SocialMediaLinkProps> = ({
   onClick,
 }) => {
   const Logo = logos[contact.medium.toLowerCase()]
+  const { isFocusVisible, focusProps } = useFocusRing({ within: true })
 
   return (
-    <div onClick={onClick}>
-      <a
+    <Focusable
+      onClick={onClick}
+      isFocusVisible={isFocusVisible}
+      {...focusProps}
+    >
+      <AnchorWithinFocusable
         href={contact.url}
         target="_blank"
         rel="noreferrer noopener"
@@ -113,7 +120,7 @@ const SocialMediaLink: React.FC<SocialMediaLinkProps> = ({
       >
         <Logo style={{ fill: '#fff' }} />
         <VisuallyHidden>{contact.medium}</VisuallyHidden>
-      </a>
-    </div>
+      </AnchorWithinFocusable>
+    </Focusable>
   )
 }

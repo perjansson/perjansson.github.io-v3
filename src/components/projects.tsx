@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useDimensions from 'react-cool-dimensions'
+import { useFocusRing } from '@react-aria/focus'
 
 import { styled } from '../../stitches.config'
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
@@ -11,6 +12,7 @@ import { event } from '../utils/gtag'
 import { Spacer } from './spacer'
 import { ContentfulImage } from './contentfulImage'
 import { ParallaxEffect } from './parallaxEffect'
+import { AnchorWithinFocusable, Focusable } from './focusable'
 
 const SectionTitle = styled('h2', {
   color: '$color12',
@@ -236,6 +238,7 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
   const { observe, width, height } = useDimensions<HTMLDivElement | null>()
   const controls = useAnimation()
   const [ref, inView] = useInView()
+  const { isFocusVisible, focusProps } = useFocusRing({ within: true })
 
   useEffect(() => {
     if (inView) {
@@ -252,33 +255,37 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
     : {}
 
   return (
-    <Link href={`/projects/${project.sys.id}`} passHref>
-      <ProjectContainer
-        ref={ref}
-        animate={controls}
-        initial="hidden"
-        variants={projectVariants}
-        onClick={handleOnClick}
-      >
-        <Role>
-          {role} at {client}
-        </Role>
-        <Title>{titleShort}</Title>
-        <AssetWrapper ref={observe}>
-          <Border>
-            <ParallaxEffect>
-              <Asset
-                src={asset.url}
-                {...placeholderProps}
-                alt={`Project image for ${role} at ${client}`}
-                layout="fixed"
-                width={`${Math.round(width)}px`}
-                height={`${Math.round(height)}px`}
-              />
-            </ParallaxEffect>
-          </Border>
-        </AssetWrapper>
-      </ProjectContainer>
-    </Link>
+    <Focusable isFocusVisible={isFocusVisible} {...focusProps}>
+      <Link href={`/projects/${project.sys.id}`} passHref>
+        <AnchorWithinFocusable>
+          <ProjectContainer
+            ref={ref}
+            animate={controls}
+            initial="hidden"
+            variants={projectVariants}
+            onClick={handleOnClick}
+          >
+            <Role>
+              {role} at {client}
+            </Role>
+            <Title>{titleShort}</Title>
+            <AssetWrapper ref={observe}>
+              <Border>
+                <ParallaxEffect>
+                  <Asset
+                    src={asset.url}
+                    {...placeholderProps}
+                    alt={`Project image for ${role} at ${client}`}
+                    layout="fixed"
+                    width={`${Math.round(width)}px`}
+                    height={`${Math.round(height)}px`}
+                  />
+                </ParallaxEffect>
+              </Border>
+            </AssetWrapper>
+          </ProjectContainer>
+        </AnchorWithinFocusable>
+      </Link>
+    </Focusable>
   )
 }
