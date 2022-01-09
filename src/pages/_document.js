@@ -1,7 +1,7 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
-import { getCssText, globalStyles } from '../stitches.config'
+import { getCssText, globalStyles } from '../../stitches.config'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {

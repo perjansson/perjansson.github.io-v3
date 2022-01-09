@@ -2,15 +2,16 @@ import * as TabsPrimitive from '@radix-ui/react-tabs'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import scrollIntoView from 'smooth-scroll-into-view-if-needed'
 
-import { styled } from '../stitches.config'
-import { ProjectType } from '../types'
+import { styled } from '../../stitches.config'
+import { ProjectType } from '../../types'
 import { Spacer } from './spacer'
+import { useProjectPageData } from '../providers/ProjectPageDataProvider'
 
 const Tabs = styled(TabsPrimitive.Tabs, {
   display: 'flex',
   flexDirection: 'column',
   width: '80%',
-  minHeight: '200px',
+  minHeight: '240px',
 
   '@bp1': {
     width: '100%',
@@ -65,7 +66,7 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   '@bp1': {
     height: '40px',
     fontSize: '$fontSize3',
-    $$marginRight: '$space$space6',
+    $$marginRight: '$space$space4',
   },
 
   '@bp2': {
@@ -94,7 +95,7 @@ const TabsContent = styled(TabsPrimitive.TabsContent, {
   lineHeight: '140%',
 
   '@bp1': {
-    fontSize: '$fontSize2',
+    fontSize: '$fontSize3',
   },
 
   '@bp2': {
@@ -118,12 +119,9 @@ const Tags = styled('div', {
   fontFamily: 'Share Tech Mono, Lucida Console, Courier New, monospace',
 })
 
-interface Props {
-  project: ProjectType
-}
-
-export const ProjectDetails: React.FC<Props> = ({ project }) => {
-  const { description, me, title, tags } = project
+export const ProjectDetails: React.FC = () => {
+  const { data } = useProjectPageData()
+  const { description, me, title, tags } = data?.project || {}
 
   const handleOnTabClick = (event: any) =>
     scrollIntoView(event.target, {
@@ -150,10 +148,10 @@ export const ProjectDetails: React.FC<Props> = ({ project }) => {
       </TabsList>
       <Spacer size="small" />
       <TabsContent value="tab1">
-        <RichText richText={description.json} />
+        <RichText richText={description?.json} />
       </TabsContent>
       <TabsContent value="tab2">
-        <RichText richText={me.json} />
+        <RichText richText={me?.json} />
       </TabsContent>
       <TabsContent value="tab3">
         <div>Team information will come...</div>

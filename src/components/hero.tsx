@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 
-import { styled } from '../stitches.config'
-import { useData } from '../providers/DataContextProvider'
+import { styled } from '../../stitches.config'
+import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { Sparkles } from './sparkle'
 import { SocialMediaLinks } from './socialMediaLinks'
 import { ContentfulImage } from './contentfulImage'
@@ -171,7 +171,7 @@ const PerspectiveWrapper = styled('div', {
 })
 
 export const Hero: React.FC = () => {
-  const { data } = useData()
+  const { data } = useIndexPageData()
 
   const [angle] = useState(10)
   const y = useMotionValue(0.5)

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ImageProps } from 'next/image'
 
-import { styled } from '../stitches.config'
+import { styled } from '../../stitches.config'
 import { ContentfulImage } from './contentfulImage'
 
 const ImageContainer = styled('div', {

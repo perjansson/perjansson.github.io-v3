@@ -34,7 +34,7 @@ export const getIndexPageData = `{
     }
 }`
 
-export const getAllProjects = `{
+export const getAllProjectsQuery = `{
     projects: projectCollection(order: startdate_DESC) {
         items {
             sys {
@@ -44,7 +44,7 @@ export const getAllProjects = `{
     }
 }`
 
-export const getProjectPageData = (id: string) => `{
+export const getProjectPageDataQuery = (id: string) => `{
     project(id: "${id}") {
         title
         titleShort
@@ -59,5 +59,6 @@ export const getProjectPageData = (id: string) => `{
         asset {
             url
         }
+        assetPlaceholder
     }
 }`

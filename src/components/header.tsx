@@ -7,7 +7,7 @@ import {
   useViewportScroll,
 } from 'framer-motion'
 
-import { styled } from '../stitches.config'
+import { styled } from '../../stitches.config'
 
 const Container = styled(motion.header, {
   position: 'fixed',

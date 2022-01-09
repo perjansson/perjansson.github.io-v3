@@ -19,6 +19,7 @@ export interface ProjectType {
   date: string
   tags: string[]
   asset: ImageType
+  assetPlaceholder?: string
   startdate: string
   enddate: string
   city: string

@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react'
+import React from 'react'
+import { useFocusRing } from '@react-aria/focus'
 
-import { useData } from '../providers/DataContextProvider'
+import { styled, theme } from '../../stitches.config'
+import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { VisuallyHidden } from './visuallyHidden'
-import { styled, theme } from '../stitches.config'
-import { ContactType } from '../types'
+import { AnchorWithinFocusable, Focusable } from './focusable'
+import { ContactType } from '../../types'
 import { event } from '../utils/gtag'
 
 import FacebookLogo from '../assets/social-media/facebook.svg'
@@ -13,6 +15,7 @@ import LinkedinLogo from '../assets/social-media/linkedin.svg'
 import MediumLogo from '../assets/social-media/medium.svg'
 import StackOverflowLogo from '../assets/social-media/stackoverflow.svg'
 import TwitterLogo from '../assets/social-media/twitter.svg'
+import Email from '../assets/social-media/email.svg'
 
 const logos: { [name: string]: any } = {
   facebook: FacebookLogo,
@@ -22,6 +25,7 @@ const logos: { [name: string]: any } = {
   medium: MediumLogo,
   'stack overflow': StackOverflowLogo,
   twitter: TwitterLogo,
+  email: Email,
 }
 
 const Container = styled('div', {
@@ -64,12 +68,8 @@ const Container = styled('div', {
 })
 
 export const SocialMediaLinks: React.FC = () => {
-  const { data } = useData()
-  const socialMediaLinks = useMemo(
-    () =>
-      data?.me.contacts.items.filter((contact) => contact.medium !== 'Email'),
-    [data?.me.contacts.items]
-  )
+  const { data } = useIndexPageData()
+  const socialMediaLinks = data?.me.contacts.items
 
   const handleOnContactClick = (medium: string) => {
     event({
@@ -104,10 +104,15 @@ const SocialMediaLink: React.FC<SocialMediaLinkProps> = ({
   onClick,
 }) => {
   const Logo = logos[contact.medium.toLowerCase()]
+  const { isFocusVisible, focusProps } = useFocusRing({ within: true })
 
   return (
-    <div onClick={onClick}>
-      <a
+    <Focusable
+      onClick={onClick}
+      isFocusVisible={isFocusVisible}
+      {...focusProps}
+    >
+      <AnchorWithinFocusable
         href={contact.url}
         target="_blank"
         rel="noreferrer noopener"
@@ -115,7 +120,7 @@ const SocialMediaLink: React.FC<SocialMediaLinkProps> = ({
       >
         <Logo style={{ fill: '#fff' }} />
         <VisuallyHidden>{contact.medium}</VisuallyHidden>
-      </a>
-    </div>
+      </AnchorWithinFocusable>
+    </Focusable>
   )
 }
