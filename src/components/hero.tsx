@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 
-import { styled } from '../stitches.config'
+import { styled } from '../../stitches.config'
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { Sparkles } from './sparkle'
 import { SocialMediaLinks } from './socialMediaLinks'

@@ -1,4 +1,4 @@
-import { ProjectsType } from '../types'
+import { ProjectsType } from '../../types'
 
 export const sortProjectsOnStartDate = (
   projects: ProjectsType

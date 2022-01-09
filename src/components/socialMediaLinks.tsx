@@ -2,8 +2,8 @@ import React, { useMemo } from 'react'
 
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { VisuallyHidden } from './visuallyHidden'
-import { styled, theme } from '../stitches.config'
-import { ContactType } from '../types'
+import { styled, theme } from '../../stitches.config'
+import { ContactType } from '../../types'
 import { event } from '../utils/gtag'
 
 import FacebookLogo from '../assets/social-media/facebook.svg'

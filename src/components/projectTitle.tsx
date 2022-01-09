@@ -1,5 +1,5 @@
 import { useProjectPageData } from '../providers/ProjectPageDataProvider'
-import { styled } from '../stitches.config'
+import { styled } from '../../stitches.config'
 import { formatProjectDates } from '../utils/projectHelper'
 import { Spacer } from './spacer'
 

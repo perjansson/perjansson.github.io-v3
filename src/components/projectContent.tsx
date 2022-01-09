@@ -2,8 +2,8 @@ import * as TabsPrimitive from '@radix-ui/react-tabs'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import scrollIntoView from 'smooth-scroll-into-view-if-needed'
 
-import { styled } from '../stitches.config'
-import { ProjectType } from '../types'
+import { styled } from '../../stitches.config'
+import { ProjectType } from '../../types'
 import { Spacer } from './spacer'
 import { useProjectPageData } from '../providers/ProjectPageDataProvider'
 

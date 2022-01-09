@@ -7,7 +7,7 @@ import {
 } from 'framer-motion'
 
 import useWindowSize from '../hooks/useWindowSize'
-import { styled } from '../stitches.config'
+import { styled } from '../../stitches.config'
 
 const Container = styled('div', {
   height: '100%',

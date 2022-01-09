@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react'
-import { ProjectPageData } from '../types'
+import { ProjectPageData } from '../../types'
 
 const ProjectPageDataContext = createContext<
   ProjectPageData | { data: undefined }

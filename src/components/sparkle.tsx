@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { isMobile, isTablet } from 'react-device-detect'
 import { useReducedMotion } from 'framer-motion'
 
-import { keyframes, styled, theme } from '../stitches.config'
+import { keyframes, styled, theme } from '../../stitches.config'
 import { useRandomInterval } from '../hooks/useRandomInterval'
 import { random } from '../utils/random'
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import { styled } from '../stitches.config'
+import { styled } from '../../stitches.config'
 
-import { IndexPageData } from '../types'
+import { IndexPageData } from '../../types'
 import { getIndexPageData } from '../client-api/indexPageApi'
 import { IndexPageDataContextProvider } from '../providers/IndexPageDataProvider'
 import { PAGES_SEO_SETTINGS } from '../utils/pagesSeo'

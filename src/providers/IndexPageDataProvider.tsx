@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react'
-import { IndexPageData } from '../types'
+import { IndexPageData } from '../../types'
 
 const IndexPageDataContext = createContext<IndexPageData | { data: undefined }>(
   {

@@ -2,8 +2,8 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { AnimatePresence } from 'framer-motion'
 
-import { styled } from '../../stitches.config'
-import { ProjectPageData, ProjectType } from '../../types'
+import { styled } from '../../../stitches.config'
+import { ProjectPageData, ProjectType } from '../../../types'
 import {
   ProjectPageDataContextProvider,
   useProjectPageData,
