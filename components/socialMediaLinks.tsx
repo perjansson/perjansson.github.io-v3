@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 
-import { useData } from '../providers/DataContextProvider'
+import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { VisuallyHidden } from './visuallyHidden'
 import { styled, theme } from '../stitches.config'
 import { ContactType } from '../types'
@@ -64,7 +64,7 @@ const Container = styled('div', {
 })
 
 export const SocialMediaLinks: React.FC = () => {
-  const { data } = useData()
+  const { data } = useIndexPageData()
   const socialMediaLinks = useMemo(
     () =>
       data?.me.contacts.items.filter((contact) => contact.medium !== 'Email'),

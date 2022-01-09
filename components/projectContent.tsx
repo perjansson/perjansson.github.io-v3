@@ -5,6 +5,7 @@ import scrollIntoView from 'smooth-scroll-into-view-if-needed'
 import { styled } from '../stitches.config'
 import { ProjectType } from '../types'
 import { Spacer } from './spacer'
+import { useProjectPageData } from '../providers/ProjectPageDataProvider'
 
 const Tabs = styled(TabsPrimitive.Tabs, {
   display: 'flex',
@@ -118,12 +119,9 @@ const Tags = styled('div', {
   fontFamily: 'Share Tech Mono, Lucida Console, Courier New, monospace',
 })
 
-interface Props {
-  project: ProjectType
-}
-
-export const ProjectDetails: React.FC<Props> = ({ project }) => {
-  const { description, me, title, tags } = project
+export const ProjectDetails: React.FC = () => {
+  const { data } = useProjectPageData()
+  const { description, me, title, tags } = data?.project || {}
 
   const handleOnTabClick = (event: any) =>
     scrollIntoView(event.target, {
@@ -150,10 +148,10 @@ export const ProjectDetails: React.FC<Props> = ({ project }) => {
       </TabsList>
       <Spacer size="small" />
       <TabsContent value="tab1">
-        <RichText richText={description.json} />
+        <RichText richText={description?.json} />
       </TabsContent>
       <TabsContent value="tab2">
-        <RichText richText={me.json} />
+        <RichText richText={me?.json} />
       </TabsContent>
       <TabsContent value="tab3">
         <div>Team information will come...</div>

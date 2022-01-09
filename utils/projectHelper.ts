@@ -12,10 +12,10 @@ export const sortProjectsOnStartDate = (
 }
 
 export const formatProjectDates = (
-  startdate: number | string,
-  enddate: number | string
+  startdate: number | string | undefined,
+  enddate: number | string | undefined
 ): string | undefined => {
-  if (!startdate && !enddate) {
+  if (typeof startdate === 'undefined' || typeof enddate === 'undefined') {
     return
   }
 

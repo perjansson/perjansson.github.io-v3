@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer'
 import useDimensions from 'react-cool-dimensions'
 
 import { styled } from '../stitches.config'
-import { useData } from '../providers/DataContextProvider'
+import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { ProjectType } from '../types'
 import { event } from '../utils/gtag'
 import { Spacer } from './spacer'
@@ -42,7 +42,7 @@ const SectionTitle = styled('h2', {
 })
 
 export const Projects: React.FC = () => {
-  const { data } = useData()
+  const { data } = useIndexPageData()
 
   const handleOnSelect = (project: ProjectType) => {
     event({
