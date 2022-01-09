@@ -13,6 +13,7 @@ import LinkedinLogo from '../assets/social-media/linkedin.svg'
 import MediumLogo from '../assets/social-media/medium.svg'
 import StackOverflowLogo from '../assets/social-media/stackoverflow.svg'
 import TwitterLogo from '../assets/social-media/twitter.svg'
+import Email from '../assets/social-media/email.svg'
 
 const logos: { [name: string]: any } = {
   facebook: FacebookLogo,
@@ -22,6 +23,7 @@ const logos: { [name: string]: any } = {
   medium: MediumLogo,
   'stack overflow': StackOverflowLogo,
   twitter: TwitterLogo,
+  email: Email,
 }
 
 const Container = styled('div', {
@@ -65,11 +67,7 @@ const Container = styled('div', {
 
 export const SocialMediaLinks: React.FC = () => {
   const { data } = useIndexPageData()
-  const socialMediaLinks = useMemo(
-    () =>
-      data?.me.contacts.items.filter((contact) => contact.medium !== 'Email'),
-    [data?.me.contacts.items]
-  )
+  const socialMediaLinks = data?.me.contacts.items
 
   const handleOnContactClick = (medium: string) => {
     event({
