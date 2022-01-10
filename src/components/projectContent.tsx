@@ -15,8 +15,6 @@ const Tabs = styled(TabsPrimitive.Tabs, {
 })
 
 const TabsList = styled(TabsPrimitive.TabsList, {
-  overflowX: 'scroll',
-  whiteSpace: 'nowrap',
   scrollbarWidth: 'none',
   '-webkit-overflow-scrolling': 'touch',
   scrollBehavior: 'smooth',
@@ -28,6 +26,8 @@ const TabsList = styled(TabsPrimitive.TabsList, {
 
   '@bp1': {
     height: '44px',
+    overflowX: 'scroll',
+    whiteSpace: 'nowrap',
   },
 
   '@bp3': {
@@ -53,6 +53,13 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   '&[data-state="active"]': {
     color: '$colorful3',
     boxShadow: 'inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor',
+  },
+
+  '&:focus': {
+    borderRadius: '$radii2',
+    position: 'relative',
+    outline: 'none',
+    boxShadow: '0 0 0 3px $colors$color2, 0 0 0 6px $colors$colorful6',
   },
 
   '&:not(:last-child)': {
