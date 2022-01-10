@@ -162,7 +162,9 @@ export const globalStyles = globalCss({
   },
 
   a: {
+    display: 'flex',
     color: '$colorful3',
+    textDecoration: 'none',
   },
 
   '#root, #__next': {
@@ -172,5 +174,11 @@ export const globalStyles = globalCss({
   '#__next': {
     height: '100%',
     minHeight: '100vh',
+  },
+
+  '*:focus-visible': {
+    borderRadius: '$radii2',
+    outline: 'none',
+    boxShadow: '0 0 0 3px $colors$color2, 0 0 0 6px $colors$colorful6',
   },
 })
