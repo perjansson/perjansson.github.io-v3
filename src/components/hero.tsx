@@ -224,7 +224,7 @@ export const Hero: React.FC = () => {
             priority
             width={469}
             height={520}
-            alt="Profile image"
+            alt=""
           />
         </motion.div>
       </PerspectiveWrapper>
