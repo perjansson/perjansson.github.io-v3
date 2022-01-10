@@ -12,41 +12,48 @@ import { PAGES_SEO_SETTINGS } from '../../utils/pagesSeo'
 import { BackgroundImage } from '../../components/backgroundImage'
 import { ProjectDetails } from '../../components/projectContent'
 import { ProjectTitle } from '../../components/projectTitle'
-import { Spacer } from '../../components/spacer'
 import {
   getAllProjects,
   getProjectDetails,
 } from '../../client-api/indexPageApi'
 
 const Main = styled('main', {
-  minWidth: '320px',
-  maxWidth: '1536px',
+  height: '100%',
   margin: '0 auto',
+  display: 'grid',
+  gridTemplateRows: '1fr 0.4fr',
+  gridTemplateAreas: `
+    'project-title'
+    'project-content'
+  `,
+  gap: '$space8',
 
   '@bp1': {
+    height: 'auto',
     padding: '$space6',
+    paddingTop: '25vh',
+    gridTemplateRows: 'fit-content(320px) 320px',
+    gridTemplateColumns: '100%',
   },
 
   '@bp2': {
     padding: '$space10',
+    gridTemplateColumns: '80%',
   },
 
   '@bp3': {
     padding: '$space14',
+    gridTemplateColumns: '80%',
   },
 
   '@bp4': {
     padding: '$space14',
+    gridTemplateColumns: '80%',
   },
 
   '@bp5': {
     padding: '$space14',
-  },
-})
-
-const TopSpacer = styled(Spacer, {
-  '@bp1': {
-    marginTop: '35vh',
+    gridTemplateColumns: '100%',
   },
 })
 
@@ -118,10 +125,8 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
             },
           }}
         >
-          <TopSpacer />
           <Main>
             <ProjectTitle />
-            <Spacer size="medium" />
             <ProjectDetails />
           </Main>
         </ProjectBackgroundImage>

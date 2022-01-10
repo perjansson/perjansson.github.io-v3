@@ -1,21 +1,17 @@
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 import RichText from '@madebyconnor/rich-text-to-jsx'
 import scrollIntoView from 'smooth-scroll-into-view-if-needed'
+import { isMobile } from 'react-device-detect'
 
 import { styled } from '../../stitches.config'
-import { ProjectType } from '../../types'
 import { Spacer } from './spacer'
 import { useProjectPageData } from '../providers/ProjectPageDataProvider'
 
 const Tabs = styled(TabsPrimitive.Tabs, {
+  gridArea: 'project-content',
   display: 'flex',
   flexDirection: 'column',
-  width: '80%',
-  minHeight: '240px',
-
-  '@bp1': {
-    width: '100%',
-  },
+  marginBottom: '$space6',
 })
 
 const TabsList = styled(TabsPrimitive.TabsList, {
@@ -124,6 +120,7 @@ export const ProjectDetails: React.FC = () => {
   const { description, me, title, tags } = data?.project || {}
 
   const handleOnTabClick = (event: any) =>
+    isMobile &&
     scrollIntoView(event.target, {
       behavior: 'smooth',
       scrollMode: 'always',

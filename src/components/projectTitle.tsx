@@ -3,33 +3,9 @@ import { styled } from '../../stitches.config'
 import { formatProjectDates } from '../utils/projectHelper'
 import { Spacer } from './spacer'
 
-const TitleWrapper = styled('div', {
+const Container = styled('div', {
+  gridArea: 'project-title',
   overflowY: 'hidden',
-
-  '@bp1': {
-    maxWidth: '100%',
-    minHeight: '120px',
-  },
-
-  '@bp2': {
-    maxWidth: '70%',
-    height: '400px',
-  },
-
-  '@bp3': {
-    maxWidth: '60%',
-    height: '440px',
-  },
-
-  '@bp4': {
-    maxWidth: '60%',
-    height: '480px',
-  },
-
-  '@bp5': {
-    maxWidth: '50%',
-    height: '480px',
-  },
 })
 
 const SectionTitle = styled('h1', {
@@ -80,13 +56,13 @@ export const ProjectTitle: React.FC = () => {
   const { title, role, city, startdate, enddate } = data?.project || {}
 
   return (
-    <TitleWrapper>
+    <Container>
       <SectionTitle>{title}</SectionTitle>
       <Spacer size="small" />
       <Info>
         <strong>{role}</strong> {formatProjectDates(startdate, enddate)} in{' '}
         <strong>{city}</strong>
       </Info>
-    </TitleWrapper>
+    </Container>
   )
 }
