@@ -112,6 +112,21 @@ export const {
   },
 })
 
+const focusRing = {
+  borderRadius: '$radii2',
+  outline: 'none',
+  boxShadow:
+    '0 0 0 3px $colors$colorful3, 0 0 0 6px $colors$colorful1, 0 0 0 9px $colors$colorful4 !important',
+}
+
+export const focusStyles = {
+  '*:focus': focusRing,
+
+  '*:focus:not(:focus-visible)': {
+    boxShadow: 'none !important',
+  },
+}
+
 export const globalStyles = globalCss({
   '*, *::before, *::after': {
     boxSizing: 'border-box',
@@ -162,7 +177,9 @@ export const globalStyles = globalCss({
   },
 
   a: {
+    display: 'flex',
     color: '$colorful3',
+    textDecoration: 'none',
   },
 
   '#root, #__next': {
@@ -173,4 +190,6 @@ export const globalStyles = globalCss({
     height: '100%',
     minHeight: '100vh',
   },
+
+  ...focusStyles,
 })

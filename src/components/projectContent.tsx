@@ -3,7 +3,7 @@ import RichText from '@madebyconnor/rich-text-to-jsx'
 import scrollIntoView from 'smooth-scroll-into-view-if-needed'
 import { isMobile } from 'react-device-detect'
 
-import { styled } from '../../stitches.config'
+import { focusStyles, styled } from '../../stitches.config'
 import { Spacer } from './spacer'
 import { useProjectPageData } from '../providers/ProjectPageDataProvider'
 
@@ -15,8 +15,6 @@ const Tabs = styled(TabsPrimitive.Tabs, {
 })
 
 const TabsList = styled(TabsPrimitive.TabsList, {
-  overflowX: 'scroll',
-  whiteSpace: 'nowrap',
   scrollbarWidth: 'none',
   '-webkit-overflow-scrolling': 'touch',
   scrollBehavior: 'smooth',
@@ -28,6 +26,8 @@ const TabsList = styled(TabsPrimitive.TabsList, {
 
   '@bp1': {
     height: '44px',
+    overflowX: 'scroll',
+    whiteSpace: 'nowrap',
   },
 
   '@bp3': {
@@ -44,7 +44,7 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   fontWeight: 'bold',
   userSelect: 'none',
   scrollSnapAlign: 'center',
-  transition: 'box-shadow 300ms',
+  padding: '$space1',
 
   '&:hover': {
     color: '$colorful3',
@@ -52,8 +52,9 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
 
   '&[data-state="active"]': {
     color: '$colorful3',
-    boxShadow: 'inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor',
   },
+
+  ...focusStyles,
 
   '&:not(:last-child)': {
     marginRight: '$$marginRight',
@@ -61,6 +62,7 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
 
   '@bp1': {
     height: '40px',
+    padding: 0,
     fontSize: '$fontSize3',
     $$marginRight: '$space$space4',
   },

@@ -1,10 +1,8 @@
 import React from 'react'
-import { useFocusRing } from '@react-aria/focus'
 
 import { styled, theme } from '../../stitches.config'
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { VisuallyHidden } from './visuallyHidden'
-import { AnchorWithinFocusable, Focusable } from './focusable'
 import { ContactType } from '../../types'
 import { event } from '../utils/gtag'
 
@@ -45,16 +43,6 @@ const Container = styled('div', {
   },
 
   svg: {
-    transition: 'all 150ms ease-out',
-
-    '&:hover': {
-      transform: 'scale(1.2)',
-      transformOrigin: 'bottom',
-      path: {
-        fill: theme.colors.colorful3.value,
-      },
-    },
-
     '@bp1': {
       width: 28,
       height: 28,
@@ -63,6 +51,23 @@ const Container = styled('div', {
     '@bp2': {
       width: 48,
       height: 48,
+    },
+  },
+})
+
+const Anchor = styled('a', {
+  borderRadius: '$radii5',
+
+  transition: 'all 150ms ease-out',
+
+  '&:hover': {
+    transform: 'scale(1.2)',
+    transformOrigin: 'bottom',
+
+    svg: {
+      path: {
+        fill: theme.colors.colorful3.value,
+      },
     },
   },
 })
@@ -104,15 +109,10 @@ const SocialMediaLink: React.FC<SocialMediaLinkProps> = ({
   onClick,
 }) => {
   const Logo = logos[contact.medium.toLowerCase()]
-  const { isFocusVisible, focusProps } = useFocusRing({ within: true })
 
   return (
-    <Focusable
-      onClick={onClick}
-      isFocusVisible={isFocusVisible}
-      {...focusProps}
-    >
-      <AnchorWithinFocusable
+    <div onClick={onClick}>
+      <Anchor
         href={contact.url}
         target="_blank"
         rel="noreferrer noopener"
@@ -120,7 +120,7 @@ const SocialMediaLink: React.FC<SocialMediaLinkProps> = ({
       >
         <Logo style={{ fill: '#fff' }} />
         <VisuallyHidden>{contact.medium}</VisuallyHidden>
-      </AnchorWithinFocusable>
-    </Focusable>
+      </Anchor>
+    </div>
   )
 }
