@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { KeyboardEvent, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useDimensions from 'react-cool-dimensions'
+import { FocusScope, useFocusManager } from '@react-aria/focus'
 
 import { styled } from '../../stitches.config'
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
@@ -59,14 +60,16 @@ export const Projects: React.FC = () => {
         Check out some projects I&apos;ve done as a consultant or freelancer
       </SectionTitle>
       <Spacer size="large" />
-      <section data-cy="projects">
-        {data?.projects.items.map((project) => (
-          <React.Fragment key={project.titleShort + project.client}>
-            <Project project={project} onSelect={handleOnSelect} />
-            <Spacer size="medium" />
-          </React.Fragment>
-        ))}
-      </section>
+      <FocusScope>
+        <section data-cy="projects">
+          {data?.projects.items.map((project) => (
+            <React.Fragment key={project.titleShort + project.client}>
+              <Project project={project} onSelect={handleOnSelect} />
+              <Spacer size="medium" />
+            </React.Fragment>
+          ))}
+        </section>
+      </FocusScope>
     </>
   )
 }
@@ -241,6 +244,7 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
   const { observe, width, height } = useDimensions<HTMLDivElement | null>()
   const controls = useAnimation()
   const [ref, inView] = useInView()
+  const focusManager = useFocusManager()
 
   useEffect(() => {
     if (inView) {
@@ -252,13 +256,24 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
     onSelect(project)
   }
 
+  const onKeyDown = (event: KeyboardEvent<HTMLAnchorElement>) => {
+    switch (event.key) {
+      case 'ArrowDown':
+        focusManager.focusNext()
+        break
+      case 'ArrowUp':
+        focusManager.focusPrevious()
+        break
+    }
+  }
+
   const placeholderProps: any = assetPlaceholder
     ? { placeholder: 'blur', blurDataURL: assetPlaceholder }
     : {}
 
   return (
     <Link href={`/projects/${project.sys.id}`} passHref>
-      <Anchor>
+      <Anchor onKeyDown={onKeyDown}>
         <ProjectContainer
           ref={ref}
           animate={controls}
