@@ -212,6 +212,7 @@ const Asset = styled(ContentfulImage, {
 })
 
 const Anchor = styled('a', {
+  display: 'flex',
   borderRadius: '$radii5',
 })
 
