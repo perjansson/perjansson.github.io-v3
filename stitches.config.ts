@@ -1,5 +1,4 @@
 import { createStitches } from '@stitches/react'
-import { isSafari } from 'react-device-detect'
 
 const fontBasePx = '16px'
 const spaceUnit = '1rem' // 16px
@@ -113,6 +112,21 @@ export const {
   },
 })
 
+const focusRing = {
+  borderRadius: '$radii2',
+  outline: 'none',
+  boxShadow:
+    '0 0 0 3px $colors$colorful3, 0 0 0 6px $colors$colorful1, 0 0 0 9px $colors$colorful4 !important',
+}
+
+export const focusStyles = {
+  '*:focus': focusRing,
+
+  '*:focus:not(:focus-visible)': {
+    boxShadow: 'none !important',
+  },
+}
+
 export const globalStyles = globalCss({
   '*, *::before, *::after': {
     boxSizing: 'border-box',
@@ -177,20 +191,5 @@ export const globalStyles = globalCss({
     minHeight: '100vh',
   },
 
-  '*:focus-visible': {
-    borderRadius: '$radii2',
-    outline: 'none',
-    boxShadow: '0 0 0 3px $colors$color2, 0 0 0 6px $colors$colorful6',
-  },
-
-  // Hack to apply focus in Safari (since that browser does not support focus-visible)
-  '@media not all and (min-resolution:.001dpcm)': {
-    '@media': {
-      '*:focus': {
-        borderRadius: '$radii2',
-        outline: 'none',
-        boxShadow: '0 0 0 3px $colors$color2, 0 0 0 6px $colors$colorful6',
-      },
-    },
-  },
+  ...focusStyles,
 })

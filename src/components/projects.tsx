@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useDimensions from 'react-cool-dimensions'
-import { useFocusRing } from '@react-aria/focus'
 
 import { styled } from '../../stitches.config'
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
@@ -241,7 +240,6 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
   const { observe, width, height } = useDimensions<HTMLDivElement | null>()
   const controls = useAnimation()
   const [ref, inView] = useInView()
-  const { isFocusVisible, focusProps } = useFocusRing({ within: true })
 
   useEffect(() => {
     if (inView) {
