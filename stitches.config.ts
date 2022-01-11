@@ -1,4 +1,5 @@
 import { createStitches } from '@stitches/react'
+import { isSafari } from 'react-device-detect'
 
 const fontBasePx = '16px'
 const spaceUnit = '1rem' // 16px
@@ -180,5 +181,16 @@ export const globalStyles = globalCss({
     borderRadius: '$radii2',
     outline: 'none',
     boxShadow: '0 0 0 3px $colors$color2, 0 0 0 6px $colors$colorful6',
+  },
+
+  // Hack to apply focus in Safari (since that browser does not support focus-visible)
+  '@media not all and (min-resolution:.001dpcm)': {
+    '@media': {
+      '*:focus': {
+        borderRadius: '$radii2',
+        outline: 'none',
+        boxShadow: '0 0 0 3px $colors$color2, 0 0 0 6px $colors$colorful6',
+      },
+    },
   },
 })
