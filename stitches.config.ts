@@ -177,7 +177,7 @@ export const globalStyles = globalCss({
   },
 
   a: {
-    display: 'flex',
+    display: 'inline-block',
     color: '$colorful3',
     textDecoration: 'none',
   },
@@ -191,5 +191,7 @@ export const globalStyles = globalCss({
     minHeight: '100vh',
   },
 
-  ...focusStyles,
+  '@bp2': {
+    ...focusStyles,
+  },
 })
