@@ -43,16 +43,6 @@ const Container = styled('div', {
   },
 
   svg: {
-    transition: 'all 150ms ease-out',
-
-    '&:hover': {
-      transform: 'scale(1.2)',
-      transformOrigin: 'bottom',
-      path: {
-        fill: theme.colors.colorful3.value,
-      },
-    },
-
     '@bp1': {
       width: 28,
       height: 28,
@@ -61,6 +51,23 @@ const Container = styled('div', {
     '@bp2': {
       width: 48,
       height: 48,
+    },
+  },
+})
+
+const Anchor = styled('a', {
+  borderRadius: '$radii5',
+
+  transition: 'all 150ms ease-out',
+
+  '&:hover': {
+    transform: 'scale(1.2)',
+    transformOrigin: 'bottom',
+
+    svg: {
+      path: {
+        fill: theme.colors.colorful3.value,
+      },
     },
   },
 })
@@ -91,10 +98,6 @@ export const SocialMediaLinks: React.FC = () => {
     </Container>
   )
 }
-
-const Anchor = styled('a', {
-  borderRadius: '$radii5',
-})
 
 interface SocialMediaLinkProps {
   contact: ContactType
