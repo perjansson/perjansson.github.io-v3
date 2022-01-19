@@ -38,7 +38,6 @@ const TabsList = styled(TabsPrimitive.TabsList, {
 const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   all: 'unset',
   textTransform: 'uppercase',
-  cursor: 'pointer',
   fontFamily: 'inherit',
   display: 'inline',
   fontWeight: 'bold',

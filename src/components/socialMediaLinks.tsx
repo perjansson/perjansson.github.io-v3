@@ -66,7 +66,7 @@ const Anchor = styled('a', {
 
     svg: {
       path: {
-        fill: theme.colors.colorful3.value,
+        fill: theme.colors.colorful4.value,
       },
     },
   },

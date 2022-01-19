@@ -86,7 +86,6 @@ const ProjectContainer = styled(motion.article, {
     'title'
     'asset'
   `,
-  cursor: 'pointer',
 
   '@bp1': {
     padding: '$space6',
