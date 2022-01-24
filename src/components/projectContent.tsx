@@ -132,7 +132,7 @@ const Collaborators = styled('div', {
       left: 0,
       backgroundColor: '$colorful4',
       transformOrigin: 'bottom right',
-      transition: 'transform 0.25s ease-out',
+      transition: 'transform 0.5s ease-out',
     },
 
     '&:hover': {

@@ -196,7 +196,7 @@ export const globalStyles = globalCss({
     textDecoration: 'none',
 
     '&:hover': {
-      color: '$colorful6',
+      color: '$colorful4',
     },
   },
 
