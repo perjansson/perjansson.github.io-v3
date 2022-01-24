@@ -117,7 +117,30 @@ const Tags = styled('div', {
 
 const Collaborators = styled('div', {
   '> *': {
+    position: 'relative',
     marginRight: '$space4',
+  },
+
+  '> a': {
+    '&:after': {
+      content: '',
+      position: 'absolute',
+      width: '100%',
+      transform: 'scaleX(0)',
+      height: '2px',
+      bottom: 0,
+      left: 0,
+      backgroundColor: '$colorful4',
+      transformOrigin: 'bottom right',
+      transition: 'transform 0.25s ease-out',
+    },
+
+    '&:hover': {
+      '&:after': {
+        transform: 'scaleX(1)',
+        transformOrigin: 'bottom left',
+      },
+    },
   },
 })
 
