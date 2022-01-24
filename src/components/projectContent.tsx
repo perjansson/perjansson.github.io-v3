@@ -45,7 +45,7 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   scrollSnapAlign: 'center',
 
   '&:hover': {
-    color: '$colorful3',
+    color: '$colorful4',
   },
 
   '&[data-state="active"]': {
