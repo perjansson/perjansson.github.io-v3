@@ -52,7 +52,7 @@ export const getProjectPageDataQuery = (id: string) => `{
         client
         description { json }
         me { json }
-        role      
+        role
         startdate
         enddate
         city
@@ -61,5 +61,11 @@ export const getProjectPageDataQuery = (id: string) => `{
             url
         }
         assetPlaceholder
+        collaborators: collaboratorsCollection {
+            items {
+                name
+                linkedin
+            }
+        }
     }
 }`

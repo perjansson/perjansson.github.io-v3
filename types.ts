@@ -8,6 +8,11 @@ interface SysId {
   id: string
 }
 
+export interface Collaborator {
+  name: string
+  linkedin?: string
+}
+
 export interface ProjectType {
   sys: SysId
   title: string
@@ -17,12 +22,15 @@ export interface ProjectType {
   me: RichTextJson
   role: string
   date: string
-  tags: string[]
+  tags: Array<string>
   asset: ImageType
   assetPlaceholder?: string
   startdate: string
   enddate: string
   city: string
+  collaborators: {
+    items: Array<Collaborator>
+  }
 }
 
 export interface ImageType {
@@ -37,13 +45,13 @@ export interface MeType {
   title: string
   profileImage: ImageType
   contacts: {
-    items: ContactType[]
+    items: Array<ContactType>
   }
   short: RichTextJson
   long: RichTextJson
 }
 
-export type ContactsType = ContactType[]
+export type ContactsType = Array<ContactType>
 
 export interface ContactType {
   medium: string

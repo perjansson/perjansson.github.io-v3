@@ -194,6 +194,10 @@ export const globalStyles = globalCss({
     display: 'inline-block',
     color: '$colorful3',
     textDecoration: 'none',
+
+    '&:hover': {
+      color: '$colorful6',
+    },
   },
 
   'a, button': {
