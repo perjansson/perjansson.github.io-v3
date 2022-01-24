@@ -43,7 +43,6 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
   fontWeight: 'bold',
   userSelect: 'none',
   scrollSnapAlign: 'center',
-  padding: '$space1',
 
   '&:hover': {
     color: '$colorful3',
@@ -116,9 +115,38 @@ const Tags = styled('div', {
   fontFamily: 'Share Tech Mono, Lucida Console, Courier New, monospace',
 })
 
+const Collaborators = styled('div', {
+  '> *': {
+    position: 'relative',
+    marginRight: '$space4',
+  },
+
+  '> a': {
+    '&:after': {
+      content: '',
+      position: 'absolute',
+      width: '100%',
+      transform: 'scaleX(0)',
+      height: '2px',
+      bottom: 0,
+      left: 0,
+      backgroundColor: '$colorful4',
+      transformOrigin: 'bottom right',
+      transition: 'transform 0.25s ease-out',
+    },
+
+    '&:hover': {
+      '&:after': {
+        transform: 'scaleX(1)',
+        transformOrigin: 'bottom left',
+      },
+    },
+  },
+})
+
 export const ProjectDetails: React.FC = () => {
   const { data } = useProjectPageData()
-  const { description, me, title, tags } = data?.project || {}
+  const { description, me, title, tags, collaborators } = data?.project || {}
 
   const handleOnTabClick = (event: any) =>
     isMobile &&
@@ -152,7 +180,22 @@ export const ProjectDetails: React.FC = () => {
         <RichText richText={me?.json} />
       </TabsContent>
       <TabsContent value="tab3">
-        <div>Team information will come...</div>
+        <Collaborators>
+          {collaborators?.items.map(({ name, linkedin }, index) => {
+            if (linkedin) {
+              return (
+                <a key={index} href={linkedin}>
+                  {name}
+                </a>
+              )
+            } else {
+              return <span key={index}>{name}</span>
+            }
+          })}
+          {collaborators?.items.length === 0 && (
+            <span>No team members added yet.</span>
+          )}
+        </Collaborators>
       </TabsContent>
       <TabsContent value="tab4">
         <Tags>{tags?.join(', ')}</Tags>

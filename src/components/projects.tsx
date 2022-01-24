@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer'
 import useDimensions from 'react-cool-dimensions'
 import { FocusScope, useFocusManager } from '@react-aria/focus'
 
-import { styled } from '../../stitches.config'
+import { cursorHoverDark, cursorHover, styled } from '../../stitches.config'
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { ProjectType } from '../../types'
 import { event } from '../utils/gtag'
@@ -188,6 +188,10 @@ const Border = styled('div', {
     objectFit: 'cover',
   },
 
+  '&:hover': {
+    cursor: cursorHoverDark,
+  },
+
   '@bp1': {
     border: '$space$space4 solid transparent !important',
     borderRadius: '$radii3',
@@ -207,6 +211,7 @@ const Border = styled('div', {
 const Asset = styled(ContentfulImage, {
   filter: 'brightness(0.7)',
   transition: 'filter 200ms ease-in-out',
+  cursor: cursorHover,
 
   [`${ProjectContainer}:hover &`]: {
     filter: 'brightness(1)',
@@ -240,7 +245,7 @@ interface ProjectProps {
 
 const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
   const { titleShort, client, role, asset, assetPlaceholder } = project
-  const { observe, width, height } = useDimensions<HTMLDivElement | null>()
+  const { observe, width, height } = useDimensions<HTMLDivElement>()
   const controls = useAnimation()
   const [ref, inView] = useInView()
   const focusManager = useFocusManager()
@@ -266,9 +271,13 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
     }
   }
 
-  const placeholderProps: any = assetPlaceholder
-    ? { placeholder: 'blur', blurDataURL: assetPlaceholder }
-    : {}
+  const imageWidth = Math.round(width)
+  const imageHeight = Math.round(height)
+
+  const placeholderProps: object =
+    assetPlaceholder && imageWidth > 0 && imageHeight > 0
+      ? { placeholder: 'blur', blurDataURL: assetPlaceholder }
+      : {}
 
   return (
     <Link href={`/projects/${project.sys.id}`} passHref>
@@ -292,8 +301,8 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
                   {...placeholderProps}
                   alt={`Project image for ${role} at ${client}`}
                   layout="fixed"
-                  width={`${Math.round(width)}px`}
-                  height={`${Math.round(height)}px`}
+                  width={imageWidth}
+                  height={imageHeight}
                 />
               </ParallaxEffect>
             </Border>
