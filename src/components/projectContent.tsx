@@ -6,6 +6,7 @@ import { isMobile } from 'react-device-detect'
 import { focusStyles, styled } from '../../stitches.config'
 import { Spacer } from './spacer'
 import { useProjectPageData } from '../providers/ProjectPageDataProvider'
+import { Tooltip } from './tooltip'
 
 const Tabs = styled(TabsPrimitive.Tabs, {
   gridArea: 'project-content',
@@ -181,22 +182,17 @@ export const ProjectDetails: React.FC = () => {
       </TabsContent>
       <TabsContent value="tab3">
         <Collaborators>
-          {collaborators?.items.map(({ name, linkedin }, index) => {
-            if (linkedin) {
-              return (
-                <a
-                  key={index}
-                  href={linkedin}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
+          {collaborators?.items.map(({ name, company, linkedin }, index) => (
+            <Tooltip key={index} text={company}>
+              {linkedin ? (
+                <a href={linkedin} target="_blank" rel="noreferrer noopener">
                   {name}
                 </a>
-              )
-            } else {
-              return <span key={index}>{name}</span>
-            }
-          })}
+              ) : (
+                <span>{name}</span>
+              )}
+            </Tooltip>
+          ))}
           {collaborators?.items.length === 0 && (
             <span>No team members added yet.</span>
           )}
