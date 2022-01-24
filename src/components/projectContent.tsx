@@ -184,7 +184,12 @@ export const ProjectDetails: React.FC = () => {
           {collaborators?.items.map(({ name, linkedin }, index) => {
             if (linkedin) {
               return (
-                <a key={index} href={linkedin}>
+                <a
+                  key={index}
+                  href={linkedin}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
                   {name}
                 </a>
               )
