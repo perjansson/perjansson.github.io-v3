@@ -30,6 +30,7 @@ export const getIndexPageData = `{
             asset {
                 url
             }
+            assetPlaceholder
         }
     }
 }`
