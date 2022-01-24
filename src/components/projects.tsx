@@ -5,14 +5,13 @@ import { useInView } from 'react-intersection-observer'
 import useDimensions from 'react-cool-dimensions'
 import { FocusScope, useFocusManager } from '@react-aria/focus'
 
-import { styled } from '../../stitches.config'
+import { cursorHoverDark, cursorHover, styled } from '../../stitches.config'
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { ProjectType } from '../../types'
 import { event } from '../utils/gtag'
 import { Spacer } from './spacer'
 import { ContentfulImage } from './contentfulImage'
 import { ParallaxEffect } from './parallaxEffect'
-import { isRenderingOnClient } from '../utils/isRenderingOnServer'
 
 const SectionTitle = styled('h2', {
   color: '$color12',
@@ -189,6 +188,10 @@ const Border = styled('div', {
     objectFit: 'cover',
   },
 
+  '&:hover': {
+    cursor: cursorHoverDark,
+  },
+
   '@bp1': {
     border: '$space$space4 solid transparent !important',
     borderRadius: '$radii3',
@@ -208,6 +211,7 @@ const Border = styled('div', {
 const Asset = styled(ContentfulImage, {
   filter: 'brightness(0.7)',
   transition: 'filter 200ms ease-in-out',
+  cursor: cursorHover,
 
   [`${ProjectContainer}:hover &`]: {
     filter: 'brightness(1)',
