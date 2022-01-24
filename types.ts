@@ -10,6 +10,7 @@ interface SysId {
 
 export interface Collaborator {
   name: string
+  company: string
   linkedin?: string
 }
 

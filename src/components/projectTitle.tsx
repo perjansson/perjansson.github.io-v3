@@ -40,11 +40,9 @@ const SectionTitle = styled('h1', {
 })
 
 const Info = styled('div', {
+  marginLeft: '$space1',
   fontSize: '$fontSize2',
-
-  strong: {
-    color: '$colorful4',
-  },
+  color: '$color13',
 
   '@bp1': {
     fontSize: '$fontSize1',
@@ -53,15 +51,20 @@ const Info = styled('div', {
 
 export const ProjectTitle: React.FC = () => {
   const { data } = useProjectPageData()
-  const { title, role, city, startdate, enddate } = data?.project || {}
+  const { title, client, role, city, startdate, enddate } = data?.project || {}
 
   return (
     <Container>
       <SectionTitle>{title}</SectionTitle>
       <Spacer size="small" />
       <Info>
-        <strong>{role}</strong> {formatProjectDates(startdate, enddate)} in{' '}
-        <strong>{city}</strong>
+        <p>
+          <strong>{role}</strong> at <strong>{client}</strong>{' '}
+          {formatProjectDates(startdate, enddate)}
+        </p>
+        <p>
+          <strong>{city}</strong>
+        </p>
       </Info>
     </Container>
   )

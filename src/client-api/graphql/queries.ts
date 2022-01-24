@@ -64,6 +64,7 @@ export const getProjectPageDataQuery = (id: string) => `{
         collaborators: collaboratorsCollection {
             items {
                 name
+                company
                 linkedin
             }
         }
