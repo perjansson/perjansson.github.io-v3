@@ -13,13 +13,10 @@ import { Spacer } from './spacer'
 import { ContentfulImage } from './contentfulImage'
 import { ParallaxEffect } from './parallaxEffect'
 
-const SectionTitle = styled('h2', {
+const Title = styled('h2', {
   color: '$color12',
   fontSize: '$fontSize8',
-  letterSpacing: '-1.5px',
-  lineHeight: '110%',
   transition: 'font-size 0.8s ease-in-out',
-  fontWeight: 700,
 
   '@bp1': {
     fontSize: '$fontSize7',
@@ -56,9 +53,9 @@ export const Projects: React.FC = () => {
 
   return (
     <>
-      <SectionTitle>
+      <Title>
         Check out some projects I&apos;ve done as a consultant or freelancer
-      </SectionTitle>
+      </Title>
       <Spacer size="large" />
       <FocusScope>
         <section data-cy="projects">
@@ -103,25 +100,23 @@ const Role = styled('div', {
 
   '@bp1': {
     fontSize: '$fontSize1',
-    lineHeight: '18px',
     textAlign: 'left',
   },
 
   '@bp2': {
     fontSize: '$fontSize3',
-    fontWeight: '600',
+    fontWeight: '$bold',
     textAlign: 'right',
   },
 })
 
-const Title = styled('h2', {
+const ProjectTitle = styled('h2', {
   gridArea: 'title',
   color: '$color12',
   textAlign: 'right',
 
   '@bp1': {
     fontSize: '$fontSize6',
-    lineHeight: '32px',
     textAlign: 'left',
   },
 
@@ -292,7 +287,7 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
           <Role>
             {role} at {client}
           </Role>
-          <Title>{titleShort}</Title>
+          <ProjectTitle>{titleShort}</ProjectTitle>
           <AssetWrapper ref={observe}>
             <Border>
               <ParallaxEffect>

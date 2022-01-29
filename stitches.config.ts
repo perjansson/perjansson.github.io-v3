@@ -94,8 +94,16 @@ export const {
       radii7: '64px',
       round: '9999px',
     },
-    fontWeights: {},
-    lineHeights: {},
+    fontWeights: {
+      regular: 400,
+      bold: 600,
+      bolder: 700,
+      boldest: 800,
+    },
+    lineHeights: {
+      header: 1.1,
+      text: 1.4,
+    },
     letterSpacings: {},
     borderWidths: {},
     borderStyles: {},
@@ -160,8 +168,9 @@ export const globalStyles = globalCss({
     minWidth: '320px',
     backgroundColor: '$color2',
     color: '$color11',
-    lineHeight: 1.5,
+    lineHeight: '$text',
     '-webkit-font-smoothing': 'antialiased',
+    '-moz-osx-font-smoothing': 'grayscale',
   },
 
   'img, picture, video, canvas, svg': {
@@ -179,6 +188,31 @@ export const globalStyles = globalCss({
 
   'h1, h2, h3, h4, h5, h6': {
     fontFamily: 'Playfair Display, Arial Narrow, serif;',
+    fontWeight: '$bold',
+    lineHeight: '$header',
+    letterSpacing: '-0.015em',
+  },
+
+  h1: {
+    '@bp1': {
+      fontSize: '$fontSize8',
+    },
+
+    '@bp2': {
+      fontSize: '$fontSize9',
+    },
+
+    '@bp3': {
+      fontSize: '$fontSize10',
+    },
+
+    '@bp4': {
+      fontSize: '$fontSize11',
+    },
+
+    '@bp5': {
+      fontSize: '$fontSize11',
+    },
   },
 
   main: {
@@ -187,7 +221,7 @@ export const globalStyles = globalCss({
   },
 
   strong: {
-    fontWeight: '800',
+    fontWeight: '$boldest',
   },
 
   a: {

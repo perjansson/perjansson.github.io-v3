@@ -34,7 +34,7 @@ const SparklesContainer = styled('span', {
 const ContentWrapper = styled('strong', {
   position: 'relative',
   zIndex: 1,
-  fontWeight: 'bold',
+  fontWeight: '$bolder',
 })
 
 interface SparklesProps {

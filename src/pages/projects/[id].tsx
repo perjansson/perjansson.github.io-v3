@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { AnimatePresence } from 'framer-motion'
 
 import { styled } from '../../../stitches.config'
-import { ProjectPageData, ProjectType } from '../../../types'
+import { ProjectPageData } from '../../../types'
 import {
   ProjectPageDataContextProvider,
   useProjectPageData,

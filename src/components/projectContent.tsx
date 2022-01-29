@@ -89,8 +89,6 @@ const TabsTrigger = styled(TabsPrimitive.TabsTrigger, {
 })
 
 const TabsContent = styled(TabsPrimitive.TabsContent, {
-  lineHeight: '140%',
-
   '@bp1': {
     fontSize: '$fontSize3',
   },
