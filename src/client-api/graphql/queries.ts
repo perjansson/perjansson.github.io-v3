@@ -27,6 +27,7 @@ export const getIndexPageData = `{
             titleShort
             client
             role
+            tech
             asset {
                 url
             }

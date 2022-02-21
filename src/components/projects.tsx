@@ -5,13 +5,19 @@ import { useInView } from 'react-intersection-observer'
 import useDimensions from 'react-cool-dimensions'
 import { FocusScope, useFocusManager } from '@react-aria/focus'
 
-import { cursorHoverDark, cursorHover, styled } from '../../stitches.config'
+import {
+  cursorHoverDark,
+  cursorHover,
+  styled,
+  theme,
+} from '../../stitches.config'
 import { useIndexPageData } from '../providers/IndexPageDataProvider'
 import { ProjectType } from '../../types'
 import { event } from '../utils/gtag'
 import { Spacer } from './spacer'
 import { ContentfulImage } from './contentfulImage'
 import { ParallaxEffect } from './parallaxEffect'
+import { Sparkles } from './sparkle'
 
 const Title = styled('h2', {
   color: '$color12',
@@ -76,37 +82,50 @@ const ProjectContainer = styled(motion.article, {
   display: 'grid',
   backgroundColor: '$color3',
   borderRadius: '$radii5',
-  gridTemplateRows: '0.05fr 0.05fr 0.9fr',
-  gridTemplateColumns: 'auto',
-  gridTemplateAreas: `
-    'role'
-    'title'
-    'asset'
-  `,
 
   '@bp1': {
-    padding: '$space6',
+    padding: '$space8',
     height: '100%',
+    gridTemplateColumns: '1fr',
+    gridTemplateRows: '0.05fr 0.05fr 0.05fr 0.9fr',
+    gridTemplateAreas: `
+      'role'
+      'title'
+      'tech'
+      'asset'
+    `,
   },
 
   '@bp2': {
-    padding: '$space12',
+    padding: '$space14',
+    gridTemplateColumns: '0.7fr 1.3fr',
+    gridTemplateRows: '0.05fr 0.05fr 0.9fr',
+    gridTemplateAreas: `
+      'tech role'
+      'tech title'
+      'asset asset'
+    `,
   },
 })
 
 const Role = styled('div', {
+  gridArea: 'role',
   color: '$color8',
   textTransform: 'uppercase',
+  fontWeight: '$bold',
+  textAlign: 'right',
 
   '@bp1': {
+    textAlign: 'center',
     fontSize: '$fontSize1',
-    textAlign: 'left',
   },
 
   '@bp2': {
     fontSize: '$fontSize3',
-    fontWeight: '$bold',
-    textAlign: 'right',
+  },
+
+  '@bp3': {
+    fontSize: '$fontSize5',
   },
 })
 
@@ -116,8 +135,8 @@ const ProjectTitle = styled('h2', {
   textAlign: 'right',
 
   '@bp1': {
+    textAlign: 'center',
     fontSize: '$fontSize6',
-    textAlign: 'left',
   },
 
   '@bp2': {
@@ -129,13 +148,34 @@ const ProjectTitle = styled('h2', {
   },
 
   '@bp4': {
-    fontSize: '$fontSize8',
+    fontSize: '$fontSize9',
+  },
+})
+
+const Tech = styled('div', {
+  gridArea: 'tech',
+  color: '$color7',
+  fontWeight: 'bold',
+  textAlign: 'left',
+
+  '@bp1': {
+    marginTop: '$space1',
+    fontSize: '$fontSize1',
+    textAlign: 'center',
+  },
+
+  '@bp2': {
+    fontSize: '$fontSize3',
+  },
+
+  '@bp3': {
+    fontSize: '$fontSize5',
   },
 })
 
 const AssetWrapper = styled('div', {
   gridArea: 'asset',
-  marginTop: '$space10',
+  marginTop: '$space14',
   position: 'relative',
   placeSelf: 'center',
   display: 'flex',
@@ -148,7 +188,7 @@ const AssetWrapper = styled('div', {
   },
 
   '@bp1': {
-    width: '250px',
+    width: '260px',
     height: '320px',
     marginTop: '$space5',
   },
@@ -239,7 +279,7 @@ interface ProjectProps {
 }
 
 const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
-  const { titleShort, client, role, asset, assetPlaceholder } = project
+  const { titleShort, client, role, tech, asset, assetPlaceholder } = project
   const { observe, width, height } = useDimensions<HTMLDivElement>()
   const controls = useAnimation()
   const [ref, inView] = useInView()
@@ -288,6 +328,11 @@ const Project: React.FC<ProjectProps> = ({ project, onSelect }) => {
             {role} at {client}
           </Role>
           <ProjectTitle>{titleShort}</ProjectTitle>
+          <Tech>
+            <Sparkles color={theme.colors.color11.value}>
+              {tech?.join(', ')}
+            </Sparkles>
+          </Tech>
           <AssetWrapper ref={observe}>
             <Border>
               <ParallaxEffect>
