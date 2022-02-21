@@ -46,16 +46,13 @@ const TitleContainer = styled('div', {
   gridArea: 'title',
 })
 
-const SectionTitle = styled('h1', {
+const Title = styled('h1', {
   background:
     'linear-gradient(271deg, $colorful3 30%, $colorful4 50%, $colorful1 70%, $colorful3 94%)',
   '-webkit-background-clip': 'text',
   '-webkit-text-fill-color': 'transparent',
   color: '$colorful3',
-  letterSpacing: '-1.5px',
-  lineHeight: '112%',
   transition: 'font-size 0.8s ease-in-out',
-  fontWeight: 700,
 
   '@bp1': {
     minHeight: '200px',
@@ -83,9 +80,8 @@ const SectionTitle = styled('h1', {
   },
 })
 
-const Subtitle = styled('div', {
+const Intro = styled('div', {
   color: '$cultured',
-  lineHeight: '1.4',
   transition: 'font-size 0.8s ease-in-out',
 
   '@bp1': {
@@ -201,15 +197,15 @@ export const Hero: React.FC = () => {
     <Container>
       <TitleContainer>
         <Sparkles>
-          <SectionTitle>
+          <Title>
             Hi. I&apos;m {data?.me.firstName}.
             <br />A Fullstack Web Developer.
-          </SectionTitle>
+          </Title>
         </Sparkles>
         <Spacer />
-        <Subtitle>
+        <Intro>
           <RichText richText={data?.me.short.json} />
-        </Subtitle>
+        </Intro>
         <Spacer />
       </TitleContainer>
       <SocialMediaContainer>

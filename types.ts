@@ -23,6 +23,7 @@ export interface ProjectType {
   me: RichTextJson
   role: string
   date: string
+  tech?: Array<string>
   tags: Array<string>
   asset: ImageType
   assetPlaceholder?: string
