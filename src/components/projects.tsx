@@ -84,7 +84,7 @@ const ProjectContainer = styled(motion.article, {
   borderRadius: '$radii5',
 
   '@bp1': {
-    padding: '$space8',
+    padding: '$space8 $space2',
     height: '100%',
     gridTemplateColumns: '1fr',
     gridTemplateRows: '0.05fr 0.05fr 0.05fr 0.9fr',
@@ -188,9 +188,9 @@ const AssetWrapper = styled('div', {
   },
 
   '@bp1': {
-    width: '260px',
+    marginTop: '$space6',
+    width: '310px',
     height: '320px',
-    marginTop: '$space5',
   },
 
   '@bp2': {
@@ -228,7 +228,7 @@ const Border = styled('div', {
   },
 
   '@bp1': {
-    border: '$space$space4 solid transparent !important',
+    border: '$space$space1 solid transparent !important',
     borderRadius: '$radii3',
   },
 
