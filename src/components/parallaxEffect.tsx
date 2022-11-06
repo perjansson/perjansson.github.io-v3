@@ -36,7 +36,7 @@ export const ParallaxEffect: React.FC = ({ children }) => {
   const { scrollY } = useViewportScroll()
   const { yOutput, scaleOutput } = isLandscape
     ? { yOutput: 100, scaleOutput: 1.1 }
-    : { yOutput: 35, scaleOutput: 1.0 }
+    : { yOutput: 35, scaleOutput: 1.1 }
   const y = useTransform(scrollY, [inputStart, inputEnd], [-yOutput, yOutput])
   const scale = useTransform(
     scrollY,
